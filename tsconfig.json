@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client", "jest"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": ["src", "vite-env.d.ts", "tests", "playwright.*.ts", "custom.d.ts"]
+}

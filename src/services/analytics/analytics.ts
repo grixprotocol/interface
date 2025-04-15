@@ -1,0 +1,30 @@
+import Mixpanel from 'mixpanel-browser';
+
+import { config, env } from '../../config';
+
+Mixpanel.init('2111331d11fb90732a2aa39342002652', {
+  track_pageview: true,
+  persistence: 'localStorage',
+  ignore_dnt: true,
+  batch_requests: false,
+  api_transport: 'XHR',
+  api_method: 'POST',
+  api_payload_format: 'json',
+  api_host: config[env].backendUrl,
+  api_routes: {
+    track: 'data/activity',
+    engage: 'data/account',
+  },
+  xhr_headers: {
+    'x-api-key': config[env].apiKey,
+  },
+});
+
+export const analytics = {
+  identify: (identifier: string) => {
+    Mixpanel.identify(identifier);
+  },
+  track: (eventName: string, props: Record<string, unknown>) => {
+    Mixpanel.track(eventName, props);
+  },
+};
