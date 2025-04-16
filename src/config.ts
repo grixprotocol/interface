@@ -16,7 +16,6 @@ export type Environment = 'debug' | 'dev' | 'staging' | 'main';
 
 export const config = {
   appName: 'Grix',
-  projectId: import.meta.env.PROJECTID,
   supportedProtocols: [],
   networks: {
     Arbitrum: {
@@ -125,7 +124,6 @@ export const getIsWhitelistedMode = (): boolean => {
   return false;
 };
 
-export const projectId = config.projectId;
 
 export const protocolsPortfolioUrlMap: { [key: string]: string } = {
   'synquote-100': 'https://app.synquote.com/portfolio',
