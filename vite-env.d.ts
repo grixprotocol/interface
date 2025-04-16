@@ -3,8 +3,8 @@
 interface ImportMetaEnv {
   readonly VITE_ENV: 'debug' | 'dev' | 'staging' | 'main';
   readonly VITE_WHITELIST_MODE: string;
-  readonly VITE_FUUL_API_KEY: string;
-  readonly VITE_WAGMI_PROJECT_ID: string;
+  readonly VITE_GRIX_API_KEY: string;
+  readonly VITE_PREMIA_KEY: string;
 
   // Add other env variables as needed
 }

@@ -2,7 +2,7 @@ import Mixpanel from 'mixpanel-browser';
 
 import { config, env } from '../../config';
 
-Mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {
+Mixpanel.init('2111331d11fb90732a2aa39342002652', {
   track_pageview: true,
   persistence: 'localStorage',
   ignore_dnt: true,
