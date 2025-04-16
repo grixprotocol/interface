@@ -143,7 +143,7 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
                     () => setIsTradePage(false) //pass :!e.target.checked
                   }
                   size={isMobile ? 'sm' : 'md'}
-                  isDisabled={true} //TODO: enable when execution is available
+                  isDisabled //TODO: enable when execution is available
                 />
               </HStack>
             </Box>
