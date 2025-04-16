@@ -14,6 +14,8 @@ import zommaLogo from './components/commons/svgLogs/zommaSVG.svg';
 
 export type Environment = 'debug' | 'dev' | 'staging' | 'main';
 
+export const pauseExecution = true;
+
 export const config = {
   appName: 'Grix',
   supportedProtocols: [],
@@ -178,7 +180,7 @@ export const protocolsArrayData: ProtocolObject[] = [
     protocolName: 'premia',
     icon: premiaLogo,
     label: 'Premia',
-    isExecution: true,
+    isExecution: true && !pauseExecution,
     url: 'https://app.premia.blue',
   },
   // {
@@ -191,7 +193,7 @@ export const protocolsArrayData: ProtocolObject[] = [
     protocolName: 'moby',
     icon: mobyLogo,
     label: 'Moby',
-    isExecution: false,
+    isExecution: true && !pauseExecution,
     url: 'https://app.moby.trade/',
   },
   // {

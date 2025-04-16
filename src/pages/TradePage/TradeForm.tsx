@@ -3,7 +3,7 @@ import { FaBitcoin, FaCog, FaEthereum } from 'react-icons/fa';
 
 import { PositionTypes, SupportedAsset, TradeOptionType, useTradeboard } from '@/api';
 import { getTradeChatbotContext } from '@/components/chatbot/pageContext/tradeContext';
-import { protocolsArrayData } from '@/config';
+import { pauseExecution, protocolsArrayData } from '@/config';
 import { CurrencyDropdown, OptionButtonTab } from '@/ds';
 import { useAnalytics, withAnalyticsContext } from '@/services/analytics';
 import { useUserAccount } from '@/utils/web3Util';
@@ -139,11 +139,9 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
                 </HStack>
                 <Switch
                   isChecked={!isTradePage}
-                  onChange={
-                    () => setIsTradePage(false) //pass :!e.target.checked
-                  }
+                  onChange={(e) => setIsTradePage(!e.target.checked)}
                   size={isMobile ? 'sm' : 'md'}
-                  isDisabled //TODO: enable when execution is available
+                  isDisabled={pauseExecution}
                 />
               </HStack>
             </Box>
