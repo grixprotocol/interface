@@ -38,7 +38,10 @@ export class TradePageDriver {
     await this.page.waitForLoadState('networkidle');
 
     // Ensure the trade page content is visible before proceeding
-    await this.page.waitForSelector('[data-testid="trade-form"]', { state: 'visible', timeout: 30000 });
+    await this.page.waitForSelector('[data-testid="trade-form"]', {
+      state: 'visible',
+      timeout: 30000,
+    });
   }
 
   getPageContent() {

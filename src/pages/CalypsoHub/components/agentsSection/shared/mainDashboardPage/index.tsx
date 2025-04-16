@@ -30,7 +30,10 @@ export const MainDashboardPage = ({ onSelectTab }: MainDashboardPageProps) => {
         <Card
           cursor="pointer"
           onClick={() => onSelectTab('trade')}
-          _hover={{ transform: 'translateY(-2px)', transition: 'transform 0.2s' }}
+          _hover={{
+            transform: 'translateY(-2px)',
+            transition: 'transform 0.2s',
+          }}
           bg="whiteAlpha.50"
           borderWidth={1}
           borderColor="whiteAlpha.200"
@@ -105,7 +108,10 @@ export const MainDashboardPage = ({ onSelectTab }: MainDashboardPageProps) => {
         <Card
           cursor="pointer"
           onClick={() => onSelectTab('social')}
-          _hover={{ transform: 'translateY(-2px)', transition: 'transform 0.2s' }}
+          _hover={{
+            transform: 'translateY(-2px)',
+            transition: 'transform 0.2s',
+          }}
           bg="whiteAlpha.50"
           borderWidth={1}
           borderColor="whiteAlpha.200"

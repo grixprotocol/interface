@@ -72,7 +72,10 @@ export const Table = <TData extends RowData>({
                           borderRadius="full"
                           border="1px solid"
                           borderColor="gray.700"
-                          _hover={{ color: 'gray.400', backgroundColor: 'gray.800' }}
+                          _hover={{
+                            color: 'gray.400',
+                            backgroundColor: 'gray.800',
+                          }}
                         >
                           <ChevronRightIcon
                             boxSize={6}

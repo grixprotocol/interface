@@ -10,7 +10,10 @@ const groupDataByProtocol = (data: MarketStatus[]): Protocol[] => {
 
   data.forEach((responseMarket) => {
     if (!protocolMap.has(responseMarket.market_name)) {
-      protocolMap.set(responseMarket.market_name, { name: responseMarket.market_name, markets: [] });
+      protocolMap.set(responseMarket.market_name, {
+        name: responseMarket.market_name,
+        markets: [],
+      });
     }
 
     const protocol = protocolMap.get(responseMarket.market_name);

@@ -60,7 +60,9 @@ export const StatsPage: React.FC = () => {
         <SimpleGrid columns={1} spacing={4} w="full">
           {renderAnimatedStat(
             'Notional Volume',
-            `$${stats?.notionalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}`,
+            `$${stats?.notionalValue.toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}`,
             !data,
             FaChartLine,
             'linear(to-r, #7928CA, #FF0080)'
@@ -128,7 +130,9 @@ export const StatsPage: React.FC = () => {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6} w="90%">
           {renderAnimatedStat(
             'Notional Volume',
-            `$${stats?.notionalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}`,
+            `$${stats?.notionalValue.toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}`,
             !data,
             FaChartLine,
             'linear(to-r, #7928CA, #FF0080)'

@@ -45,7 +45,12 @@ export const CowswapWidget = () => {
     <Box
       backgroundColor="black"
       id="cowswap-widget"
-      style={{ width: '100%', height: '100vh', minHeight: layoutConstants.mainContentHeight, marginTop: '-120px' }}
+      style={{
+        width: '100%',
+        height: '100vh',
+        minHeight: layoutConstants.mainContentHeight,
+        marginTop: '-120px',
+      }}
       display="flex"
       justifyContent="center"
       alignItems="center"

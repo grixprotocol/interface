@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Brave",
+            "url": "http://localhost:4000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "/Applications/Brave Browser.app"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome with pnpm",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "pnpm: dev"
+        }
+    ]
+}

@@ -41,7 +41,9 @@ export const ReviewOrderModal = ({
   } = useOrderToken(option);
   const { chainId } = useUserNetwork();
   const { address: userAddress } = useUserAccount();
-  const { onSubmit, isLoading, isDisabled } = useOnProtocolSubmit({ token: payWithToken });
+  const { onSubmit, isLoading, isDisabled } = useOnProtocolSubmit({
+    token: payWithToken,
+  });
   const { data: balanceResult } = useBalance({
     address: userAddress as `0x${string}`,
     chainId: chainId as number,
@@ -78,7 +80,10 @@ export const ReviewOrderModal = ({
   const allowMinimum = urlParams.get('allowMinimum') === 'true';
 
   const [showPointsAnimation, setShowPointsAnimation] = useState(false);
-  const [animationPosition, setAnimationPosition] = useState({ top: 0, left: 0 });
+  const [animationPosition, setAnimationPosition] = useState({
+    top: 0,
+    left: 0,
+  });
 
   const handlePrimaryAction = async () => {
     const button = document.querySelector('[data-testid="buy-button"]');

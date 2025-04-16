@@ -55,7 +55,10 @@ export const ExpirationDatePicker = ({
       <OptionsContainer
         title="Expiration"
         onHeaderClick={onOpenModal}
-        description={{ title: 'Expires In:', value: expirationDate ? getRemainingTime(expirationDate) : '' }}
+        description={{
+          title: 'Expires In:',
+          value: expirationDate ? getRemainingTime(expirationDate) : '',
+        }}
         isLoading={isLoading || isFetching}
         isError={isError}
       >

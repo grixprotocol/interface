@@ -123,5 +123,9 @@ export const useOnProtocolSubmit = ({ token }: { token: SupportedToken }) => {
     }
   };
 
-  return { onSubmit, isLoading: isMutating, isDisabled: !balanceResult || !assetPrice };
+  return {
+    onSubmit,
+    isLoading: isMutating,
+    isDisabled: !balanceResult || !assetPrice,
+  };
 };

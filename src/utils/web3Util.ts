@@ -95,7 +95,14 @@ export const approveErc1155Allowance = (tokenAddress: string, operator: `0x${str
 
 export const useUserAccount = () => {
   const { address, isConnected, caipAddress, status, allAccounts, embeddedWalletInfo } = useAppKitAccount();
-  return { address, isConnected, caipAddress, status, allAccounts, embeddedWalletInfo };
+  return {
+    address,
+    isConnected,
+    caipAddress,
+    status,
+    allAccounts,
+    embeddedWalletInfo,
+  };
 };
 
 export const useUserNetwork = () => {

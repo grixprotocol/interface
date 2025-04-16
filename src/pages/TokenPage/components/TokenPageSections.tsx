@@ -151,7 +151,10 @@ export const ForDevelopersSection = ({ cardBg, borderColor }: { cardBg: string; 
               size="md"
               leftIcon={<FaServer />}
               bgGradient="linear(to-r, purple.500, purple.600)"
-              _hover={{ bgGradient: 'linear(to-r, purple.600, purple.700)', transform: 'translateY(-2px)' }}
+              _hover={{
+                bgGradient: 'linear(to-r, purple.600, purple.700)',
+                transform: 'translateY(-2px)',
+              }}
               transition="all 0.3s"
             >
               API Dashboard
@@ -164,7 +167,10 @@ export const ForDevelopersSection = ({ cardBg, borderColor }: { cardBg: string; 
               size="md"
               leftIcon={<FaBook />}
               bgGradient="linear(to-r, blue.500, blue.600)"
-              _hover={{ bgGradient: 'linear(to-r, blue.600, blue.700)', transform: 'translateY(-2px)' }}
+              _hover={{
+                bgGradient: 'linear(to-r, blue.600, blue.700)',
+                transform: 'translateY(-2px)',
+              }}
               transition="all 0.3s"
             >
               API Documentation
@@ -177,7 +183,10 @@ export const ForDevelopersSection = ({ cardBg, borderColor }: { cardBg: string; 
               size="md"
               leftIcon={<FaGithub />}
               bgGradient="linear(to-r, gray.700, gray.800)"
-              _hover={{ bgGradient: 'linear(to-r, gray.800, gray.900)', transform: 'translateY(-2px)' }}
+              _hover={{
+                bgGradient: 'linear(to-r, gray.800, gray.900)',
+                transform: 'translateY(-2px)',
+              }}
               transition="all 0.3s"
             >
               GitHub

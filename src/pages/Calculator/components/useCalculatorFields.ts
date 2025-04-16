@@ -2,7 +2,12 @@ import { useCallback, useState } from 'react';
 
 import { PNLChartPosition } from '@/ds/PNLChart/types';
 
-const emptyRow: PNLChartPosition = { amount: 1, optionType: 'call', premium: 42, strikePrice: 3500 };
+const emptyRow: PNLChartPosition = {
+  amount: 1,
+  optionType: 'call',
+  premium: 42,
+  strikePrice: 3500,
+};
 
 export const useCalculatorFields = () => {
   const [fields, setFields] = useState<PNLChartPosition[]>([{ ...emptyRow }]);

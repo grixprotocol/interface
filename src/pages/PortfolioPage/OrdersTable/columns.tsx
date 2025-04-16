@@ -42,7 +42,10 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
   const { data: BtcCurrentPrice } = useAssetPrice(SupportedAsset.BTC);
   const { data: EthCurrentPrice } = useAssetPrice(SupportedAsset.ETH);
   const { address: userAddress } = useUserAccount();
-  const [isActionBtnLoading, setIsActionBtnLoading] = useState({ state: false, optionTokenId: '' });
+  const [isActionBtnLoading, setIsActionBtnLoading] = useState({
+    state: false,
+    optionTokenId: '',
+  });
   const { mutateAsync: submitExercisePosition } = useExercisePositionRequest({
     userAddress: userAddress as `0x${string}`,
   });
@@ -116,7 +119,9 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
     cell: (info) => {
       const expirationTimestamp = Number(info.cell.row.original.request_data.expiration) * 1000;
       const formattedDate = format(expirationTimestamp, 'MMM dd, yyyy');
-      const timeDifference = formatDistanceToNowStrict(expirationTimestamp, { addSuffix: true });
+      const timeDifference = formatDistanceToNowStrict(expirationTimestamp, {
+        addSuffix: true,
+      });
 
       return <GenericTableCell title={formattedDate} description={timeDifference} isInline={false} />;
     },
@@ -161,7 +166,9 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
       const status = info.cell.row.original.status;
       const expirationTimestamp = new Date(info.cell.row.original.signature_expired_datetime);
       const expiresIn = isFuture(expirationTimestamp)
-        ? `Valid for ${formatDistanceToNowStrict(expirationTimestamp, { unit: 'minute' })}`
+        ? `Valid for ${formatDistanceToNowStrict(expirationTimestamp, {
+            unit: 'minute',
+          })}`
         : 'Not valid anymore';
       const failureReason = info.cell.row.original.failureReason;
 

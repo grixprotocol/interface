@@ -9,7 +9,9 @@ import { PointsContainer, separatorStyle } from '../utils';
 export const Leaderboard = () => {
   const { address } = useUserAccount();
   const { data: userPointsResponse } = useUserPoints({ pageSize: 30 });
-  const { data: userData } = useUserPoints({ userAddress: address as `0x${string}` });
+  const { data: userData } = useUserPoints({
+    userAddress: address as `0x${string}`,
+  });
 
   const data = useMemo(() => {
     if (!userPointsResponse || !userData) {

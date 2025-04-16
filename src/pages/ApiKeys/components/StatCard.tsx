@@ -14,7 +14,10 @@ export const StatCard: React.FC<StatCardProps> = ({ label, value, icon }) => (
     bg="rgba(17, 25, 40, 0.8)"
     borderRadius="2xl"
     border="1px solid rgba(255, 255, 255, 0.1)"
-    _hover={{ transform: 'translateY(-2px)', shadow: '0 8px 16px rgba(0, 0, 0, 0.4)' }}
+    _hover={{
+      transform: 'translateY(-2px)',
+      shadow: '0 8px 16px rgba(0, 0, 0, 0.4)',
+    }}
     transition="all 0.2s"
     position="relative"
     overflow="hidden"

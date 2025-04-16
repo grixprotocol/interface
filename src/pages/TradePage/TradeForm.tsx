@@ -143,6 +143,7 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
                     () => setIsTradePage(false) //pass :!e.target.checked
                   }
                   size={isMobile ? 'sm' : 'md'}
+                  isDisabled //TODO: enable when execution is available
                 />
               </HStack>
             </Box>
@@ -186,7 +187,12 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
             value: SupportedAsset.ETH,
             icon: <FaEthereum color="white" />,
           },
-          { label: 'BTC', description: 'Bitcoin', value: SupportedAsset.BTC, icon: <FaBitcoin color="white" /> },
+          {
+            label: 'BTC',
+            description: 'Bitcoin',
+            value: SupportedAsset.BTC,
+            icon: <FaBitcoin color="white" />,
+          },
         ]}
         precision={asset === SupportedAsset.BTC ? 3 : 2}
       />

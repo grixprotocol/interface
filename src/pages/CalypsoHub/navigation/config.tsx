@@ -17,13 +17,19 @@ export type NavigationLink = {
 };
 
 const SocialAgentsSection = lazy(() =>
-  import('../components/agentsSection/socialAgents').then((m) => ({ default: m.SocialAgents }))
+  import('../components/agentsSection/socialAgents').then((m) => ({
+    default: m.SocialAgents,
+  }))
 );
 const PlaybooksSection = lazy(() =>
-  import('../components/playbooksSection/PlaybooksMarketplace').then((m) => ({ default: m.PlaybooksMarketplace }))
+  import('../components/playbooksSection/PlaybooksMarketplace').then((m) => ({
+    default: m.PlaybooksMarketplace,
+  }))
 );
 const StrategiesSection = lazy(() =>
-  import('../components/strategiesSection/StrategiesExplorer').then((m) => ({ default: m.StrategiesExplorer }))
+  import('../components/strategiesSection/StrategiesExplorer').then((m) => ({
+    default: m.StrategiesExplorer,
+  }))
 );
 const FeatureRequestsSection = lazy(() =>
   import('../components/featureRequestsSection/featureRequestPage').then((m) => ({ default: m.FeatureRequestsSection }))

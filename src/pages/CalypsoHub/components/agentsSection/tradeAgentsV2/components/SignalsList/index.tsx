@@ -11,7 +11,6 @@ import { SignalCard } from './SignalCard';
 import { NoSignalsCard } from './SignalCard/NoSignalsCard';
 import { SignalsListProps } from './types';
 
-// Add type for progress
 type RequestProgress = 'completed' | 'pending' | 'failed';
 
 const INSTRUMENT_TYPE_OPTIONS = [
@@ -42,7 +41,6 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
     });
   };
 
-  // Get all signals from all requests for filtering
   const allSignals = signalRequests?.flatMap((request) => request.signals) || [];
 
   const filteredRequests = signalRequests?.filter((request) => {
@@ -52,7 +50,6 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
     );
   });
 
-  // Get unique instrument types for the dropdown
   const uniqueInstrumentTypes = [...new Set(allSignals?.map((signal) => signal.signal.instrument_type) || [])];
 
   return (
@@ -178,7 +175,6 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
           </Box>
         )}
 
-        {/* Scrollable content area */}
         <Box
           overflowY="auto"
           height="calc(100% - 60px)"
@@ -222,7 +218,10 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
                       borderColor="whiteAlpha.200"
                       overflow="hidden"
                       boxShadow="md"
-                      _hover={{ boxShadow: 'lg', transition: 'box-shadow 0.2s ease' }}
+                      _hover={{
+                        boxShadow: 'lg',
+                        transition: 'box-shadow 0.2s ease',
+                      }}
                     >
                       <HStack
                         p={4}

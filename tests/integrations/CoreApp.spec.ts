@@ -48,7 +48,10 @@ test.describe('Core Application', () => {
     await page.waitForLoadState('networkidle');
 
     // Wait for the trade page to be fully loaded with the new navigation
-    await page.waitForSelector('[data-testid="trade-form"]', { state: 'visible', timeout: 30000 });
+    await page.waitForSelector('[data-testid="trade-form"]', {
+      state: 'visible',
+      timeout: 30000,
+    });
 
     // Verify state is preserved
     await expect(tradeDriver.getAssetValue()).toHaveText('BTC');

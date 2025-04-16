@@ -75,12 +75,22 @@ export const useExercisePositionRequest = ({ userAddress }: { userAddress?: `0x$
     }) => {
       try {
         const optionIdentifier = option.selectedProtocol === 'moby' ? option.optionTokenId : option.poolAddress;
-        setIsActionBtnLoading({ state: true, optionTokenId: optionIdentifier as string });
+        setIsActionBtnLoading({
+          state: true,
+          optionTokenId: optionIdentifier as string,
+        });
         if (!userAddress) {
           throw new Error('User address is not defined');
         }
         try {
-          await preExerciseValidations({ option, nftAddress, userAddress, track, displayToast, grixToast });
+          await preExerciseValidations({
+            option,
+            nftAddress,
+            userAddress,
+            track,
+            displayToast,
+            grixToast,
+          });
         } catch (error) {
           return {
             success: false,

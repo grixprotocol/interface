@@ -16,7 +16,7 @@ Mixpanel.init('2111331d11fb90732a2aa39342002652', {
     engage: 'data/account',
   },
   xhr_headers: {
-    'x-api-key': config[env].apiKey,
+    'x-api-key': import.meta.env.VITE_GRIX_API_KEY,
   },
 });
 

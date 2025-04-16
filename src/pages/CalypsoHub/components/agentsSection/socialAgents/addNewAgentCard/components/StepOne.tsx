@@ -98,7 +98,10 @@ export const StepOne = ({ formData, setFormData }: StepOneProps) => (
           onChange={(e) =>
             setFormData({
               ...formData,
-              target_credentials: { ...formData.target_credentials, [TaskTarget.TELEGRAM]: { chatId: e.target.value } },
+              target_credentials: {
+                ...formData.target_credentials,
+                [TaskTarget.TELEGRAM]: { chatId: e.target.value },
+              },
             })
           }
           placeholder="Enter your Telegram bot token"

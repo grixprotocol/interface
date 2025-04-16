@@ -51,7 +51,10 @@ export const calculatePnlFromHistory = (
     ([timestamp]) => Math.abs(Number(timestamp) - signalTimestamp) < msValues.hour
   );
   if (!entrySnapshot) {
-    return { values: null, error: 'No price snapshot found near signal creation time' };
+    return {
+      values: null,
+      error: 'No price snapshot found near signal creation time',
+    };
   }
 
   // For shorts we sell at bid, for longs we buy at ask
@@ -111,7 +114,10 @@ export const calculatePnlFromHistory = (
   });
 
   if (!validPriceFound) {
-    return { values: null, error: 'No valid price data found in relevant snapshots' };
+    return {
+      values: null,
+      error: 'No valid price data found in relevant snapshots',
+    };
   }
 
   // Calculate percentage changes

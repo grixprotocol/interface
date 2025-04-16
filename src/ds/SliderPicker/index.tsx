@@ -27,7 +27,10 @@ export const SliderPicker = <T extends string>({
 
   const handleRightScroll = () => {
     if (buttonGroupRef.current) {
-      buttonGroupRef.current.scrollTo({ left: buttonGroupRef.current.scrollLeft + 160, behavior: 'smooth' });
+      buttonGroupRef.current.scrollTo({
+        left: buttonGroupRef.current.scrollLeft + 160,
+        behavior: 'smooth',
+      });
     }
   };
 

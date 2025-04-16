@@ -13,7 +13,11 @@ export const TableHeader = ({
   optionType: TradeOptionType;
   onOptionTypeChange: (value: TradeOptionType) => void;
 }) => {
-  const isSmallScreen = useBreakpointValue({ base: false, sm: true, md: false });
+  const isSmallScreen = useBreakpointValue({
+    base: false,
+    sm: true,
+    md: false,
+  });
 
   useEffect(() => {
     if (!optionType) {
@@ -27,8 +31,14 @@ export const TableHeader = ({
         <OptionButtonTab
           onChange={onOptionTypeChange}
           options={[
-            { label: positionType === 'long' ? 'Buy Call' : 'Sell Call', value: 'call' },
-            { label: positionType === 'long' ? 'Buy Put' : 'Sell Put', value: 'put' },
+            {
+              label: positionType === 'long' ? 'Buy Call' : 'Sell Call',
+              value: 'call',
+            },
+            {
+              label: positionType === 'long' ? 'Buy Put' : 'Sell Put',
+              value: 'put',
+            },
           ]}
           value={optionType}
           width="full"

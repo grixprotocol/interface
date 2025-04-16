@@ -1,15 +1,15 @@
 import { Fuul } from '@fuul/sdk';
 import type { GetPointsLeaderboardParams } from '@fuul/sdk/dist/types/api';
 
-import { VITE_FUUL_API_KEY } from '@/config';
-
 type TotalPoints = {
   totalPoints: number;
 };
 
+const FUUL_API_KEY = '8d5dbc2bc85b953e795b97c38865741f95172d79857e1cece53e059ee07dfd15';
+
 export const fuulInit = () => {
   Fuul.init({
-    apiKey: VITE_FUUL_API_KEY,
+    apiKey: FUUL_API_KEY,
   });
 };
 

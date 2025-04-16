@@ -93,7 +93,10 @@ export const SuggestionBadge = () => {
           <Text fontSize="12px" fontWeight="500" color="gray.400">
             Prediction By <strong style={{ fontWeight: 'bold' }}>Allora network</strong>:{' '}
             <span style={{ color: 'white' }}>
-              {Number(prediction).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {Number(prediction).toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </span>
           </Text>
         </Box>

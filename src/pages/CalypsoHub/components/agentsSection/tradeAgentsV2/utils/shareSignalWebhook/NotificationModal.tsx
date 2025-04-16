@@ -97,7 +97,12 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
                 </FormLabel>
                 <Input
                   value={settings.webhookUrl}
-                  onChange={(e) => onSettingsChange({ ...settings, webhookUrl: e.target.value })}
+                  onChange={(e) =>
+                    onSettingsChange({
+                      ...settings,
+                      webhookUrl: e.target.value,
+                    })
+                  }
                   placeholder="Discord webhook URL"
                   _focus={{
                     borderColor: 'blue.400',
@@ -135,7 +140,12 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
                     <Input
                       type={showBotToken ? 'text' : 'password'}
                       value={settings.botToken}
-                      onChange={(e) => onSettingsChange({ ...settings, botToken: e.target.value })}
+                      onChange={(e) =>
+                        onSettingsChange({
+                          ...settings,
+                          botToken: e.target.value,
+                        })
+                      }
                       placeholder="Telegram bot token"
                       _focus={{
                         borderColor: 'blue.400',

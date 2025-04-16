@@ -54,11 +54,27 @@ export const Footer = () => {
   const { data } = useBlockNumber({ chainId: 42161, watch: true });
 
   const socialLinks = [
-    { icon: FaXTwitter, label: 'Twitter', href: 'https://twitter.com/GrixFinance' },
-    { icon: FaGithub, label: 'Github', href: 'https://github.com/grixprotocol/defi-options-hub' },
+    {
+      icon: FaXTwitter,
+      label: 'Twitter',
+      href: 'https://twitter.com/GrixFinance',
+    },
+    {
+      icon: FaGithub,
+      label: 'Github',
+      href: 'https://github.com/grixprotocol/defi-options-hub',
+    },
     { icon: FaDiscord, label: 'Discord', href: 'https://t.co/YPGAhKlcUV' },
-    { icon: FaMedium, label: 'Medium', href: 'https://medium.com/@grixfinance' },
-    { icon: SiLinktree, label: 'Linktree', href: 'https://linktr.ee/grixfinance' },
+    {
+      icon: FaMedium,
+      label: 'Medium',
+      href: 'https://medium.com/@grixfinance',
+    },
+    {
+      icon: SiLinktree,
+      label: 'Linktree',
+      href: 'https://linktr.ee/grixfinance',
+    },
     { icon: FaTelegram, label: 'Telegram', href: 'https://t.me/grixfinance' },
   ];
 

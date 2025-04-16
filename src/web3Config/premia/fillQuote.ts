@@ -3,7 +3,6 @@ import { OrderbookQuote, QuoteOB } from '@premia/v3-sdk';
 import { waitForTransactionReceipt, writeContract } from 'wagmi/actions';
 
 import { useGrixToast } from '@/components/useToast/useToast';
-import { PREMIA_KEY } from '@/config';
 import { checkBalanceOfERC1155 } from '@/utils/web3Util';
 import { wagmiConfig } from '@/web3Config/reownConfig';
 
@@ -72,7 +71,7 @@ export const fetchPoolQuery = async (
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'x-apikey': PREMIA_KEY,
+      'x-apikey': import.meta.env.VITE_PREMIA_KEY,
     },
     body: null,
   };

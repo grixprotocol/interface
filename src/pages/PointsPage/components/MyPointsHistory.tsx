@@ -9,7 +9,9 @@ import { PointsContainer, separatorStyle } from '../utils';
 
 export const MyPointsHistory = () => {
   const { address } = useUserAccount();
-  const { data: userPointsRespponse } = usePointsHistory({ userAddress: address as `0x${string}` });
+  const { data: userPointsRespponse } = usePointsHistory({
+    userAddress: address as `0x${string}`,
+  });
 
   const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 

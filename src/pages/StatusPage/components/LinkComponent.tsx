@@ -30,7 +30,9 @@ export const LinkComponent = (props: { link: CustomLink }) => {
         stroke="url(#glow-gradient)"
         strokeWidth="3"
         initial={{ strokeDashoffset: 0 }}
-        animate={{ strokeDashoffset: target.status === LinkStatus.active ? [0, 360] : [0, 12] }}
+        animate={{
+          strokeDashoffset: target.status === LinkStatus.active ? [0, 360] : [0, 12],
+        }}
         transition={{
           duration: target.status === LinkStatus.active ? 1.5 : 2,
           repeat: Infinity,

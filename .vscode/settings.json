@@ -1,0 +1,5 @@
+{
+  "cSpell.words": ["Grix"],
+  "colorize.languages": ["css", "sass", "scss", "less", "sss", "stylus", "xml", "svg", "typescript"],
+  "git.allowNoVerifyCommit": false
+}

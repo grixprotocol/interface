@@ -35,11 +35,22 @@ const OptionsMatrixList = () => {
 
   const [_selectedItem, setSelectedItem] = useState<ItemSelection | undefined>(undefined);
   const [filteredProtocols, setFilteredProtocols] = useState<string[]>(protocolsArrayData.map((p) => p.protocolName));
-  const { expirationDates = [], isLoading } = useExpirations({ protocols: filteredProtocols });
+  const { expirationDates = [], isLoading } = useExpirations({
+    protocols: filteredProtocols,
+  });
   const { data: assetPriceUSD } = useAssetPrice(asset);
 
-  const { data } = useOptionsMatrix({ asset, expirationDate, protocols: filteredProtocols });
-  const table = useOptionsMatrixTable({ data, optionType, onItemSelection: setSelectedItem, assetPriceUSD });
+  const { data } = useOptionsMatrix({
+    asset,
+    expirationDate,
+    protocols: filteredProtocols,
+  });
+  const table = useOptionsMatrixTable({
+    data,
+    optionType,
+    onItemSelection: setSelectedItem,
+    assetPriceUSD,
+  });
 
   const scrolledToIndicator = useRef(false);
   if (isLoading) scrolledToIndicator.current = false;
@@ -109,7 +120,13 @@ const OptionsMatrixList = () => {
         height={`calc(${layoutConstants.mainContentHeight} - 300px)`}
         table={table}
         tableProps={{ size: 'md' }}
-        thProps={{ py: 0, position: 'sticky', top: 0, backgroundColor: 'base.black', zIndex: 1 }}
+        thProps={{
+          py: 0,
+          position: 'sticky',
+          top: 0,
+          backgroundColor: 'base.black',
+          zIndex: 1,
+        }}
         tdProps={{ py: 0 }}
         borderColor="gray.600"
         w="100%"
