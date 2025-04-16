@@ -53,9 +53,7 @@ export const MobileNavbar: React.FC = () => {
                   justifyContent="space-between"
                   fontSize="sm"
                   onClick={() => toggleDropdown(index)}
-                  rightIcon={
-                    item.subItems ? isDropdownOpen === index ? <ChevronUpIcon /> : <ChevronDownIcon /> : undefined
-                  }
+                  rightIcon={item.subItems ? isDropdownOpen === index ? <ChevronUpIcon /> : <ChevronDownIcon /> : undefined}
                   _hover={{ color: 'white', bg: 'whiteAlpha.200' }}
                 >
                   {item.label}
@@ -64,11 +62,7 @@ export const MobileNavbar: React.FC = () => {
                 {isDropdownOpen === index && item.subItems && (
                   <VStack spacing={2} align="stretch" pl={4}>
                     {item.subItems.map((subItem) => (
-                      <Link
-                        key={subItem.path}
-                        href={subItem.path}
-                        {...(subItem.isExternal ? { isExternal: true } : {})}
-                      >
+                      <Link key={subItem.path} href={subItem.path} {...(subItem.isExternal ? { isExternal: true } : {})}>
                         <Button
                           variant="ghost"
                           color="gray.300"

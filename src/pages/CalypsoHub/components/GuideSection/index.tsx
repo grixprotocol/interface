@@ -47,14 +47,7 @@ export const GuideSection = () => {
           </Text>
         </VStack>
         <Box position="absolute" top={0} right={0}>
-          <Button
-            leftIcon={<FaLightbulb />}
-            onClick={onOpen}
-            variant="ghost"
-            color="gray.400"
-            _hover={{ color: 'blue.400' }}
-            size="sm"
-          >
+          <Button leftIcon={<FaLightbulb />} onClick={onOpen} variant="ghost" color="gray.400" _hover={{ color: 'blue.400' }} size="sm">
             Feature Requests
           </Button>
         </Box>

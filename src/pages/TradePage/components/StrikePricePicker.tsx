@@ -18,13 +18,7 @@ type StrikePricePickerProps = FlexProps & {
   isFetching: boolean;
 };
 
-export const StrikePricePicker = ({
-  tradeboardData,
-  isLoading,
-  isError,
-  isFetching,
-  ...props
-}: StrikePricePickerProps) => {
+export const StrikePricePicker = ({ tradeboardData, isLoading, isError, isFetching, ...props }: StrikePricePickerProps) => {
   const { track } = useAnalytics();
   const { isOpen: isModalOpen, onClose: onCloseModal, onOpen: onOpenModal } = useDisclosure();
   const { strikePrice, setStrikePrice, expirationDate, asset } = useTradeForm();
@@ -61,9 +55,7 @@ export const StrikePricePicker = ({
         label: option.label,
         value: option.value,
         badge:
-          furthestStrikePrice === option.value && assetPriceUSD
-            ? `Spot ${formatPriceDisplay(formatWithCommas(assetPriceUSD))}`
-            : undefined,
+          furthestStrikePrice === option.value && assetPriceUSD ? `Spot ${formatPriceDisplay(formatWithCommas(assetPriceUSD))}` : undefined,
       })),
     [options, furthestStrikePrice, assetPriceUSD]
   );
@@ -93,27 +85,14 @@ export const StrikePricePicker = ({
         isLoading={isLoading || isLoadingAssetPrice || isFetching}
         isError={isError}
       >
-        {options && strikePrice && (
-          <WheelPicker value={value} options={options} height={100} itemHeight={32} onChange={onChange} />
-        )}
+        {options && strikePrice && <WheelPicker value={value} options={options} height={100} itemHeight={32} onChange={onChange} />}
       </OptionsContainer>
-      <ItemsModal
-        isOpen={isModalOpen}
-        onClose={onCloseModal}
-        onSelection={onChange}
-        title="Strike"
-        items={modalOptions}
-        value={value}
-      />
+      <ItemsModal isOpen={isModalOpen} onClose={onCloseModal} onSelection={onChange} title="Strike" items={modalOptions} value={value} />
     </Card>
   );
 };
 
-const selectInitialStrikePrice = (
-  data: TradeboardResponse,
-  expirationDate: string,
-  setStrikePrice: (strikePrice: string) => void
-) => {
+const selectInitialStrikePrice = (data: TradeboardResponse, expirationDate: string, setStrikePrice: (strikePrice: string) => void) => {
   let longestLength = 0;
   let isFoundStrikePriceWithExecutionProtocol = false;
   const optionsArrayAtSelectedExpiry = data?.optionBoard[expirationDate || Object.keys(data?.optionBoard || {})[0]];

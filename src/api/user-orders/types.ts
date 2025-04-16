@@ -84,4 +84,7 @@ export type UserOrdersParams = {
   fetchAll?: boolean;
 };
 
-export type UserOrdersCountParams = { type: UserOrderType; userAddress?: string };
+export type UserOrdersCountParams = {
+  type: UserOrderType;
+  userAddress?: string;
+};

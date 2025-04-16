@@ -42,7 +42,10 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
   const { data: BtcCurrentPrice } = useAssetPrice(SupportedAsset.BTC);
   const { data: EthCurrentPrice } = useAssetPrice(SupportedAsset.ETH);
   const { address: userAddress } = useUserAccount();
-  const [isActionBtnLoading, setIsActionBtnLoading] = useState({ state: false, optionTokenId: '' });
+  const [isActionBtnLoading, setIsActionBtnLoading] = useState({
+    state: false,
+    optionTokenId: '',
+  });
   const { mutateAsync: submitExercisePosition } = useExercisePositionRequest({
     userAddress: userAddress as `0x${string}`,
   });
@@ -96,9 +99,7 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
       return (
         <Box width="100%" display="flex" justifyContent="center" alignItems="center" pl={0}>
           <HStack spacing={2} justify="center">
-            <Text color={tradeType === 'long' ? 'primary.300' : 'error.300'}>
-              {tradeType === 'long' ? 'Long' : 'Short'}
-            </Text>
+            <Text color={tradeType === 'long' ? 'primary.300' : 'error.300'}>{tradeType === 'long' ? 'Long' : 'Short'}</Text>
             <Box w="4px" h="4px" bgColor="gray.300" borderRadius="50%" />
             <Text color={isCall ? 'primary.400' : 'error.400'}>{isCall ? 'Call' : 'Put'}</Text>
           </HStack>
@@ -116,7 +117,9 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
     cell: (info) => {
       const expirationTimestamp = Number(info.cell.row.original.request_data.expiration) * 1000;
       const formattedDate = format(expirationTimestamp, 'MMM dd, yyyy');
-      const timeDifference = formatDistanceToNowStrict(expirationTimestamp, { addSuffix: true });
+      const timeDifference = formatDistanceToNowStrict(expirationTimestamp, {
+        addSuffix: true,
+      });
 
       return <GenericTableCell title={formattedDate} description={timeDifference} isInline={false} />;
     },
@@ -161,12 +164,13 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
       const status = info.cell.row.original.status;
       const expirationTimestamp = new Date(info.cell.row.original.signature_expired_datetime);
       const expiresIn = isFuture(expirationTimestamp)
-        ? `Valid for ${formatDistanceToNowStrict(expirationTimestamp, { unit: 'minute' })}`
+        ? `Valid for ${formatDistanceToNowStrict(expirationTimestamp, {
+            unit: 'minute',
+          })}`
         : 'Not valid anymore';
       const failureReason = info.cell.row.original.failureReason;
 
-      const tooltipContent =
-        currentTab === UserOrderType.InactiveOrders && failureReason ? JSON.stringify(failureReason) : expiresIn;
+      const tooltipContent = currentTab === UserOrderType.InactiveOrders && failureReason ? JSON.stringify(failureReason) : expiresIn;
 
       switch (status) {
         case 'completed':
@@ -194,10 +198,7 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
               <Badge variant="warning" mr={2}>
                 Failed_3rd_party
               </Badge>
-              <Tooltip
-                label="The order failed on the protocol end, funds were refunded into your wallet"
-                aria-label="Status Tooltip"
-              >
+              <Tooltip label="The order failed on the protocol end, funds were refunded into your wallet" aria-label="Status Tooltip">
                 <InfoIcon color="gray.500" boxSize={4} />
               </Tooltip>
             </>
@@ -286,9 +287,7 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
                   fontWeight: 'bold',
                   opacity: isOneOfThePositionsLoading && !isCurrentPositionButtonLoading ? 0.5 : 1,
                   cursor:
-                    (isOneOfThePositionsLoading && !isCurrentPositionButtonLoading) || isClosePositionDisabled
-                      ? 'not-allowed'
-                      : 'pointer',
+                    (isOneOfThePositionsLoading && !isCurrentPositionButtonLoading) || isClosePositionDisabled ? 'not-allowed' : 'pointer',
                 }}
                 _hover={{
                   cursor: 'pointer',
@@ -373,11 +372,7 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
       ) {
         return (
           <Box display="flex" justifyContent="center" alignItems="center">
-            <Tooltip
-              label="Out the money, cannot be closed or settled."
-              aria-label="NFT Balance Tooltip"
-              placement="left"
-            >
+            <Tooltip label="Out the money, cannot be closed or settled." aria-label="NFT Balance Tooltip" placement="left">
               <InfoIcon color="gray.500" boxSize={4} />
             </Tooltip>
           </Box>
@@ -418,29 +413,13 @@ export const useColumns = ({ currentTab }: { currentTab: UserOrderType }): Colum
   });
 
   if (currentTab === UserOrderType.Positions) {
-    return [
-      created_at_column,
-      contract_type_column,
-      option_column,
-      size_column,
-      protocol_column,
-      action_column,
-      pnl_column,
-    ];
+    return [created_at_column, contract_type_column, option_column, size_column, protocol_column, action_column, pnl_column];
   }
   if (currentTab === UserOrderType.History) {
     return [created_at_column, contract_type_column, option_column, size_column, protocol_column];
   }
   if (currentTab === UserOrderType.LiveOrders) {
-    return [
-      created_at_column,
-      contract_type_column,
-      option_column,
-      size_column,
-      protocol_column,
-      status_column,
-      isExercise_column,
-    ];
+    return [created_at_column, contract_type_column, option_column, size_column, protocol_column, status_column, isExercise_column];
   }
   if (currentTab === UserOrderType.InactiveOrders || currentTab === UserOrderType.OrdersHistory) {
     return [

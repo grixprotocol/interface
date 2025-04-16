@@ -88,13 +88,7 @@ export const NetworkAvailability = ({ cardBg, cardHoverBg, borderColor }: Networ
                   </HStack>
                 ))}
               </VStack>
-              <Link
-                href={network.scanUrl}
-                isExternal
-                color="blue.400"
-                fontSize="sm"
-                _hover={{ textDecoration: 'none', color: 'blue.300' }}
-              >
+              <Link href={network.scanUrl} isExternal color="blue.400" fontSize="sm" _hover={{ textDecoration: 'none', color: 'blue.300' }}>
                 <HStack spacing={2}>
                   <Text>{`${network.address.slice(0, 6)}...${network.address.slice(-4)}`}</Text>
                   <Icon as={FaExternalLinkAlt} boxSize={3} />

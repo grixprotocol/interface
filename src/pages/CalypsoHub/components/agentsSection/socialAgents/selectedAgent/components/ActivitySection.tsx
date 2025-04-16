@@ -29,9 +29,7 @@ export const ActivitySection = ({ agent }: ActivitySectionProps) => {
 
   useEffect(() => {
     if (agentActions) {
-      const sorted = agentActions.taskActions.sort(
-        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      );
+      const sorted = agentActions.taskActions.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
       const grouped = sorted.reduce<GroupedActions>(
         (acc, action) => {

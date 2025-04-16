@@ -1,16 +1,5 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import {
-  Button,
-  Card,
-  CardBody,
-  FormControl,
-  FormLabel,
-  IconButton,
-  Select,
-  Text,
-  useDisclosure,
-  VStack,
-} from '@chakra-ui/react';
+import { Button, Card, CardBody, FormControl, FormLabel, IconButton, Select, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { AgentMessageType } from '../../../../../../api/socialAgents/createAgent/types'; // Import AgentMessageType

@@ -32,7 +32,12 @@ export const useNavbarRoutes = () => {
         isExternal: false,
         onClick: () => track('page_trade_click'),
       },
-      { to: '/Calypso', shortLabel: 'AI Playground', longLabel: 'AI Playground', isExternal: false },
+      {
+        to: '/Calypso',
+        shortLabel: 'AI Playground',
+        longLabel: 'AI Playground',
+        isExternal: false,
+      },
       {
         to: '/token',
         shortLabel: '$GRIX Token',

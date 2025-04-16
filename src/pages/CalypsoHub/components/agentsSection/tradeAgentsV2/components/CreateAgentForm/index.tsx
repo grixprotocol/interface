@@ -135,13 +135,7 @@ export const CreateAgentForm: React.FC<CreateAgentFormProps> = ({ isOpen, onClos
             </FormControl>
 
             <FormControl>
-              <FormLabel
-                fontSize="sm"
-                color="whiteAlpha.800"
-                fontWeight="medium"
-                textTransform="uppercase"
-                letterSpacing="wide"
-              >
+              <FormLabel fontSize="sm" color="whiteAlpha.800" fontWeight="medium" textTransform="uppercase" letterSpacing="wide">
                 Budget (USD)
               </FormLabel>
               <InputGroup>
@@ -176,7 +170,10 @@ export const CreateAgentForm: React.FC<CreateAgentFormProps> = ({ isOpen, onClos
                 }))}
                 selectedValues={formData.assets}
                 onChange={(values) => {
-                  setFormData((prev) => ({ ...prev, assets: values.map((v) => v as UnderlyingAsset) }));
+                  setFormData((prev) => ({
+                    ...prev,
+                    assets: values.map((v) => v as UnderlyingAsset),
+                  }));
                   setErrors((prev) => ({ ...prev, assets: '' }));
                 }}
               />
@@ -216,7 +213,10 @@ export const CreateAgentForm: React.FC<CreateAgentFormProps> = ({ isOpen, onClos
                 }))}
                 selectedValues={formData.input_data}
                 onChange={(values) => {
-                  setFormData((prev) => ({ ...prev, input_data: values.map((v) => v as AgentInputType) }));
+                  setFormData((prev) => ({
+                    ...prev,
+                    input_data: values.map((v) => v as AgentInputType),
+                  }));
                   setErrors((prev) => ({ ...prev, input_data: '' }));
                 }}
               />
@@ -230,7 +230,10 @@ export const CreateAgentForm: React.FC<CreateAgentFormProps> = ({ isOpen, onClos
               <Input
                 value={formData.user_prompt || ''}
                 onChange={(e) => {
-                  setFormData((prev) => ({ ...prev, user_prompt: e.target.value }));
+                  setFormData((prev) => ({
+                    ...prev,
+                    user_prompt: e.target.value,
+                  }));
                   setErrors((prev) => ({ ...prev, user_prompt: '' }));
                 }}
                 placeholder="Describe your trading strategy..."

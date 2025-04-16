@@ -23,7 +23,11 @@ export const useOptionsMatrixTable = ({
   onItemSelection: (selection: { item: OptionMatrixItem; accessor: OptionMatrixAccessor }) => void;
   assetPriceUSD?: number;
 }) => {
-  const isSmallScreen = useBreakpointValue({ base: false, sm: true, md: false });
+  const isSmallScreen = useBreakpointValue({
+    base: false,
+    sm: true,
+    md: false,
+  });
   const shouldFilterCalls = isSmallScreen && optionType !== 'call';
 
   const nearestStrikeItem = useMemo(() => {
@@ -51,7 +55,13 @@ export const useOptionsMatrixTable = ({
       const [firstProtocol] = info.cell.row.original[accessor];
       if (!firstProtocol)
         return (
-          <Box _hover={{ bg: 'whiteAlpha.100', borderRadius: '8px', cursor: 'pointer' }}>
+          <Box
+            _hover={{
+              bg: 'whiteAlpha.100',
+              borderRadius: '8px',
+              cursor: 'pointer',
+            }}
+          >
             <Text
               color="gray.700"
               cursor="pointer"
@@ -68,7 +78,13 @@ export const useOptionsMatrixTable = ({
         );
 
       return (
-        <Box _hover={{ bg: 'whiteAlpha.100', borderRadius: '8px', cursor: 'pointer' }}>
+        <Box
+          _hover={{
+            bg: 'whiteAlpha.100',
+            borderRadius: '8px',
+            cursor: 'pointer',
+          }}
+        >
           <StrikeOptionTableCell
             boardItem={firstProtocol}
             matrixItem={info.cell.row.original}
@@ -124,7 +140,10 @@ export const useOptionsMatrixTable = ({
 
     return {
       data: Array(10).fill({}),
-      columns: columns.map((column) => ({ ...column, cell: () => <Skeleton height={6} w="full" my={2} /> })),
+      columns: columns.map((column) => ({
+        ...column,
+        cell: () => <Skeleton height={6} w="full" my={2} />,
+      })),
     };
   }, [data, columns]);
 

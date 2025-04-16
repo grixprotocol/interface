@@ -2,30 +2,13 @@ import { BidAskSnapshot } from '@/api/optionPriceHistory/types';
 import { Signal } from '@/api/trade-agents/types/TradeAgent';
 import { calculatePnlFromHistory } from '@/components/OptionPriceGraph/pnlCalculator';
 
-export const prepareSignalMessage = (
-  signal: Signal,
-  priceHistory: Record<string, BidAskSnapshot> | undefined
-): string => {
+export const prepareSignalMessage = (signal: Signal, priceHistory: Record<string, BidAskSnapshot> | undefined): string => {
   const {
-    signal: {
-      instrument,
-      action_type,
-      position_type,
-      size,
-      expected_instrument_price_usd,
-      expected_total_price_usd,
-      reason,
-    },
+    signal: { instrument, action_type, position_type, size, expected_instrument_price_usd, expected_total_price_usd, reason },
   } = signal;
 
   const currentPnl = priceHistory
-    ? calculatePnlFromHistory(
-        priceHistory,
-        signal.created_at,
-        signal.signal.size,
-        signal.signal.position_type,
-        signal.signal.action_type
-      )
+    ? calculatePnlFromHistory(priceHistory, signal.created_at, signal.signal.size, signal.signal.position_type, signal.signal.action_type)
     : null;
 
   // Format the core signal information

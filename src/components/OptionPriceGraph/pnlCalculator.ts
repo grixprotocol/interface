@@ -47,11 +47,12 @@ export const calculatePnlFromHistory = (
   const timeEntries = Object.entries(priceHistory).sort(([a], [b]) => Number(a) - Number(b));
 
   // Find entry price around signal creation time
-  const entrySnapshot = timeEntries.find(
-    ([timestamp]) => Math.abs(Number(timestamp) - signalTimestamp) < msValues.hour
-  );
+  const entrySnapshot = timeEntries.find(([timestamp]) => Math.abs(Number(timestamp) - signalTimestamp) < msValues.hour);
   if (!entrySnapshot) {
-    return { values: null, error: 'No price snapshot found near signal creation time' };
+    return {
+      values: null,
+      error: 'No price snapshot found near signal creation time',
+    };
   }
 
   // For shorts we sell at bid, for longs we buy at ask
@@ -67,9 +68,7 @@ export const calculatePnlFromHistory = (
   }
 
   // For shorts we sell at bid, for longs we buy at ask
-  const purchasePrice = isLong
-    ? Math.min(...entryData.asks.map((q) => q.price))
-    : Math.max(...entryData.bids.map((q) => q.price));
+  const purchasePrice = isLong ? Math.min(...entryData.asks.map((q) => q.price)) : Math.max(...entryData.bids.map((q) => q.price));
 
   let maxPnlPerContract = 0;
   let currentPnlPerContract = 0;
@@ -79,9 +78,7 @@ export const calculatePnlFromHistory = (
 
   // Only consider snapshots after entry for open positions
   const relevantSnapshots =
-    actionType === ActionType.open
-      ? timeEntries.filter(([timestamp]) => Number(timestamp) >= signalTimestamp)
-      : timeEntries;
+    actionType === ActionType.open ? timeEntries.filter(([timestamp]) => Number(timestamp) >= signalTimestamp) : timeEntries;
 
   let validPriceFound = false;
 
@@ -91,9 +88,7 @@ export const calculatePnlFromHistory = (
     }
 
     // For longs we look at bid (selling price), for shorts we look at ask (buying back price)
-    const price = isLong
-      ? Math.max(...snapshot.bids.map((q) => q.price))
-      : Math.min(...snapshot.asks.map((q) => q.price));
+    const price = isLong ? Math.max(...snapshot.bids.map((q) => q.price)) : Math.min(...snapshot.asks.map((q) => q.price));
 
     // For longs: profit = sell price - buy price
     // For shorts: profit = sell price - buy back price
@@ -111,7 +106,10 @@ export const calculatePnlFromHistory = (
   });
 
   if (!validPriceFound) {
-    return { values: null, error: 'No valid price data found in relevant snapshots' };
+    return {
+      values: null,
+      error: 'No valid price data found in relevant snapshots',
+    };
   }
 
   // Calculate percentage changes

@@ -52,13 +52,7 @@ const ButtonWithTooltip = <T extends string>({
   return button;
 };
 
-export const OptionButtonTab = <T extends string>({
-  value,
-  options,
-  onChange,
-  buttonProps,
-  ...rest
-}: OptionButtonTabProps<T>) => (
+export const OptionButtonTab = <T extends string>({ value, options, onChange, buttonProps, ...rest }: OptionButtonTabProps<T>) => (
   <ButtonGroup isAttached {...rest}>
     {options.map((option, index) => (
       <ButtonWithTooltip

@@ -75,11 +75,7 @@ export const ProcedureDisplay = ({ procedure }: { procedure: { steps: { [key: st
         <Flex direction="column" ml={10} height="150px" justifyContent="space-between">
           {/* Solver Selection Process */}
           <Flex alignItems="center">
-            <Text
-              color={procedureStatus.solverSelectionProcess ? 'teal.300' : 'gray.500'}
-              fontWeight="bold"
-              fontSize="md"
-            >
+            <Text color={procedureStatus.solverSelectionProcess ? 'teal.300' : 'gray.500'} fontWeight="bold" fontSize="md">
               Solver Selection Process
             </Text>
             <Tooltip
@@ -92,8 +88,7 @@ export const ProcedureDisplay = ({ procedure }: { procedure: { steps: { [key: st
             </Tooltip>
             {procedureStatus.solverSelectionProcess
               ? null
-              : !spinnerShown &&
-                (spinnerShown = true) && <Spinner thickness="2px" speed="0.65s" color="gray.500" size="sm" ml={2} />}
+              : !spinnerShown && (spinnerShown = true) && <Spinner thickness="2px" speed="0.65s" color="gray.500" size="sm" ml={2} />}
           </Flex>
 
           {/* Option Settlement */}
@@ -116,8 +111,7 @@ export const ProcedureDisplay = ({ procedure }: { procedure: { steps: { [key: st
             )}
             {procedureStatus.optionSettlement
               ? null
-              : !spinnerShown &&
-                (spinnerShown = true) && <Spinner thickness="2px" speed="0.65s" color="gray.500" size="sm" ml={2} />}
+              : !spinnerShown && (spinnerShown = true) && <Spinner thickness="2px" speed="0.65s" color="gray.500" size="sm" ml={2} />}
           </Flex>
 
           {/* Final Clearing */}
@@ -140,8 +134,7 @@ export const ProcedureDisplay = ({ procedure }: { procedure: { steps: { [key: st
             )}
             {procedureStatus.finalClearing
               ? null
-              : !spinnerShown &&
-                (spinnerShown = true) && <Spinner thickness="2px" speed="0.65s" color="gray.500" size="sm" ml={2} />}
+              : !spinnerShown && (spinnerShown = true) && <Spinner thickness="2px" speed="0.65s" color="gray.500" size="sm" ml={2} />}
           </Flex>
         </Flex>
       </Flex>

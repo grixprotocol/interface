@@ -3,11 +3,7 @@ import { OptionBoardItem } from '@/api/tradeboard/types';
 
 import { FAQQuestion } from '../types';
 
-const getTradeFAQs = (
-  positionType: PositionTypes,
-  optionType: TradeOptionType,
-  asset: SupportedAsset
-): FAQQuestion[] => [
+const getTradeFAQs = (positionType: PositionTypes, optionType: TradeOptionType, asset: SupportedAsset): FAQQuestion[] => [
   {
     question: `How does this ${optionType} option work?`,
     category: 'Education',
@@ -58,11 +54,10 @@ export const getTradeChatbotContext = (
   chatContext: {
     underlyingAsset: asset,
     pageName: 'Trade',
-    pageDescription:
-      "I'm here to help you understand this trading position and answer any questions you might have about it.",
-    initialMessage: `Hi! I see you're looking at ${
-      positionType === 'long' ? 'buying' : 'selling'
-    } a ${optionType} option for ${asset}${strikePrice ? ` with strike price $${strikePrice}` : ''}${
+    pageDescription: "I'm here to help you understand this trading position and answer any questions you might have about it.",
+    initialMessage: `Hi! I see you're looking at ${positionType === 'long' ? 'buying' : 'selling'} a ${optionType} option for ${asset}${
+      strikePrice ? ` with strike price $${strikePrice}` : ''
+    }${
       expirationDate ? ` expiring on ${new Date(Number(expirationDate) * 1000).toLocaleDateString()}` : ''
     }. How can I help you understand this position?`,
     defaultQuestions: getTradeFAQs(positionType, optionType, asset),

@@ -15,12 +15,7 @@ type ExpirationSelectorProps = {
   isLoading: boolean;
 };
 
-export const ExpirationSelector = ({
-  expirationDate,
-  setExpirationDate,
-  expirationDates,
-  tradeType,
-}: ExpirationSelectorProps) => {
+export const ExpirationSelector = ({ expirationDate, setExpirationDate, expirationDates, tradeType }: ExpirationSelectorProps) => {
   const { isOpen: isModalOpen, onClose: onCloseModal, onOpen: onOpenModal } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
 

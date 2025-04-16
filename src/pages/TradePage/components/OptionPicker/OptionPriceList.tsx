@@ -18,16 +18,8 @@ type OptionPriceListProps = {
 
 export const OptionPriceList = ({ isTradePage }: OptionPriceListProps) => {
   const { track } = useAnalytics();
-  const {
-    expirationDate,
-    strikePrice,
-    selectedOption,
-    setSelectedOption,
-    positionType,
-    optionType,
-    asset,
-    setIsTradablePositionExists,
-  } = useTradeForm();
+  const { expirationDate, strikePrice, selectedOption, setSelectedOption, positionType, optionType, asset, setIsTradablePositionExists } =
+    useTradeForm();
 
   // Use state to track progress value
   const [progressValue, setProgressValue] = useState(0);
@@ -101,9 +93,7 @@ export const OptionPriceList = ({ isTradePage }: OptionPriceListProps) => {
   return (
     <VStack w="full" gap={0}>
       {/* Simple progress bar with React state */}
-      {!isLoading && !isError && (
-        <Progress value={progressValue} w="full" borderRadius="5px" mb={1} h="2px" maxW="100%" />
-      )}
+      {!isLoading && !isError && <Progress value={progressValue} w="full" borderRadius="5px" mb={1} h="2px" maxW="100%" />}
       <ButtonGroup isAttached as="ul" spacing={0} flexDir="column" w="full">
         {tradableOnGrix.map((option, index) => (
           <OptionPriceListItem

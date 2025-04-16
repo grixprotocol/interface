@@ -12,7 +12,11 @@ export const CalculatorPage = () => {
   const { fields, addRow, removeRow, onChange } = useCalculatorFields();
 
   const debouncedFields = useDebouncedValue(fields);
-  const table = useCalculatorTable({ data: fields, onChange, onRemoveRow: removeRow });
+  const table = useCalculatorTable({
+    data: fields,
+    onChange,
+    onRemoveRow: removeRow,
+  });
 
   return (
     <VStack

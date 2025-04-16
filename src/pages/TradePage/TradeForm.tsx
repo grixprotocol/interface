@@ -74,9 +74,7 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
     onAssetChange(selectedAsset);
   };
 
-  const isTradableOption = protocolsArrayData.find(
-    (protocol) => protocol.protocolName === selectedOption?.marketName
-  )?.isExecution;
+  const isTradableOption = protocolsArrayData.find((protocol) => protocol.protocolName === selectedOption?.marketName)?.isExecution;
 
   const chatbotContext = getTradeChatbotContext(
     positionType,
@@ -186,7 +184,12 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
             value: SupportedAsset.ETH,
             icon: <FaEthereum color="white" />,
           },
-          { label: 'BTC', description: 'Bitcoin', value: SupportedAsset.BTC, icon: <FaBitcoin color="white" /> },
+          {
+            label: 'BTC',
+            description: 'Bitcoin',
+            value: SupportedAsset.BTC,
+            icon: <FaBitcoin color="white" />,
+          },
         ]}
         precision={asset === SupportedAsset.BTC ? 3 : 2}
       />

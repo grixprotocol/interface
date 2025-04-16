@@ -25,14 +25,7 @@ export type TableProps<T> = TableContainerProps & {
 };
 import { ChevronRightIcon } from '@chakra-ui/icons'; // Import icons for expanding rows
 
-export const Table = <TData extends RowData>({
-  table,
-  tableProps,
-  thProps,
-  tdProps,
-  customExpandedRow,
-  ...rest
-}: TableProps<TData>) => (
+export const Table = <TData extends RowData>({ table, tableProps, thProps, tdProps, customExpandedRow, ...rest }: TableProps<TData>) => (
   <TableContainer w="full" borderTopWidth={1} borderColor="gray.900" {...rest}>
     <ChakraTable size="lg" {...tableProps}>
       <Thead>
@@ -58,11 +51,7 @@ export const Table = <TData extends RowData>({
           <React.Fragment key={row.id}>
             <Tr onClick={row.getCanExpand() ? () => row.toggleExpanded() : undefined} color="base.white">
               {row.getVisibleCells().map((cell, index) => (
-                <Td
-                  key={cell.id}
-                  width={cell.column.getSize() || `${100 / table.getVisibleLeafColumns().length}%`}
-                  {...tdProps}
-                >
+                <Td key={cell.id} width={cell.column.getSize() || `${100 / table.getVisibleLeafColumns().length}%`} {...tdProps}>
                   {index === 0 && (
                     <Flex alignItems="center" ml="-3">
                       {row.getCanExpand() && (
@@ -72,7 +61,10 @@ export const Table = <TData extends RowData>({
                           borderRadius="full"
                           border="1px solid"
                           borderColor="gray.700"
-                          _hover={{ color: 'gray.400', backgroundColor: 'gray.800' }}
+                          _hover={{
+                            color: 'gray.400',
+                            backgroundColor: 'gray.800',
+                          }}
                         >
                           <ChevronRightIcon
                             boxSize={6}

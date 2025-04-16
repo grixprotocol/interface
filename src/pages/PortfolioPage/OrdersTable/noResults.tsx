@@ -13,11 +13,7 @@ export const NoResults: React.FC<NoResultsProps> = ({ tab, arrayLength, isOpenPo
     <Text fontSize="sm" color="gray.300">
       {tab === UserOrderType.Positions &&
         arrayLength === 0 &&
-        (isOpenPositions === null
-          ? 'No positions found.'
-          : isOpenPositions
-          ? 'No open positions.'
-          : 'No closed positions.')}
+        (isOpenPositions === null ? 'No positions found.' : isOpenPositions ? 'No open positions.' : 'No closed positions.')}
       {tab === UserOrderType.LiveOrders && arrayLength === 0 && 'No live orders.'}
       {tab === UserOrderType.History && arrayLength === 0 && 'No trading history yet.'}
     </Text>

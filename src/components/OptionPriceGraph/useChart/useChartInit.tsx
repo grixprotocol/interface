@@ -89,9 +89,7 @@ export const useChartInit = ({
       container,
       seriesRef: {
         ...series,
-        ...(visibleSeries.includes(assetName) && underlyingSeriesRef.current
-          ? { [assetName]: underlyingSeriesRef.current }
-          : {}),
+        ...(visibleSeries.includes(assetName) && underlyingSeriesRef.current ? { [assetName]: underlyingSeriesRef.current } : {}),
       },
     });
     chart.subscribeCrosshairMove(tooltip.updateTooltip);

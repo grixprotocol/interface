@@ -123,7 +123,6 @@ export const getIsWhitelistedMode = (): boolean => {
   return false;
 };
 
-
 export const protocolsPortfolioUrlMap: { [key: string]: string } = {
   'synquote-100': 'https://app.synquote.com/portfolio',
   'derive-100': 'https://www.derive.xyz/history',
@@ -252,4 +251,5 @@ export const deBridgeScriptSrc = 'https://app.debridge.finance/assets/scripts/wi
 
 export const WBTC_Address = '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f';
 
-export const grixLogoUrl = 'https://statics.solscan.io/cdn/imgs/s60?ref=68747470733a2f2f697066732e696f2f697066732f516d52556977584b515a624d445766587a567833594c4c5a6852436d4a744c376a75557a5148437a795559427454';
+export const grixLogoUrl =
+  'https://statics.solscan.io/cdn/imgs/s60?ref=68747470733a2f2f697066732e696f2f697066732f516d52556977584b515a624d445766587a567833594c4c5a6852436d4a744c376a75557a5148437a795559427454';

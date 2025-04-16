@@ -23,20 +23,13 @@ import { getStatusInfo } from './getModalStatus';
 import { TelegramGuideModal } from './TelegramGuideModal';
 import { NotificationModalProps, WebhookDestination } from './types';
 
-export const NotificationModal: React.FC<NotificationModalProps> = ({
-  isOpen,
-  onClose,
-  settings,
-  onSettingsChange,
-  onSubmit,
-}) => {
+export const NotificationModal: React.FC<NotificationModalProps> = ({ isOpen, onClose, settings, onSettingsChange, onSubmit }) => {
   const [showBotToken, setShowBotToken] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
 
   // Add validation logic
   const isDiscordValid = settings.type === WebhookDestination.DISCORD && settings.webhookUrl?.trim();
-  const isTelegramValid =
-    settings.type === WebhookDestination.TELEGRAM && settings.botToken?.trim() && settings.chatId?.trim();
+  const isTelegramValid = settings.type === WebhookDestination.TELEGRAM && settings.botToken?.trim() && settings.chatId?.trim();
   const isValid = settings.type === WebhookDestination.DISCORD ? isDiscordValid : isTelegramValid;
 
   const statusInfo = getStatusInfo(settings);
@@ -55,14 +48,7 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
           transition="transform 0.2s"
           _hover={{ transform: 'scale(1.01)' }}
         >
-          <ModalHeader
-            borderBottomWidth="1px"
-            borderColor="blue.400"
-            fontSize="lg"
-            fontWeight="bold"
-            color="white"
-            textAlign="center"
-          >
+          <ModalHeader borderBottomWidth="1px" borderColor="blue.400" fontSize="lg" fontWeight="bold" color="white" textAlign="center">
             Connect Your Channels
           </ModalHeader>
           <ModalCloseButton />
@@ -97,7 +83,12 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
                 </FormLabel>
                 <Input
                   value={settings.webhookUrl}
-                  onChange={(e) => onSettingsChange({ ...settings, webhookUrl: e.target.value })}
+                  onChange={(e) =>
+                    onSettingsChange({
+                      ...settings,
+                      webhookUrl: e.target.value,
+                    })
+                  }
                   placeholder="Discord webhook URL"
                   _focus={{
                     borderColor: 'blue.400',
@@ -135,7 +126,12 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
                     <Input
                       type={showBotToken ? 'text' : 'password'}
                       value={settings.botToken}
-                      onChange={(e) => onSettingsChange({ ...settings, botToken: e.target.value })}
+                      onChange={(e) =>
+                        onSettingsChange({
+                          ...settings,
+                          botToken: e.target.value,
+                        })
+                      }
                       placeholder="Telegram bot token"
                       _focus={{
                         borderColor: 'blue.400',
@@ -196,11 +192,7 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
               onClick={isValid ? onSubmit : undefined}
               fontSize="xl"
               fontWeight="bold"
-              bg={
-                isValid
-                  ? 'linear-gradient(135deg, #4299E1 0%, #2B6CB0 100%)'
-                  : 'linear-gradient(135deg, #2D3748 0%, #1A202C 100%)'
-              }
+              bg={isValid ? 'linear-gradient(135deg, #4299E1 0%, #2B6CB0 100%)' : 'linear-gradient(135deg, #2D3748 0%, #1A202C 100%)'}
               color={isValid ? 'white' : 'gray.400'}
               border="2px solid"
               borderColor={isValid ? 'blue.400' : 'gray.600'}

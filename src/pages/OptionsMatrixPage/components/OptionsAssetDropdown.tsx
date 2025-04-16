@@ -1,18 +1,5 @@
 import { CheckCircleIcon, ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  HStack,
-  Icon,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  Text,
-  Tooltip,
-  useToken,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, HStack, Icon, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, Tooltip, useToken, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 type Option<T extends string> = {
@@ -29,11 +16,7 @@ export type OptionsAssetDropdownProps<T extends string> = {
   onCurrencySelect: (value: Option<T>['value']) => void;
 };
 
-export const OptionsAssetDropdown = <T extends string>({
-  options,
-  value,
-  onCurrencySelect,
-}: OptionsAssetDropdownProps<T>) => {
+export const OptionsAssetDropdown = <T extends string>({ options, value, onCurrencySelect }: OptionsAssetDropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const selectedOption = options.find((option) => option.value === value);

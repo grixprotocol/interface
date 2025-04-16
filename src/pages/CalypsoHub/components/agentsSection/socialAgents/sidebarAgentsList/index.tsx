@@ -17,14 +17,7 @@ type SidebarAgentsListProps = {
   setSelectedAgent: (agent: SocialAgentTask) => void;
 };
 
-export const SidebarAgentsList = ({
-  onClose,
-  agents,
-  isLoading,
-  isError,
-  selectedAgent,
-  setSelectedAgent,
-}: SidebarAgentsListProps) => {
+export const SidebarAgentsList = ({ onClose, agents, isLoading, isError, selectedAgent, setSelectedAgent }: SidebarAgentsListProps) => {
   const [isIncludeInactive, setIsIncludeInactive] = useState(false);
 
   if (isLoading) {
@@ -67,11 +60,7 @@ export const SidebarAgentsList = ({
                   {isIncludeInactive ? 'Show all agents' : 'Hide inactive agents'}
                 </Text>
               </HStack>
-              <Switch
-                isChecked={isIncludeInactive}
-                onChange={(e) => setIsIncludeInactive(e.target.checked)}
-                size="md"
-              />
+              <Switch isChecked={isIncludeInactive} onChange={(e) => setIsIncludeInactive(e.target.checked)} size="md" />
             </HStack>
           </Box>
           <IconButton aria-label="Close" icon={<CloseIcon />} size="sm" variant="ghost" onClick={() => onClose()} />
@@ -99,11 +88,7 @@ export const SidebarAgentsList = ({
                 <HStack justify="space-between">
                   <HStack spacing={2}>
                     {getPlatformIcon(agent.task_target)}
-                    <Text
-                      fontWeight="medium"
-                      color={selectedAgent?.id === agent.id ? 'white' : 'gray.400'}
-                      fontSize="sm"
-                    >
+                    <Text fontWeight="medium" color={selectedAgent?.id === agent.id ? 'white' : 'gray.400'} fontSize="sm">
                       {agent.name}
                     </Text>
                   </HStack>

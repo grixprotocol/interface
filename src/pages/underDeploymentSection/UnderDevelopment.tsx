@@ -49,15 +49,7 @@ export const UnderDevelopment = () => {
     <Container maxW="container.xl" py={20}>
       <Box borderRadius="xl" p="1px" bgGradient={bgGradient} position="relative" overflow="hidden">
         <Box borderRadius="xl" bg="base.black" p={8} position="relative" zIndex={1}>
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            bgGradient="linear(to-r, #2E90FA20, #15B79E20)"
-            zIndex={-1}
-          />
+          <Box position="absolute" top={0} left={0} right={0} bottom={0} bgGradient="linear(to-r, #2E90FA20, #15B79E20)" zIndex={-1} />
 
           <Box textAlign="center" mb={8}>
             <Box display="inline-block" position="relative">
@@ -100,16 +92,7 @@ export const UnderDevelopment = () => {
           </Box>
 
           {config.features.length > 0 && (
-            <Box
-              maxW="2xl"
-              mx="auto"
-              mt={12}
-              p={6}
-              borderRadius="lg"
-              border="1px solid"
-              borderColor="whiteAlpha.200"
-              bg="blackAlpha.300"
-            >
+            <Box maxW="2xl" mx="auto" mt={12} p={6} borderRadius="lg" border="1px solid" borderColor="whiteAlpha.200" bg="blackAlpha.300">
               <Text fontSize="lg" fontWeight="bold" mb={4} color="primary.400">
                 Upcoming Features:
               </Text>

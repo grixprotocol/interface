@@ -16,18 +16,15 @@ export type SliderPickerProps<T extends string> = {
   variant?: ButtonProps['variant'];
 };
 
-export const SliderPicker = <T extends string>({
-  options,
-  value,
-  onChange,
-  isLoading,
-  variant,
-}: SliderPickerProps<T>) => {
+export const SliderPicker = <T extends string>({ options, value, onChange, isLoading, variant }: SliderPickerProps<T>) => {
   const buttonGroupRef = useRef<HTMLDivElement>(null);
 
   const handleRightScroll = () => {
     if (buttonGroupRef.current) {
-      buttonGroupRef.current.scrollTo({ left: buttonGroupRef.current.scrollLeft + 160, behavior: 'smooth' });
+      buttonGroupRef.current.scrollTo({
+        left: buttonGroupRef.current.scrollLeft + 160,
+        behavior: 'smooth',
+      });
     }
   };
 

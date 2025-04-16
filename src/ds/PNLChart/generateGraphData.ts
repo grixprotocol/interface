@@ -28,7 +28,12 @@ export const generateGraphData = (Positions: PNLChartPosition): GraphData => {
     pnl: pnlCalculator(isCall, isLong, strikePrice, strikePrice, contractPrice, contractAmount),
   });
   const sortedDataPoints = dataPoints.sort((a, b) => a.assetPrice - b.assetPrice);
-  return { dataPoints: sortedDataPoints, semiRange, breakEvenPrice, strikePrice };
+  return {
+    dataPoints: sortedDataPoints,
+    semiRange,
+    breakEvenPrice,
+    strikePrice,
+  };
 };
 
 const pnlCalculator = (

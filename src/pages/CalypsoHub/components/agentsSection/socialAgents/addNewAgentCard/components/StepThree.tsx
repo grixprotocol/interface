@@ -3,11 +3,7 @@ import { Box, Button, Checkbox, FormControl, FormLabel, SimpleGrid, Text, VStack
 import { AgentMessageType, CreateSocialAgentPayload } from '@/api/socialAgents/createAgent/types';
 
 const taskCategories = {
-  'Market Status': [
-    AgentMessageType.marketStatusBTC,
-    AgentMessageType.marketStatusETH,
-    AgentMessageType.marketSentiment,
-  ],
+  'Market Status': [AgentMessageType.marketStatusBTC, AgentMessageType.marketStatusETH, AgentMessageType.marketSentiment],
   Analysis: [AgentMessageType.actionableRecommendation],
 };
 

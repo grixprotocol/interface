@@ -26,9 +26,7 @@ export const CreditPackageCard: React.FC<{
     position="relative"
     overflow="hidden"
   >
-    {isSelected && (
-      <Box position="absolute" top={0} left={0} right={0} h="3px" bgGradient={THEME_COLORS.primary.gradient} />
-    )}
+    {isSelected && <Box position="absolute" top={0} left={0} right={0} h="3px" bgGradient={THEME_COLORS.primary.gradient} />}
     <VStack spacing={4} align="stretch">
       <Text color={THEME_COLORS.primary.light} fontSize="3xl" fontWeight="bold" lineHeight="1">
         {credits.toLocaleString()}

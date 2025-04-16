@@ -120,7 +120,9 @@ export const useCreateApiKey = () => {
         args: [CREDIT_PAYMENT_ADDRESS as Address, priceInUsdcWei],
       });
 
-      const approveReceipt = await publicClient.waitForTransactionReceipt({ hash: approveTx });
+      const approveReceipt = await publicClient.waitForTransactionReceipt({
+        hash: approveTx,
+      });
       if (!approveReceipt.status) throw new Error('Approval failed');
 
       // Finally process payment with credit amount and keyId
@@ -131,7 +133,9 @@ export const useCreateApiKey = () => {
         args: [USDC_ADDRESS, BigInt(creditAmount), keyId],
       });
 
-      const payReceipt = await publicClient.waitForTransactionReceipt({ hash: payTx });
+      const payReceipt = await publicClient.waitForTransactionReceipt({
+        hash: payTx,
+      });
       if (!payReceipt.status) throw new Error('Payment failed');
 
       // After successful payment, send POST request to initiate API payment
@@ -187,7 +191,9 @@ export const useRechargeApiKey = () => {
         args: [CREDIT_PAYMENT_ADDRESS as Address, priceInUsdcWei],
       });
 
-      const approveReceipt = await publicClient.waitForTransactionReceipt({ hash: approveTx });
+      const approveReceipt = await publicClient.waitForTransactionReceipt({
+        hash: approveTx,
+      });
       if (!approveReceipt.status) throw new Error('Approval failed');
 
       // Finally process payment with credit amount and keyId
@@ -198,7 +204,9 @@ export const useRechargeApiKey = () => {
         args: [USDC_ADDRESS, BigInt(creditAmount), keyId],
       });
 
-      const payReceipt = await publicClient.waitForTransactionReceipt({ hash: payTx });
+      const payReceipt = await publicClient.waitForTransactionReceipt({
+        hash: payTx,
+      });
       if (!payReceipt.status) throw new Error('Payment failed');
 
       // After successful payment, send POST request to initiate API payment

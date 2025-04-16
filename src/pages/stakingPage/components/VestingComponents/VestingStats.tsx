@@ -67,13 +67,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({ vestingData }) => (
         </Text>
         {vestingData?.vestingProgress?.isVesting ? (
           <>
-            <Progress
-              value={vestingData.vestingProgress.progress}
-              size="sm"
-              colorScheme="primary"
-              borderRadius="full"
-              bg="gray.700"
-            />
+            <Progress value={vestingData.vestingProgress.progress} size="sm" colorScheme="primary" borderRadius="full" bg="gray.700" />
             <Text color="white" fontSize="sm">
               {vestingData.vestingProgress.remainingDays} days remaining
             </Text>

@@ -29,13 +29,7 @@ export const SuggestionBadge = () => {
 
   return (
     <Box w="full" data-testid="suggestion-badge">
-      <Box
-        borderRadius="6px"
-        p="1px"
-        display="flex"
-        flexDirection="row"
-        bgGradient="linear(to-r, blue.500, primary.500)"
-      >
+      <Box borderRadius="6px" p="1px" display="flex" flexDirection="row" bgGradient="linear(to-r, blue.500, primary.500)">
         <Box borderRadius="6px" w="full" bgColor="base.black">
           <Box bgGradient="linear(to-r, #2E90FA20, #15B79E20)" borderRadius={3} color="white" p={1} textAlign="center">
             I believe {asset} will be{' '}
@@ -93,7 +87,10 @@ export const SuggestionBadge = () => {
           <Text fontSize="12px" fontWeight="500" color="gray.400">
             Prediction By <strong style={{ fontWeight: 'bold' }}>Allora network</strong>:{' '}
             <span style={{ color: 'white' }}>
-              {Number(prediction).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {Number(prediction).toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </span>
           </Text>
         </Box>

@@ -60,18 +60,14 @@ export const StatsPage: React.FC = () => {
         <SimpleGrid columns={1} spacing={4} w="full">
           {renderAnimatedStat(
             'Notional Volume',
-            `$${stats?.notionalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}`,
+            `$${stats?.notionalValue.toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}`,
             !data,
             FaChartLine,
             'linear(to-r, #7928CA, #FF0080)'
           )}
-          {renderAnimatedStat(
-            'Unique users',
-            stats?.uniqueUserCount ?? 'Loading...',
-            !data,
-            FaUsers,
-            'linear(to-r, #FF4D4D, #F9CB28)'
-          )}
+          {renderAnimatedStat('Unique users', stats?.uniqueUserCount ?? 'Loading...', !data, FaUsers, 'linear(to-r, #FF4D4D, #F9CB28)')}
           {renderEnhancedTransactionBreakdown(stats?.transactionBreakdown, !data)}
         </SimpleGrid>
         <Box display="flex" justifyContent="center" alignItems="center" w="full">
@@ -128,18 +124,14 @@ export const StatsPage: React.FC = () => {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6} w="90%">
           {renderAnimatedStat(
             'Notional Volume',
-            `$${stats?.notionalValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}`,
+            `$${stats?.notionalValue.toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}`,
             !data,
             FaChartLine,
             'linear(to-r, #7928CA, #FF0080)'
           )}
-          {renderAnimatedStat(
-            'Active Traders',
-            stats?.uniqueUserCount ?? 'Loading...',
-            !data,
-            FaUsers,
-            'linear(to-r, #FF4D4D, #F9CB28)'
-          )}
+          {renderAnimatedStat('Active Traders', stats?.uniqueUserCount ?? 'Loading...', !data, FaUsers, 'linear(to-r, #FF4D4D, #F9CB28)')}
           {renderAnimatedStat(
             'Protocols',
             stats?.numberOfIntegratedProtocols ?? 'Loading...',

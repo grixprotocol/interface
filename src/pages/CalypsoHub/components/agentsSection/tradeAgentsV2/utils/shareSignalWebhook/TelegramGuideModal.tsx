@@ -26,14 +26,7 @@ type TelegramGuideModalProps = {
 export const TelegramGuideModal: React.FC<TelegramGuideModalProps> = ({ isOpen, onClose }) => (
   <Modal isOpen={isOpen} onClose={onClose} size="xl">
     <ModalOverlay backdropFilter="blur(4px)" />
-    <ModalContent
-      bg="blackAlpha.900"
-      borderWidth="2px"
-      borderColor="blue.400"
-      borderRadius="xl"
-      maxHeight="80vh"
-      overflowY="auto"
-    >
+    <ModalContent bg="blackAlpha.900" borderWidth="2px" borderColor="blue.400" borderRadius="xl" maxHeight="80vh" overflowY="auto">
       <ModalHeader color="white">Complete Telegram Setup Guide</ModalHeader>
       <ModalCloseButton />
       <ModalBody pb={6}>
@@ -67,8 +60,8 @@ export const TelegramGuideModal: React.FC<TelegramGuideModalProps> = ({ isOpen, 
                     Follow the instructions until you receive a message containing your bot token
                     <Box mt={2} bg="whiteAlpha.100" p={3} borderRadius="md">
                       <Text fontSize="sm" as="pre" whiteSpace="pre-wrap">
-                        Done! Congratulations on your new bot. You will find it at t.me/new_bot. Use this token to
-                        access the HTTP API: 63xxxxxx71:AAFoxxxxn0hwA-2TVSxxxNf4c
+                        Done! Congratulations on your new bot. You will find it at t.me/new_bot. Use this token to access the HTTP API:
+                        63xxxxxx71:AAFoxxxxn0hwA-2TVSxxxNf4c
                       </Text>
                     </Box>
                   </ListItem>
@@ -88,7 +81,8 @@ export const TelegramGuideModal: React.FC<TelegramGuideModalProps> = ({ isOpen, 
                   <ListItem>
                     Open this URL in your browser:
                     <Code display="block" my={2} p={2} bg="whiteAlpha.100" color="blue.300" fontSize="sm">
-                      https://api.telegram.org/bot{'{your_bot_token}'}/getUpdates
+                      https://api.telegram.org/bot{'{your_bot_token}'}
+                      /getUpdates
                     </Code>
                   </ListItem>
                   <ListItem>
@@ -124,7 +118,8 @@ export const TelegramGuideModal: React.FC<TelegramGuideModalProps> = ({ isOpen, 
                   <ListItem>
                     Open this URL in your browser:
                     <Code display="block" my={2} p={2} bg="whiteAlpha.100" color="blue.300" fontSize="sm">
-                      https://api.telegram.org/bot{'{your_bot_token}'}/getUpdates
+                      https://api.telegram.org/bot{'{your_bot_token}'}
+                      /getUpdates
                     </Code>
                   </ListItem>
                   <ListItem>
@@ -180,7 +175,8 @@ export const TelegramGuideModal: React.FC<TelegramGuideModalProps> = ({ isOpen, 
           <Text color="white" fontSize="sm">
             💡 Pro Tip: To verify your setup, you can test sending a message using this URL format:
             <Code display="block" mt={2} p={2} bg="whiteAlpha.200" color="blue.300" fontSize="sm">
-              https://api.telegram.org/bot{'{your_bot_token}'}/sendMessage?chat_id={'{your_chat_id}'}&text=test123
+              https://api.telegram.org/bot{'{your_bot_token}'}
+              /sendMessage?chat_id={'{your_chat_id}'}&text=test123
             </Code>
           </Text>
         </Box>

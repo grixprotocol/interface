@@ -63,11 +63,7 @@ const displayToast = (
   });
 };
 
-export const fetchPoolQuery = async (
-  poolAddress: string,
-  userAddress: `0x${string}`,
-  fillSize: string
-): Promise<OrderbookQuote | null> => {
+export const fetchPoolQuery = async (poolAddress: string, userAddress: `0x${string}`, fillSize: string): Promise<OrderbookQuote | null> => {
   const requestObject = {
     method: 'GET',
     headers: {

@@ -52,18 +52,14 @@ export const TokenPage = () => {
               DeFi Derivatives Interactions
             </Heading>
             <Text fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }} maxW="800px" color="whiteAlpha.900" lineHeight={1.6}>
-              Grix provides battle-tested toolkits that empower users and AI agents with comprehensive solutions for
-              risk management, position optimization, and strategy execution across leading DeFi derivatives platforms.
+              Grix provides battle-tested toolkits that empower users and AI agents with comprehensive solutions for risk management,
+              position optimization, and strategy execution across leading DeFi derivatives platforms.
             </Text>
             <HStack spacing={6} pt={4}>
               <ActionButton href="https://app.grix.finance" onClick={() => track('launch_app_click')}>
                 Launch App
               </ActionButton>
-              <ActionButton
-                href="https://app.grix.finance/calypso/lobby"
-                variant="primary"
-                onClick={() => track('ai_playground_click')}
-              >
+              <ActionButton href="https://app.grix.finance/calypso/lobby" variant="primary" onClick={() => track('ai_playground_click')}>
                 AI Playground
               </ActionButton>
             </HStack>
@@ -78,12 +74,7 @@ export const TokenPage = () => {
           {/* Core Products Section */}
           <section aria-label="Core Products">
             <VStack spacing={12} align="center">
-              <Heading
-                fontSize={{ base: '2xl', md: '3xl' }}
-                textAlign="center"
-                bgGradient="linear(to-r, teal.400, blue.400)"
-                bgClip="text"
-              >
+              <Heading fontSize={{ base: '2xl', md: '3xl' }} textAlign="center" bgGradient="linear(to-r, teal.400, blue.400)" bgClip="text">
                 Core Products
               </Heading>
 
@@ -117,11 +108,7 @@ export const TokenPage = () => {
                     <Text color="white" fontSize="lg">
                       Compare options prices, view options matrices, and manage positions
                     </Text>
-                    <ActionButton
-                      href="https://app.grix.finance"
-                      onClick={() => track('trading_interface_click')}
-                      size="md"
-                    >
+                    <ActionButton href="https://app.grix.finance" onClick={() => track('trading_interface_click')} size="md">
                       Launch App
                     </ActionButton>
                   </VStack>

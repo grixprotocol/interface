@@ -17,12 +17,7 @@ export type CtaSectionProps = SectionProps & {
 export const renderFeaturesSection = ({ cardBg, cardHoverBg = '', borderColor }: SectionProps) => (
   <section aria-label="Platform Features">
     <VStack spacing={12} align="center">
-      <Heading
-        fontSize={{ base: '2xl', md: '3xl' }}
-        textAlign="center"
-        bgGradient="linear(to-r, blue.400, purple.400)"
-        bgClip="text"
-      >
+      <Heading fontSize={{ base: '2xl', md: '3xl' }} textAlign="center" bgGradient="linear(to-r, blue.400, purple.400)" bgClip="text">
         Key Features
       </Heading>
 
@@ -112,53 +107,21 @@ export const renderCtaSection = ({ cardBg, borderColor, track }: CtaSectionProps
       </Heading>
 
       <Text fontSize={{ base: 'md', md: 'lg' }} textAlign="center" color="whiteAlpha.900" maxW="800px" mb={6}>
-        Unlock the full potential of on-chain derivatives with Grix - powering the next generation of intelligent
-        trading infrastructure for protocols, developers, and AI agents.
+        Unlock the full potential of on-chain derivatives with Grix - powering the next generation of intelligent trading infrastructure for
+        protocols, developers, and AI agents.
       </Text>
 
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} w="full" maxW="800px">
-        <Button
-          as="a"
-          href="https://x.com/GrixFinance"
-          target="_blank"
-          variant="outline"
-          colorScheme="blue"
-          size="md"
-          w="full"
-        >
+        <Button as="a" href="https://x.com/GrixFinance" target="_blank" variant="outline" colorScheme="blue" size="md" w="full">
           Twitter
         </Button>
-        <Button
-          as="a"
-          href="https://t.co/YPGAhKlcUV"
-          target="_blank"
-          variant="outline"
-          colorScheme="purple"
-          size="md"
-          w="full"
-        >
+        <Button as="a" href="https://t.co/YPGAhKlcUV" target="_blank" variant="outline" colorScheme="purple" size="md" w="full">
           Discord
         </Button>
-        <Button
-          as="a"
-          href="https://medium.com/@grixfinance"
-          target="_blank"
-          variant="outline"
-          colorScheme="gray"
-          size="md"
-          w="full"
-        >
+        <Button as="a" href="https://medium.com/@grixfinance" target="_blank" variant="outline" colorScheme="gray" size="md" w="full">
           Medium
         </Button>
-        <Button
-          as="a"
-          href="https://t.me/grixfinance"
-          target="_blank"
-          variant="outline"
-          colorScheme="blue"
-          size="md"
-          w="full"
-        >
+        <Button as="a" href="https://t.me/grixfinance" target="_blank" variant="outline" colorScheme="blue" size="md" w="full">
           Telegram
         </Button>
       </SimpleGrid>

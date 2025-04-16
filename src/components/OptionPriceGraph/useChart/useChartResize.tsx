@@ -1,10 +1,7 @@
 import { createChart } from 'lightweight-charts';
 import { useEffect } from 'react';
 
-export const useChartResize = (
-  containerRef: React.RefObject<HTMLDivElement>,
-  chart: ReturnType<typeof createChart> | undefined
-) => {
+export const useChartResize = (containerRef: React.RefObject<HTMLDivElement>, chart: ReturnType<typeof createChart> | undefined) => {
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !chart) return;

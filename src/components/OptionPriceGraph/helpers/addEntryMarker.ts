@@ -1,11 +1,6 @@
 import { ISeriesApi, SeriesMarkerPosition, SeriesMarkerShape, UTCTimestamp } from 'lightweight-charts';
 
-export const addEntryMarker = (
-  series: ISeriesApi<'Line'>,
-  entryTime: UTCTimestamp,
-  price: number,
-  title: string = 'Entry'
-) => {
+export const addEntryMarker = (series: ISeriesApi<'Line'>, entryTime: UTCTimestamp, price: number, title: string = 'Entry') => {
   series.createPriceLine({
     price,
     color: '#FFD700',

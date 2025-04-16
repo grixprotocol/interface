@@ -1,13 +1,4 @@
-import {
-  FaArrowDown,
-  FaArrowsAltH,
-  FaArrowUp,
-  FaBolt,
-  FaChartLine,
-  FaExchangeAlt,
-  FaPercentage,
-  FaShieldAlt,
-} from 'react-icons/fa';
+import { FaArrowDown, FaArrowsAltH, FaArrowUp, FaBolt, FaChartLine, FaExchangeAlt, FaPercentage, FaShieldAlt } from 'react-icons/fa';
 
 import { Strategy } from '../../types';
 

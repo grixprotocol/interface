@@ -21,11 +21,7 @@ export const getOrderDescriptions = ({
   {
     id: 'contractSize',
     label: 'Size',
-    rightColumn: availableContracts ? (
-      <Text color="whiteAlpha.600">Available: {availableContracts}</Text>
-    ) : (
-      <Text></Text>
-    ),
+    rightColumn: availableContracts ? <Text color="whiteAlpha.600">Available: {availableContracts}</Text> : <Text></Text>,
     column: (
       <Box border="1px solid" borderColor="whiteAlpha.300" borderRadius="md" px={3} py={1}>
         <HStack spacing={2} justify="center">

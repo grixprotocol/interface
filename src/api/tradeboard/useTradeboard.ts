@@ -22,7 +22,13 @@ export const useTradeboard = ({
 }) => {
   const { data, isLoading, isError, error, isFetching } = useQuery<TradeboardResponse>({
     queryKey: ['tradeboard', asset, optionType, positionType, shouldFilterExecutionProtocols],
-    queryFn: () => fetchTradeboard({ shouldFilterExecutionProtocols, positionType, optionType, asset }),
+    queryFn: () =>
+      fetchTradeboard({
+        shouldFilterExecutionProtocols,
+        positionType,
+        optionType,
+        asset,
+      }),
     enabled: !!asset && !!optionType && !!positionType,
     refetchInterval,
   });
@@ -44,8 +50,7 @@ export const fetchTradeboard = async ({
   asset: SupportedAsset;
 }) => {
   const protocolsFilter =
-    protocols ??
-    protocolsArrayData.filter((p) => !shouldFilterExecutionProtocols || p.isExecution).map((p) => p.protocolName);
+    protocols ?? protocolsArrayData.filter((p) => !shouldFilterExecutionProtocols || p.isExecution).map((p) => p.protocolName);
 
   const filters: TradeboardQueryFilters = {
     positionType,
@@ -53,6 +58,8 @@ export const fetchTradeboard = async ({
     asset,
     protocols: protocolsFilter.join(','),
   };
-  const response = await apiClient.get<TradeboardResponse>(`/tradeboard`, { params: filters });
+  const response = await apiClient.get<TradeboardResponse>(`/tradeboard`, {
+    params: filters,
+  });
   return response.data;
 };

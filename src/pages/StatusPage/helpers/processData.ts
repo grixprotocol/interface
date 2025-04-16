@@ -10,7 +10,10 @@ const groupDataByProtocol = (data: MarketStatus[]): Protocol[] => {
 
   data.forEach((responseMarket) => {
     if (!protocolMap.has(responseMarket.market_name)) {
-      protocolMap.set(responseMarket.market_name, { name: responseMarket.market_name, markets: [] });
+      protocolMap.set(responseMarket.market_name, {
+        name: responseMarket.market_name,
+        markets: [],
+      });
     }
 
     const protocol = protocolMap.get(responseMarket.market_name);
@@ -46,9 +49,7 @@ const addMarketLogos = (markets?: Market[]): Market[] => {
 
 const mapStatusToProtocol = (protocols: Protocol[]): Protocol[] =>
   protocols.map((protocol) => {
-    const status = protocol.markets?.some((market) => market.status === LinkStatus.active)
-      ? LinkStatus.active
-      : LinkStatus.paused;
+    const status = protocol.markets?.some((market) => market.status === LinkStatus.active) ? LinkStatus.active : LinkStatus.paused;
     const mostRecentlyUpdatedMarket = protocol.markets?.sort(
       (a, b) => new Date(b.latest_update).getTime() - new Date(a.latest_update).getTime()
     )[0];

@@ -48,8 +48,7 @@ export const calculateAgentMetrics = (agent: TradeAgent): AgentMetrics => {
   // Position analysis
   const totalExpectedValue = signals.reduce((sum, signal) => sum + signal.signal.expected_total_price_usd, 0);
 
-  const averagePositionSize =
-    signals.length > 0 ? signals.reduce((sum, signal) => sum + signal.signal.size, 0) / signals.length : 0;
+  const averagePositionSize = signals.length > 0 ? signals.reduce((sum, signal) => sum + signal.signal.size, 0) / signals.length : 0;
 
   return {
     totalSignals: signals.length,

@@ -34,7 +34,11 @@ export type GrixMetricsData = {
     entity_type: string;
     entity_type_string: string;
   }[];
-  graphTokens: { tokenName: string; totalPurchases: string; totalFeePaidByToken: string }[];
+  graphTokens: {
+    tokenName: string;
+    totalPurchases: string;
+    totalFeePaidByToken: string;
+  }[];
   graphStatistics: {
     uniqueUserCount: string;
     totalNotionalValue: string;

@@ -8,13 +8,7 @@ import { config } from '@/config';
 import { useAnalytics } from '@/services/analytics';
 import { getSignatureExpired } from '@/utils/dateUtil';
 import { handlePositionSignMessage } from '@/utils/signMessageWagmi';
-import {
-  approveAllowance,
-  approveErc1155Allowance,
-  checkBalanceOfERC20,
-  fetchAllowance,
-  isApprovalSetForAll,
-} from '@/utils/web3Util';
+import { approveAllowance, approveErc1155Allowance, checkBalanceOfERC20, fetchAllowance, isApprovalSetForAll } from '@/utils/web3Util';
 import { fetchPoolQuery } from '@/web3Config/premia/fillQuote';
 
 export type ExercisePositionRequest = {
@@ -75,12 +69,22 @@ export const useExercisePositionRequest = ({ userAddress }: { userAddress?: `0x$
     }) => {
       try {
         const optionIdentifier = option.selectedProtocol === 'moby' ? option.optionTokenId : option.poolAddress;
-        setIsActionBtnLoading({ state: true, optionTokenId: optionIdentifier as string });
+        setIsActionBtnLoading({
+          state: true,
+          optionTokenId: optionIdentifier as string,
+        });
         if (!userAddress) {
           throw new Error('User address is not defined');
         }
         try {
-          await preExerciseValidations({ option, nftAddress, userAddress, track, displayToast, grixToast });
+          await preExerciseValidations({
+            option,
+            nftAddress,
+            userAddress,
+            track,
+            displayToast,
+            grixToast,
+          });
         } catch (error) {
           return {
             success: false,

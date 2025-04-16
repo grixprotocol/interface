@@ -7,13 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { Message } from '../types';
 
 export const ChatbotMessage: React.FC<{ msg: Message; idx: number }> = ({ msg, idx }) => (
-  <HStack
-    borderRadius="xl"
-    key={idx}
-    justify={msg.user === 'user' ? 'flex-end' : 'flex-start'}
-    mb={3}
-    transition="all 0.3s ease"
-  >
+  <HStack borderRadius="xl" key={idx} justify={msg.user === 'user' ? 'flex-end' : 'flex-start'} mb={3} transition="all 0.3s ease">
     <Box
       bg={msg.user === 'user' ? 'rgba(75, 85, 99, 0.9)' : 'rgba(55, 65, 81, 0.9)'}
       color={msg.user === 'user' ? 'white' : 'gray.100'}

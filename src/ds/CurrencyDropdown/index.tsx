@@ -118,12 +118,7 @@ export const CurrencyDropdown = <T extends string>({
             {isOpen && <Icon as={ChevronUpIcon} boxSize={5} color="gray.400" mr={4} />}
           </HStack>
         </MenuButton>
-        <MenuList
-          backgroundColor="base.black"
-          borderColor="gray.700"
-          borderTopRadius={0}
-          borderTop={isOpen ? 0 : undefined}
-        >
+        <MenuList backgroundColor="base.black" borderColor="gray.700" borderTopRadius={0} borderTop={isOpen ? 0 : undefined}>
           {options.map((option, index) => (
             <React.Fragment key={option.value}>
               <MenuItem

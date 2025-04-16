@@ -1,17 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CloseIcon, WarningIcon } from '@chakra-ui/icons';
-import {
-  Box,
-  Button,
-  Icon,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Icon, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from '@chakra-ui/react';
 import React from 'react';
 
 type ErrorModalProps = {
@@ -26,13 +15,7 @@ export const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, onClose, message
   <Modal isOpen={isOpen} onClose={onClose} isCentered>
     <ModalOverlay />
     <ModalContent mx="4" bg="white" borderRadius="lg" boxShadow="xl">
-      <ModalHeader
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        borderBottomWidth="1px"
-        paddingBottom="1rem"
-      >
+      <ModalHeader display="flex" alignItems="center" justifyContent="space-between" borderBottomWidth="1px" paddingBottom="1rem">
         <Box display="flex" alignItems="center">
           <Icon as={WarningIcon} w={8} h={8} color="red.500" mr="3" />
           <Text fontSize="xl" fontWeight="bold">

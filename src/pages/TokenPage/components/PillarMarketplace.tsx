@@ -1,16 +1,4 @@
-import {
-  Box,
-  Button,
-  Collapse,
-  Heading,
-  HStack,
-  Icon,
-  List,
-  ListItem,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Button, Collapse, Heading, HStack, Icon, List, ListItem, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { IconType } from 'react-icons';
 import { FaBalanceScale, FaBolt, FaBrain, FaChartLine, FaChevronDown, FaChevronUp, FaShieldAlt } from 'react-icons/fa';
@@ -38,12 +26,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
       icon: FaShieldAlt,
       title: 'Risk Shield Tools',
       description: 'Enterprise-grade risk management toolkit',
-      features: [
-        'Position hedging tools',
-        'Delta-neutral frameworks',
-        'Liquidation protection system',
-        'Stop-loss automation tools',
-      ],
+      features: ['Position hedging tools', 'Delta-neutral frameworks', 'Liquidation protection system', 'Stop-loss automation tools'],
       color: 'green',
       unlockRequirement: '1,000 GRIX',
       agentInteractions: 15234,
@@ -53,12 +36,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
       icon: FaBalanceScale,
       title: 'Options Toolkit',
       description: 'Complete options trading infrastructure',
-      features: [
-        'Greeks analysis tools',
-        'Volatility trading framework',
-        'Options spread calculator',
-        'Exercise optimization tools',
-      ],
+      features: ['Greeks analysis tools', 'Volatility trading framework', 'Options spread calculator', 'Exercise optimization tools'],
       color: 'cyan',
       unlockRequirement: '5,000 GRIX',
       agentInteractions: 8756,
@@ -68,12 +46,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
       icon: FaBrain,
       title: 'Perpetuals Framework',
       description: 'Comprehensive perpetual futures toolkit',
-      features: [
-        'Funding rate analysis tools',
-        'Cross-exchange toolkit',
-        'Leverage optimization system',
-        'Index tracking framework',
-      ],
+      features: ['Funding rate analysis tools', 'Cross-exchange toolkit', 'Leverage optimization system', 'Index tracking framework'],
       color: 'blue',
       unlockRequirement: '10,000 GRIX',
       agentInteractions: 12543,
@@ -83,12 +56,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
       icon: FaBolt,
       title: 'Basis Trading Tools',
       description: 'Advanced basis trading infrastructure',
-      features: [
-        'Spot-futures analysis tools',
-        'Funding rate calculator',
-        'Basis tracking system',
-        'Spread execution toolkit',
-      ],
+      features: ['Spot-futures analysis tools', 'Funding rate calculator', 'Basis tracking system', 'Spread execution toolkit'],
       color: 'purple',
       unlockRequirement: '50,000 GRIX',
       agentInteractions: 9876,
@@ -98,12 +66,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
       icon: FaChartLine,
       title: 'Leverage Tools',
       description: 'Advanced leverage optimization toolkit',
-      features: [
-        'Options pricing tools',
-        'Leverage calculation system',
-        'Delta-gamma analysis toolkit',
-        'Volatility surface tools',
-      ],
+      features: ['Options pricing tools', 'Leverage calculation system', 'Delta-gamma analysis toolkit', 'Volatility surface tools'],
       color: 'yellow',
       unlockRequirement: '75,000 GRIX',
       agentInteractions: 7845,
@@ -113,12 +76,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
       icon: FaShieldAlt,
       title: 'Insurance Tools',
       description: 'Comprehensive position protection toolkit',
-      features: [
-        'Collateral protection system',
-        'Smart contract analysis tools',
-        'Claim automation toolkit',
-        'Risk assessment framework',
-      ],
+      features: ['Collateral protection system', 'Smart contract analysis tools', 'Claim automation toolkit', 'Risk assessment framework'],
       color: 'orange',
       unlockRequirement: '150,000 GRIX',
       agentInteractions: 3245,
@@ -144,26 +102,12 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
         >
           Derivatives Toolkits Marketplace for Agentic Trading
         </Heading>
-        <Text
-          fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
-          textAlign="center"
-          color="whiteAlpha.900"
-          maxW="800px"
-          px={4}
-          lineHeight="1.6"
-        >
-          Unlock powerful derivatives trading toolkits that power up your trading agents across leading agentic
-          platforms like ElizaOS.
+        <Text fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }} textAlign="center" color="whiteAlpha.900" maxW="800px" px={4} lineHeight="1.6">
+          Unlock powerful derivatives trading toolkits that power up your trading agents across leading agentic platforms like ElizaOS.
         </Text>
       </VStack>
 
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3 }}
-        spacing={{ base: 8, md: 10 }}
-        maxW="1200px"
-        mx="auto"
-        px={{ base: 2, md: 4 }}
-      >
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 8, md: 10 }} maxW="1200px" mx="auto" px={{ base: 2, md: 4 }}>
         {pillarItems.map((item) => (
           <Box
             key={item.title}
@@ -187,12 +131,7 @@ export const PillarMarketplace = ({ cardBg, cardHoverBg, borderColor }: PillarMa
               <VStack spacing={4} align="start">
                 <HStack spacing={3}>
                   <Icon as={item.icon} color={`${item.color}.400`} boxSize={6} />
-                  <Text
-                    fontSize="xl"
-                    fontWeight="bold"
-                    bgGradient={`linear(to-r, ${item.color}.200, ${item.color}.400)`}
-                    bgClip="text"
-                  >
+                  <Text fontSize="xl" fontWeight="bold" bgGradient={`linear(to-r, ${item.color}.200, ${item.color}.400)`} bgClip="text">
                     {item.title}
                   </Text>
                 </HStack>

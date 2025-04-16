@@ -17,13 +17,7 @@ type ExpirationDatePickerProps = FlexProps & {
   isFetching: boolean;
 };
 
-export const ExpirationDatePicker = ({
-  tradeboardData,
-  isLoading,
-  isError,
-  isFetching,
-  ...props
-}: ExpirationDatePickerProps) => {
+export const ExpirationDatePicker = ({ tradeboardData, isLoading, isError, isFetching, ...props }: ExpirationDatePickerProps) => {
   const { expirationDate, onExpirationDateChange } = useTradeForm();
   const { isOpen: isModalOpen, onClose: onCloseModal, onOpen: onOpenModal } = useDisclosure();
   const [value, setValue] = useState(expirationDate);
@@ -55,13 +49,14 @@ export const ExpirationDatePicker = ({
       <OptionsContainer
         title="Expiration"
         onHeaderClick={onOpenModal}
-        description={{ title: 'Expires In:', value: expirationDate ? getRemainingTime(expirationDate) : '' }}
+        description={{
+          title: 'Expires In:',
+          value: expirationDate ? getRemainingTime(expirationDate) : '',
+        }}
         isLoading={isLoading || isFetching}
         isError={isError}
       >
-        {expirationDate && options && (
-          <WheelPicker value={value} options={options} height={100} itemHeight={32} onChange={onChange} />
-        )}
+        {expirationDate && options && <WheelPicker value={value} options={options} height={100} itemHeight={32} onChange={onChange} />}
       </OptionsContainer>
       <ItemsModal
         isOpen={isModalOpen}

@@ -6,21 +6,16 @@ import { apiClient } from '@/services/apiClient';
 import { PaginatedResponse, UserOrdersCountParams, UserOrdersParams, UserOrderType, UserRequest } from './types';
 
 const queryKey = {
-  list: ({ userAddress, type, limit, offset, fetchAll }: UserOrdersParams) => [
-    'user-orders',
-    userAddress,
-    type,
-    limit,
-    offset,
-    fetchAll,
-  ],
+  list: ({ userAddress, type, limit, offset, fetchAll }: UserOrdersParams) => ['user-orders', userAddress, type, limit, offset, fetchAll],
   totalCount: ({ userAddress, type }: UserOrdersCountParams) => ['user-orders-count', userAddress, type],
 };
 
 const queryFn = async (url: string, fetchAll: boolean, userAddress?: string, limit?: number, offset?: number) => {
   const params = fetchAll ? { limit: 50 } : { user_account: userAddress, limit, offset };
 
-  const response = await apiClient.get<PaginatedResponse<UserRequest>>(url, { params });
+  const response = await apiClient.get<PaginatedResponse<UserRequest>>(url, {
+    params,
+  });
 
   return response.data;
 };
@@ -43,7 +38,9 @@ export const useUserOrders = (
 ) => {
   const queryClient = useQueryClient();
   useEffect(() => {
-    void queryClient.invalidateQueries({ queryKey: queryKey.totalCount({ userAddress, type }) });
+    void queryClient.invalidateQueries({
+      queryKey: queryKey.totalCount({ userAddress, type }),
+    });
   }, [queryClient, userAddress, type, limit, offset, fetchAll]);
 
   return useQuery({

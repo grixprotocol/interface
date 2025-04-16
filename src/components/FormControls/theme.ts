@@ -3,7 +3,10 @@ export const formControlStyles = {
     bg: 'whiteAlpha.50',
     borderColor: 'whiteAlpha.200',
     _hover: { borderColor: 'whiteAlpha.400' },
-    _focus: { borderColor: 'blue.400', boxShadow: '0 0 0 1px var(--chakra-colors-blue-400)' },
+    _focus: {
+      borderColor: 'blue.400',
+      boxShadow: '0 0 0 1px var(--chakra-colors-blue-400)',
+    },
   },
   button: {
     selected: {

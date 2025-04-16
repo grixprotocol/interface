@@ -49,13 +49,7 @@ export const StrategyGuidance = ({ selectedStrategy, setSelectedStrategy }: Stra
                   </Badge>
                 </VStack>
                 <Badge
-                  colorScheme={
-                    strategy.complexity === 'Advanced'
-                      ? 'red'
-                      : strategy.complexity === 'Intermediate'
-                      ? 'yellow'
-                      : 'green'
-                  }
+                  colorScheme={strategy.complexity === 'Advanced' ? 'red' : strategy.complexity === 'Intermediate' ? 'yellow' : 'green'}
                 >
                   {strategy.complexity}
                 </Badge>
@@ -167,11 +161,7 @@ export const StrategyGuidance = ({ selectedStrategy, setSelectedStrategy }: Stra
                       borderLeft="4px solid"
                       borderLeftColor={getMarketConditionColor(condition)}
                     >
-                      <Icon
-                        as={getMarketConditionIcon(condition)}
-                        color={getMarketConditionColor(condition)}
-                        boxSize={5}
-                      />
+                      <Icon as={getMarketConditionIcon(condition)} color={getMarketConditionColor(condition)} boxSize={5} />
                       <Text color="white">{condition}</Text>
                     </HStack>
                   ))}

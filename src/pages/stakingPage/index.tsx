@@ -93,14 +93,7 @@ export const StakingPage: React.FC = () => {
             <VStack align="stretch" spacing={6}>
               <RewardsCard data={userRewardData} refetchData={handleDataRefresh} />
 
-              <Box
-                bg="gray.950"
-                borderRadius="lg"
-                p={6}
-                border="1px solid"
-                borderColor="gray.900"
-                _hover={{ borderColor: 'gray.800' }}
-              >
+              <Box bg="gray.950" borderRadius="lg" p={6} border="1px solid" borderColor="gray.900" _hover={{ borderColor: 'gray.800' }}>
                 <VStack align="stretch" spacing={2}>
                   <Heading size="sm" color="white" fontWeight="600">
                     Learn about Staking

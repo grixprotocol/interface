@@ -24,11 +24,7 @@ export const PNLChart = ({ attributes, onCursorChanged, containerProps }: PNLCha
 
   return (
     <ResponsiveContainer width="100%" height={200} {...containerProps}>
-      <ComposedChart
-        data={graphData.dataPoints}
-        margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
-        onMouseMove={handleMouseMove}
-      >
+      <ComposedChart data={graphData.dataPoints} margin={{ top: 0, left: 0, right: 0, bottom: 0 }} onMouseMove={handleMouseMove}>
         <XAxis dataKey="assetPrice" hide />
         <YAxis dataKey="pnl" domain={[-graphData.semiRange, graphData.semiRange]} allowDataOverflow hide />
         {gradientsComponent(isCall, isLong)}

@@ -20,28 +20,17 @@ import { TotalOrderLineItem } from './components/TotalOrderLineItem';
 import { getOrderDescriptions } from './constants';
 import { useOrderToken } from './hooks/useOrderToken';
 
-export const ReviewOrderModal = ({
-  isOpen,
-  onClose,
-  option,
-}: {
-  isOpen: boolean;
-  onClose: VoidFunction;
-  option: OptionBoardItem;
-}) => {
+export const ReviewOrderModal = ({ isOpen, onClose, option }: { isOpen: boolean; onClose: VoidFunction; option: OptionBoardItem }) => {
   const [isArbitrum, setIsArbitrum] = useState(false);
   const { asset: underlyingAsset, amount, onAmountChange } = useTradeForm();
   const availableContracts = option.availableContractAmount ? Number(option.availableContractAmount).toFixed(3) : null;
   const { track } = useAnalytics();
-  const {
-    token: payWithToken,
-    setToken: setPayWithToken,
-    optionQuote,
-    isLoading: isLoadingQuote,
-  } = useOrderToken(option);
+  const { token: payWithToken, setToken: setPayWithToken, optionQuote, isLoading: isLoadingQuote } = useOrderToken(option);
   const { chainId } = useUserNetwork();
   const { address: userAddress } = useUserAccount();
-  const { onSubmit, isLoading, isDisabled } = useOnProtocolSubmit({ token: payWithToken });
+  const { onSubmit, isLoading, isDisabled } = useOnProtocolSubmit({
+    token: payWithToken,
+  });
   const { data: balanceResult } = useBalance({
     address: userAddress as `0x${string}`,
     chainId: chainId as number,
@@ -60,9 +49,7 @@ export const ReviewOrderModal = ({
   const totalPriceInUSD = Number(option.contractPrice) * Number(amount);
   const totalPriceWithFeeUSD = calculateTotalPriceWithFee(totalPriceInUSD, FEE_PERCENTAGE);
   const points = assetPrice && Number(amount) ? ((assetPrice * Number(amount)) / 10).toFixed(0) : '0';
-  const totalTokenPrice = tokenAssetPrice
-    ? usdToWei(totalPriceWithFeeUSD, tokenAssetPrice, balanceResult?.decimals)
-    : 0n;
+  const totalTokenPrice = tokenAssetPrice ? usdToWei(totalPriceWithFeeUSD, tokenAssetPrice, balanceResult?.decimals) : 0n;
 
   const userHasFunds = balanceResult && balanceResult.value >= totalTokenPrice;
   const actionLabel = option.positionType === 'long' ? 'Buy' : 'Sell';
@@ -78,7 +65,10 @@ export const ReviewOrderModal = ({
   const allowMinimum = urlParams.get('allowMinimum') === 'true';
 
   const [showPointsAnimation, setShowPointsAnimation] = useState(false);
-  const [animationPosition, setAnimationPosition] = useState({ top: 0, left: 0 });
+  const [animationPosition, setAnimationPosition] = useState({
+    top: 0,
+    left: 0,
+  });
 
   const handlePrimaryAction = async () => {
     const button = document.querySelector('[data-testid="buy-button"]');

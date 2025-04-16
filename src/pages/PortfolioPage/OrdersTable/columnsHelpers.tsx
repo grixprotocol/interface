@@ -33,11 +33,7 @@ export const exerciseColumnPreValidations = (
       isPreValidationFailed: true,
       returnContent: (
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Tooltip
-            label="This position has been already closed or settled"
-            aria-label="NFT Balance Tooltip"
-            placement="left"
-          >
+          <Tooltip label="This position has been already closed or settled" aria-label="NFT Balance Tooltip" placement="left">
             <InfoIcon color="gray.500" boxSize={4} />
           </Tooltip>
         </Box>
@@ -74,8 +70,7 @@ export const getParameters = (
   const nftBalance = info.cell.row.original.nftBalance ?? 0n;
   const poolAddress = info.cell.row.original.optionMetadata?.poolAddress as `0x${string}` | null;
   const isCall = info.cell.row.original.request_data.isCall;
-  const baseAsset =
-    info.cell.row.original.request_data.baseAsset.toLowerCase() as keyof typeof mobyContracts.mobyNFTManager;
+  const baseAsset = info.cell.row.original.request_data.baseAsset.toLowerCase() as keyof typeof mobyContracts.mobyNFTManager;
   const upperCaseAsset = baseAsset.toUpperCase() as SupportedAsset;
   const { nftSizeOut } = info.cell.row.original.optionOnChainData ?? {};
   const positionType = info.cell.row.original.tradeType as 'long' | 'short';

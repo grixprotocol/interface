@@ -28,8 +28,7 @@ export const useSplitPositionsData = (userAddress: `0x${string}`, data?: UserReq
               //    const refundCloseBuy = d.refundCloseBuy ?? 0;
               //  const refundCloseSell = d.refundCloseSell ?? 0;
               //const refundSettleBuy = d.refundSettleBuy ?? 0;
-              const isClosePositionDisabled =
-                expirationTimestamp - currentTimestamp < 30 * 60 * 1000 && !isExpired ? true : false;
+              const isClosePositionDisabled = expirationTimestamp - currentTimestamp < 30 * 60 * 1000 && !isExpired ? true : false;
 
               d.isClosePositionDisabled = isClosePositionDisabled;
 

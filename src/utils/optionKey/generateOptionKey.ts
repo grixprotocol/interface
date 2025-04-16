@@ -7,9 +7,7 @@ export const generateOptionKey = (params: OptionParams): OptionKey => {
 
   const date = new Date(expiry);
   const day = date.getUTCDate().toString().padStart(2, '0');
-  const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][
-    date.getUTCMonth()
-  ];
+  const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][date.getUTCMonth()];
   const year = date.getUTCFullYear().toString().slice(-2);
   const expiryShort = `${day}${month}${year}` as ExpiryShort;
 

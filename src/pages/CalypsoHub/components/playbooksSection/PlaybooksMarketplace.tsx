@@ -1,18 +1,4 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Grid,
-  Heading,
-  HStack,
-  Icon,
-  Input,
-  Progress,
-  Select,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Badge, Box, Button, Grid, Heading, HStack, Icon, Input, Progress, Select, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaArrowsAltH, FaBolt, FaChartLine, FaExclamationTriangle, FaPlus, FaShieldAlt } from 'react-icons/fa';
 
@@ -33,11 +19,7 @@ const PlaybookDetails = ({ playbook }: PlaybookDetailsProps) => (
             {playbook.name}
           </Heading>
         </HStack>
-        <Badge
-          colorScheme={
-            playbook.complexity === 'Basic' ? 'green' : playbook.complexity === 'Intermediate' ? 'yellow' : 'purple'
-          }
-        >
+        <Badge colorScheme={playbook.complexity === 'Basic' ? 'green' : playbook.complexity === 'Intermediate' ? 'yellow' : 'purple'}>
           {playbook.complexity}
         </Badge>
       </VStack>
@@ -54,14 +36,7 @@ const PlaybookDetails = ({ playbook }: PlaybookDetailsProps) => (
         Performance Score
       </Text>
       <HStack spacing={4} align="center">
-        <Progress
-          value={playbook.performanceScore}
-          colorScheme="blue"
-          size="lg"
-          borderRadius="full"
-          bg="whiteAlpha.200"
-          flex={1}
-        />
+        <Progress value={playbook.performanceScore} colorScheme="blue" size="lg" borderRadius="full" bg="whiteAlpha.200" flex={1} />
         <Text color="white" fontWeight="bold" fontSize="xl">
           {playbook.performanceScore}%
         </Text>
@@ -172,8 +147,8 @@ export const PlaybooksMarketplace = () => {
             AI Trading Playbooks
           </Text>
           <Text color="gray.400" fontSize="lg">
-            Select from our curated collection of AI trading agents, each configured with specific strategy combinations
-            and behavioral patterns optimized for different market scenarios.
+            Select from our curated collection of AI trading agents, each configured with specific strategy combinations and behavioral
+            patterns optimized for different market scenarios.
           </Text>
         </Box>
 
@@ -205,13 +180,7 @@ export const PlaybooksMarketplace = () => {
               role="group"
             >
               <VStack spacing={2}>
-                <Icon
-                  as={FaPlus}
-                  color="blue.400"
-                  boxSize={6}
-                  _groupHover={{ transform: 'scale(1.1)' }}
-                  transition="all 0.2s"
-                />
+                <Icon as={FaPlus} color="blue.400" boxSize={6} _groupHover={{ transform: 'scale(1.1)' }} transition="all 0.2s" />
                 <Text color="white" fontWeight="bold">
                   Create Custom Playbook
                 </Text>
@@ -246,11 +215,7 @@ export const PlaybooksMarketplace = () => {
                         </Text>
                         <Badge
                           colorScheme={
-                            playbook.complexity === 'Basic'
-                              ? 'green'
-                              : playbook.complexity === 'Intermediate'
-                              ? 'yellow'
-                              : 'purple'
+                            playbook.complexity === 'Basic' ? 'green' : playbook.complexity === 'Intermediate' ? 'yellow' : 'purple'
                           }
                         >
                           {playbook.complexity}
@@ -265,11 +230,7 @@ export const PlaybooksMarketplace = () => {
           </VStack>
 
           {/* Playbook Details or Create Custom Form */}
-          <Box>
-            {selectedPlaybook && (
-              <PlaybookDetails playbook={playbooks.find((p) => p.id === selectedPlaybook) ?? playbooks[0]} />
-            )}
-          </Box>
+          <Box>{selectedPlaybook && <PlaybookDetails playbook={playbooks.find((p) => p.id === selectedPlaybook) ?? playbooks[0]} />}</Box>
         </Grid>
       </VStack>
     </Box>

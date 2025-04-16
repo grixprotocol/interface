@@ -1,27 +1,10 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Icon,
-  Link,
-  SimpleGrid,
-  Text,
-  useBreakpointValue,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, Icon, Link, SimpleGrid, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
 import React, { useCallback, useState } from 'react';
 import { FiBook, FiCreditCard, FiDatabase, FiKey } from 'react-icons/fi';
 import { useAccount, useConnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 
-import {
-  PaymentStatus,
-  useApiKeys,
-  useCreateApiKey,
-  useGetCreditPrices,
-  useRechargeApiKey,
-} from '@/api/apiKeys/useApiKeys';
+import { PaymentStatus, useApiKeys, useCreateApiKey, useGetCreditPrices, useRechargeApiKey } from '@/api/apiKeys/useApiKeys';
 import { useGrixToast } from '@/components/useToast/useToast';
 import { layoutConstants } from '@/configDesign';
 
@@ -41,8 +24,7 @@ export const ApiKeysPage: React.FC = () => {
   const [selectedKeyId, setSelectedKeyId] = useState<string | null>(null);
   const [isRechargingMode, setIsRechargingMode] = useState(false);
 
-  const totalCredits =
-    apiKeys?.reduce((sum, key) => (key.status === PaymentStatus.COMPLETED ? sum + key.credits : sum), 0) || 0;
+  const totalCredits = apiKeys?.reduce((sum, key) => (key.status === PaymentStatus.COMPLETED ? sum + key.credits : sum), 0) || 0;
 
   const activeKeys = apiKeys?.filter((key) => key.isActive && key.status === PaymentStatus.COMPLETED).length || 0;
 
@@ -114,17 +96,7 @@ export const ApiKeysPage: React.FC = () => {
     } else {
       handleCreateKey();
     }
-  }, [
-    connect,
-    grixToast,
-    handleCreateKey,
-    isConnected,
-    isRechargingMode,
-    rechargeKey,
-    refetch,
-    selectedCredits,
-    selectedKeyId,
-  ]);
+  }, [connect, grixToast, handleCreateKey, isConnected, isRechargingMode, rechargeKey, refetch, selectedCredits, selectedKeyId]);
 
   const getButtonText = () => {
     if (!isConnected) return 'Connect Wallet';
@@ -182,16 +154,8 @@ export const ApiKeysPage: React.FC = () => {
             </Flex>
 
             <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6} w="full" px={{ base: 0, md: 2 }}>
-              <StatCard
-                label="Total Credits"
-                value={totalCredits}
-                icon={<Icon as={FiCreditCard} boxSize={5} color="cyan.400" />}
-              />
-              <StatCard
-                label="Active Keys"
-                value={activeKeys}
-                icon={<Icon as={FiKey} boxSize={5} color="blue.400" />}
-              />
+              <StatCard label="Total Credits" value={totalCredits} icon={<Icon as={FiCreditCard} boxSize={5} color="cyan.400" />} />
+              <StatCard label="Active Keys" value={activeKeys} icon={<Icon as={FiKey} boxSize={5} color="blue.400" />} />
               <StatCard
                 label="Total Keys"
                 value={apiKeys?.filter((key) => key.status === PaymentStatus.COMPLETED).length || 0}

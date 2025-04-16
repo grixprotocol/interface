@@ -54,14 +54,7 @@ export const SocialAgents = () => {
           {sectionDescriptions.socialAgents.description}
         </Text>
         <Box position="absolute" top={6} right={6}>
-          <Button
-            leftIcon={<FaLightbulb />}
-            onClick={onOpen}
-            variant="ghost"
-            color="gray.400"
-            _hover={{ color: 'blue.400' }}
-            size="sm"
-          >
+          <Button leftIcon={<FaLightbulb />} onClick={onOpen} variant="ghost" color="gray.400" _hover={{ color: 'blue.400' }} size="sm">
             Feature Requests
           </Button>
         </Box>

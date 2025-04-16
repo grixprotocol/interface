@@ -28,7 +28,10 @@ export const useCalculatorTable = ({
               borderColor="gray.600"
               placeholder={header}
               onChange={(event) => {
-                onChange(info.cell.row.index, { field, value: Number(event.target.value) });
+                onChange(info.cell.row.index, {
+                  field,
+                  value: Number(event.target.value),
+                });
               }}
             />
           );
@@ -49,7 +52,10 @@ export const useCalculatorTable = ({
               value={optionType}
               borderColor="gray.600"
               onChange={(event) => {
-                onChange(info.cell.row.index, { field: 'optionType', value: event.target.value });
+                onChange(info.cell.row.index, {
+                  field: 'optionType',
+                  value: event.target.value,
+                });
               }}
             >
               <option value="call">Call</option>
@@ -62,9 +68,7 @@ export const useCalculatorTable = ({
       createInputAccessor('strikePrice', 'Strike price'),
       createInputAccessor('premium', 'Premium'),
       columnHelper.display({
-        cell: (info) => (
-          <IconButton onClick={() => onRemoveRow(info.cell.row.index)} aria-label="Remove" icon={<CloseIcon />} />
-        ),
+        cell: (info) => <IconButton onClick={() => onRemoveRow(info.cell.row.index)} aria-label="Remove" icon={<CloseIcon />} />,
         header: 'Remove',
       }),
     ],

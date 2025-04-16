@@ -1,12 +1,11 @@
 import { Fuul } from '@fuul/sdk';
 import type { GetPointsLeaderboardParams } from '@fuul/sdk/dist/types/api';
 
-
 type TotalPoints = {
   totalPoints: number;
 };
 
-const FUUL_API_KEY = "8d5dbc2bc85b953e795b97c38865741f95172d79857e1cece53e059ee07dfd15";  
+const FUUL_API_KEY = '8d5dbc2bc85b953e795b97c38865741f95172d79857e1cece53e059ee07dfd15';
 
 export const fuulInit = () => {
   Fuul.init({
@@ -19,9 +18,7 @@ export const generateTrackingLink = async (address: string) => {
   return trackingLink;
 };
 
-export const getUserStats = async (
-  params: GetPointsLeaderboardParams
-): Promise<{ points: number | string; position: number | string }> => {
+export const getUserStats = async (params: GetPointsLeaderboardParams): Promise<{ points: number | string; position: number | string }> => {
   const leaderboard = await Fuul.getPointsLeaderboard(params);
   if (leaderboard.results.length > 0) {
     const points = Number(leaderboard.results[0].total_amount);

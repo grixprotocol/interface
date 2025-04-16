@@ -19,13 +19,7 @@ type SendMessageParams = {
 };
 
 export const useSendMessage = () => {
-  const mutationFn = async ({
-    userMessage,
-    userContext,
-    tradeboardData,
-    underlyingAsset,
-    pageContext,
-  }: SendMessageParams) => {
+  const mutationFn = async ({ userMessage, userContext, tradeboardData, underlyingAsset, pageContext }: SendMessageParams) => {
     const response: AxiosResponse<ChatbotResponseType> = await apiClient.post<ChatbotResponseType>('/grixchatbot', {
       userMessage,
       userContext,

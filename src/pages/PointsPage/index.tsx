@@ -25,14 +25,7 @@ export const PointsPage = () => {
       backgroundSize="cover"
       backgroundPosition="center"
     >
-      <Flex
-        direction={isBigScreen ? 'row' : 'column'}
-        gap={6}
-        w="full"
-        maxW="1440px"
-        px={{ base: 4, lg: 8 }}
-        pb={{ base: 24, lg: 8 }}
-      >
+      <Flex direction={isBigScreen ? 'row' : 'column'} gap={6} w="full" maxW="1440px" px={{ base: 4, lg: 8 }} pb={{ base: 24, lg: 8 }}>
         <VStack spacing={6} align="stretch" flex={1}>
           <MyPoints />
           <TradeAndEarn isBigScreen={isBigScreen} />

@@ -43,11 +43,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
   const fetchVestingData = useCallback(
     async (triggerParentRefresh = false) => {
       if (!address) return;
-      const [data, lastTime, duration] = await Promise.all([
-        getVestingData(address),
-        getLastVestingTime(address),
-        getVestingDuration(),
-      ]);
+      const [data, lastTime, duration] = await Promise.all([getVestingData(address), getLastVestingTime(address), getVestingDuration()]);
       setVestingData(data);
       setLastVestingTime(lastTime);
       setVestingDuration(duration);
@@ -182,14 +178,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
   }, [lastVestingTime, vestingDuration, vestingData]);
 
   return (
-    <Box
-      bg="gray.950"
-      borderRadius="lg"
-      p={6}
-      border="1px solid"
-      borderColor="gray.900"
-      _hover={{ borderColor: 'gray.800' }}
-    >
+    <Box bg="gray.950" borderRadius="lg" p={6} border="1px solid" borderColor="gray.900" _hover={{ borderColor: 'gray.800' }}>
       <VestingHeader />
 
       <VStack spacing={6} align="stretch">

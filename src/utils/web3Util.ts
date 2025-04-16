@@ -26,11 +26,7 @@ export const fetchAllowance = (userAddress: `0x${string}`, tokenAddress: string)
     functionName: 'allowance',
     args: [userAddress, spender],
   });
-export const isApprovalSetForAll = async (
-  contractAddress: `0x${string}`,
-  account: `0x${string}`,
-  operator: `0x${string}`
-) => {
+export const isApprovalSetForAll = async (contractAddress: `0x${string}`, account: `0x${string}`, operator: `0x${string}`) => {
   try {
     const result = await readContract(wagmiConfig, {
       abi: erc1155ABI,
@@ -95,7 +91,14 @@ export const approveErc1155Allowance = (tokenAddress: string, operator: `0x${str
 
 export const useUserAccount = () => {
   const { address, isConnected, caipAddress, status, allAccounts, embeddedWalletInfo } = useAppKitAccount();
-  return { address, isConnected, caipAddress, status, allAccounts, embeddedWalletInfo };
+  return {
+    address,
+    isConnected,
+    caipAddress,
+    status,
+    allAccounts,
+    embeddedWalletInfo,
+  };
 };
 
 export const useUserNetwork = () => {

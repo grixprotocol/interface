@@ -201,11 +201,7 @@ export const PortfolioPage = () => {
         {isPositionsFirstFetchLoading && <CenteredSpinner />}
         <NoResults
           tab={UserOrderType.Positions}
-          arrayLength={
-            positionsTableCurrentTab === 'open'
-              ? processedPositionsData?.length ?? 0
-              : processedHistoryData?.length ?? 0
-          }
+          arrayLength={positionsTableCurrentTab === 'open' ? processedPositionsData?.length ?? 0 : processedHistoryData?.length ?? 0}
           isOpenPositions={positionsTableCurrentTab === 'open'}
         />
       </PortfolioSection>

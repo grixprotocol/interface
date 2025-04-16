@@ -1,16 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  Input,
-  InputGroup,
-  InputRightElement,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, HStack, Input, InputGroup, InputRightElement, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 import { GrixLogo } from '@/components/commons/Logo';
@@ -122,15 +110,7 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
           height="48px"
         />
         <InputRightElement width="4.5rem" h="48px">
-          <Button
-            h="1.75rem"
-            size="sm"
-            onClick={handleMaxClick}
-            variant="secondary"
-            color="primary.400"
-            fontSize="xs"
-            mr={1}
-          >
+          <Button h="1.75rem" size="sm" onClick={handleMaxClick} variant="secondary" color="primary.400" fontSize="xs" mr={1}>
             Max
           </Button>
         </InputRightElement>

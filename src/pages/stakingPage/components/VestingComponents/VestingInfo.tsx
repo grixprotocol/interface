@@ -14,8 +14,7 @@ export const VestingInfo: React.FC<VestingInfoProps> = ({ _vestingData }) => (
       About Vesting
     </Text>
     <Text fontSize="sm" color="gray.400">
-      Convert your esGRIX tokens to GRIX Token through the vesting process. Vested tokens are claimable on an ongoing
-      basis.
+      Convert your esGRIX tokens to GRIX Token through the vesting process. Vested tokens are claimable on an ongoing basis.
     </Text>
   </VStack>
 );
