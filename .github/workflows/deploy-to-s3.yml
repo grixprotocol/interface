@@ -30,6 +30,8 @@ jobs:
         env:
           VITE_ENV: 'dev'
           VITE_WHITELIST_MODE: true
+          VITE_GRIX_API_KEY: ${{ secrets.VITE_GRIX_API_KEY }}
+          VITE_PREMIA_KEY: ${{ secrets.VITE_PREMIA_KEY }}
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
