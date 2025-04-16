@@ -74,7 +74,9 @@ export const TradeForm = withAnalyticsContext(({ setAnalyticsProperties }) => {
     onAssetChange(selectedAsset);
   };
 
-  const isTradableOption = protocolsArrayData.find((protocol) => protocol.protocolName === selectedOption?.marketName)?.isExecution;
+  const isTradableOption = protocolsArrayData.find(
+    (protocol) => protocol.protocolName === selectedOption?.marketName
+  )?.isExecution;
 
   const chatbotContext = getTradeChatbotContext(
     positionType,

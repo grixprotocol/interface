@@ -1,6 +1,10 @@
 import { PersonalityTemplate } from '../types/configuration';
 
-export const DEFAULT_PROFILE_PICTURES = ['/assets/agents/default1.png', '/assets/agents/default2.png', '/assets/agents/default3.png'];
+export const DEFAULT_PROFILE_PICTURES = [
+  '/assets/agents/default1.png',
+  '/assets/agents/default2.png',
+  '/assets/agents/default3.png',
+];
 
 export const PERSONALITY_TEMPLATES: PersonalityTemplate[] = [
   {

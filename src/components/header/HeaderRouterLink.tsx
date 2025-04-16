@@ -46,7 +46,13 @@ export const HeaderRouterLink: React.FC<HeaderRouterLinkProps> = ({ to, shortLab
   return (
     <Flex justifyContent="flex-start" alignItems="center">
       {isExternal ? (
-        <ChakraLink href={to} isExternal onMouseEnter={() => handleMouseEnter(to)} onMouseLeave={handleMouseLeave} style={linkStyle}>
+        <ChakraLink
+          href={to}
+          isExternal
+          onMouseEnter={() => handleMouseEnter(to)}
+          onMouseLeave={handleMouseLeave}
+          style={linkStyle}
+        >
           <Heading as="h2" fontSize={{ base: '15px', md: '15px' }} aria-label={`${shortLabel} Link`} mr="10px">
             {isBigScreen ? longLabel : shortLabel}
           </Heading>

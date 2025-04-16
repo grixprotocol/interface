@@ -20,12 +20,25 @@ import { TotalOrderLineItem } from './components/TotalOrderLineItem';
 import { getOrderDescriptions } from './constants';
 import { useOrderToken } from './hooks/useOrderToken';
 
-export const ReviewOrderModal = ({ isOpen, onClose, option }: { isOpen: boolean; onClose: VoidFunction; option: OptionBoardItem }) => {
+export const ReviewOrderModal = ({
+  isOpen,
+  onClose,
+  option,
+}: {
+  isOpen: boolean;
+  onClose: VoidFunction;
+  option: OptionBoardItem;
+}) => {
   const [isArbitrum, setIsArbitrum] = useState(false);
   const { asset: underlyingAsset, amount, onAmountChange } = useTradeForm();
   const availableContracts = option.availableContractAmount ? Number(option.availableContractAmount).toFixed(3) : null;
   const { track } = useAnalytics();
-  const { token: payWithToken, setToken: setPayWithToken, optionQuote, isLoading: isLoadingQuote } = useOrderToken(option);
+  const {
+    token: payWithToken,
+    setToken: setPayWithToken,
+    optionQuote,
+    isLoading: isLoadingQuote,
+  } = useOrderToken(option);
   const { chainId } = useUserNetwork();
   const { address: userAddress } = useUserAccount();
   const { onSubmit, isLoading, isDisabled } = useOnProtocolSubmit({
@@ -49,7 +62,9 @@ export const ReviewOrderModal = ({ isOpen, onClose, option }: { isOpen: boolean;
   const totalPriceInUSD = Number(option.contractPrice) * Number(amount);
   const totalPriceWithFeeUSD = calculateTotalPriceWithFee(totalPriceInUSD, FEE_PERCENTAGE);
   const points = assetPrice && Number(amount) ? ((assetPrice * Number(amount)) / 10).toFixed(0) : '0';
-  const totalTokenPrice = tokenAssetPrice ? usdToWei(totalPriceWithFeeUSD, tokenAssetPrice, balanceResult?.decimals) : 0n;
+  const totalTokenPrice = tokenAssetPrice
+    ? usdToWei(totalPriceWithFeeUSD, tokenAssetPrice, balanceResult?.decimals)
+    : 0n;
 
   const userHasFunds = balanceResult && balanceResult.value >= totalTokenPrice;
   const actionLabel = option.positionType === 'long' ? 'Buy' : 'Sell';

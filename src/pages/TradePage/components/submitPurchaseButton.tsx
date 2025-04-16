@@ -11,7 +11,11 @@ type ProtocolSubmitButtonProps = {
   isTradablePositionExists: OptionBoardItem | undefined;
 };
 
-export const ProtocolSubmitButton = ({ selectedOption, amountOfContracts, isTradablePositionExists }: ProtocolSubmitButtonProps) => {
+export const ProtocolSubmitButton = ({
+  selectedOption,
+  amountOfContracts,
+  isTradablePositionExists,
+}: ProtocolSubmitButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const isBigScreen = useIsBigScreen();

@@ -18,7 +18,9 @@ export const generateTrackingLink = async (address: string) => {
   return trackingLink;
 };
 
-export const getUserStats = async (params: GetPointsLeaderboardParams): Promise<{ points: number | string; position: number | string }> => {
+export const getUserStats = async (
+  params: GetPointsLeaderboardParams
+): Promise<{ points: number | string; position: number | string }> => {
   const leaderboard = await Fuul.getPointsLeaderboard(params);
   if (leaderboard.results.length > 0) {
     const points = Number(leaderboard.results[0].total_amount);

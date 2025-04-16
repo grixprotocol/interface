@@ -67,7 +67,13 @@ export const StatsPage: React.FC = () => {
             FaChartLine,
             'linear(to-r, #7928CA, #FF0080)'
           )}
-          {renderAnimatedStat('Unique users', stats?.uniqueUserCount ?? 'Loading...', !data, FaUsers, 'linear(to-r, #FF4D4D, #F9CB28)')}
+          {renderAnimatedStat(
+            'Unique users',
+            stats?.uniqueUserCount ?? 'Loading...',
+            !data,
+            FaUsers,
+            'linear(to-r, #FF4D4D, #F9CB28)'
+          )}
           {renderEnhancedTransactionBreakdown(stats?.transactionBreakdown, !data)}
         </SimpleGrid>
         <Box display="flex" justifyContent="center" alignItems="center" w="full">
@@ -131,7 +137,13 @@ export const StatsPage: React.FC = () => {
             FaChartLine,
             'linear(to-r, #7928CA, #FF0080)'
           )}
-          {renderAnimatedStat('Active Traders', stats?.uniqueUserCount ?? 'Loading...', !data, FaUsers, 'linear(to-r, #FF4D4D, #F9CB28)')}
+          {renderAnimatedStat(
+            'Active Traders',
+            stats?.uniqueUserCount ?? 'Loading...',
+            !data,
+            FaUsers,
+            'linear(to-r, #FF4D4D, #F9CB28)'
+          )}
           {renderAnimatedStat(
             'Protocols',
             stats?.numberOfIntegratedProtocols ?? 'Loading...',

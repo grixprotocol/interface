@@ -10,8 +10,8 @@ export const renderDefaultView = () => (
           Trading Strategies Guide
         </Text>
         <Text color="gray.400" fontSize="lg">
-          Explore our comprehensive collection of trading strategies designed to help you navigate different market conditions and achieve
-          your investment goals.
+          Explore our comprehensive collection of trading strategies designed to help you navigate different market
+          conditions and achieve your investment goals.
         </Text>
       </Box>
 
@@ -25,8 +25,8 @@ export const renderDefaultView = () => (
             </Text>
           </HStack>
           <Text color="gray.400">
-            Focus on generating regular returns through premium collection and yield optimization. Ideal for investors seeking consistent
-            income streams.
+            Focus on generating regular returns through premium collection and yield optimization. Ideal for investors
+            seeking consistent income streams.
           </Text>
         </Box>
 
@@ -38,7 +38,8 @@ export const renderDefaultView = () => (
             </Text>
           </HStack>
           <Text color="gray.400">
-            Designed to protect your portfolio against market downturns and manage risk effectively. Essential for preserving capital.
+            Designed to protect your portfolio against market downturns and manage risk effectively. Essential for
+            preserving capital.
           </Text>
         </Box>
 
@@ -50,7 +51,8 @@ export const renderDefaultView = () => (
             </Text>
           </HStack>
           <Text color="gray.400">
-            Aimed at capital appreciation through strategic market positioning and trend following. Suitable for long-term wealth building.
+            Aimed at capital appreciation through strategic market positioning and trend following. Suitable for
+            long-term wealth building.
           </Text>
         </Box>
       </SimpleGrid>

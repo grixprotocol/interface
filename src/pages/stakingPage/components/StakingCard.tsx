@@ -27,7 +27,13 @@ type StakingCardProps = {
   onActionComplete: () => void;
 };
 
-export const StakingCard: React.FC<StakingCardProps> = ({ title, description, type, refreshTrigger, onActionComplete }) => {
+export const StakingCard: React.FC<StakingCardProps> = ({
+  title,
+  description,
+  type,
+  refreshTrigger,
+  onActionComplete,
+}) => {
   const { address } = useAccount();
   const [amount, setAmount] = useState<string>('');
   const [isApproving, setIsApproving] = useState(false);

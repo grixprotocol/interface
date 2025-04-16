@@ -81,7 +81,16 @@ export const FeatureCard = ({
     h="100%"
   >
     <VStack spacing={4} align="flex-start">
-      <Flex w="50px" h="50px" bg={`${color}.900`} color={`${color}.300`} borderRadius="lg" align="center" justify="center" mb={2}>
+      <Flex
+        w="50px"
+        h="50px"
+        bg={`${color}.900`}
+        color={`${color}.300`}
+        borderRadius="lg"
+        align="center"
+        justify="center"
+        mb={2}
+      >
         <Icon as={icon} fontSize="24px" />
       </Flex>
       <Heading size="md" fontWeight="700" color={`${color}.300`}>

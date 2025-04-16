@@ -135,7 +135,13 @@ export const CreateAgentForm: React.FC<CreateAgentFormProps> = ({ isOpen, onClos
             </FormControl>
 
             <FormControl>
-              <FormLabel fontSize="sm" color="whiteAlpha.800" fontWeight="medium" textTransform="uppercase" letterSpacing="wide">
+              <FormLabel
+                fontSize="sm"
+                color="whiteAlpha.800"
+                fontWeight="medium"
+                textTransform="uppercase"
+                letterSpacing="wide"
+              >
                 Budget (USD)
               </FormLabel>
               <InputGroup>

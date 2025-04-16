@@ -1,7 +1,12 @@
 import Grix from '../logos/GrixLogo.svg';
 import { CustomLink, CustomNode, GraphData, Protocol } from './types';
 
-export const generateGraphComponents = (graphWidth: number, graphHeight: number, angleOffset: number, protocols: Protocol[]): GraphData => {
+export const generateGraphComponents = (
+  graphWidth: number,
+  graphHeight: number,
+  angleOffset: number,
+  protocols: Protocol[]
+): GraphData => {
   const centerX = 0.5 * graphWidth;
   const centerY = 0.5 * graphHeight;
   const layer1Radius = Math.min(graphWidth, graphHeight) * 0.3;

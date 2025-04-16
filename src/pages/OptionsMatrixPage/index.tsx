@@ -30,7 +30,8 @@ type ItemSelection = {
 
 const OptionsMatrixList = () => {
   useSetDefaultQueryParams('asset', supportedAssets);
-  const { asset, onAssetChange, optionType, onOptionTypeChange, expirationDate, onExpirationDateChange } = useTradeForm();
+  const { asset, onAssetChange, optionType, onOptionTypeChange, expirationDate, onExpirationDateChange } =
+    useTradeForm();
 
   const [_selectedItem, setSelectedItem] = useState<ItemSelection | undefined>(undefined);
   const [filteredProtocols, setFilteredProtocols] = useState<string[]>(protocolsArrayData.map((p) => p.protocolName));

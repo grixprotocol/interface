@@ -60,7 +60,12 @@ export const AgentsList = ({ agents, isLoading, onAgentSelect, selectedAgentId }
         ) : (
           <Box display="flex" flexDirection="column" gap={2} p={2}>
             {agents.map((agent) => (
-              <AgentCard key={agent.id} agent={agent} onSelect={onAgentSelect} isSelected={agent.id === selectedAgentId} />
+              <AgentCard
+                key={agent.id}
+                agent={agent}
+                onSelect={onAgentSelect}
+                isSelected={agent.id === selectedAgentId}
+              />
             ))}
           </Box>
         )}

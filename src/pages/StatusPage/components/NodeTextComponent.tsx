@@ -10,7 +10,14 @@ type NodeTextProps = {
   handleTextLayout: (textNode: SVGTextElement, setTextWidth: (width: number) => void) => void;
 };
 
-export const NodeTextComponent = ({ size, isHovered, showText, name, mostRecentUpdate, handleTextLayout }: NodeTextProps) => {
+export const NodeTextComponent = ({
+  size,
+  isHovered,
+  showText,
+  name,
+  mostRecentUpdate,
+  handleTextLayout,
+}: NodeTextProps) => {
   const [nameWidth, setLocalNameWidth] = useState(0);
   const [updateWidth, setLocalUpdateWidth] = useState(0);
 

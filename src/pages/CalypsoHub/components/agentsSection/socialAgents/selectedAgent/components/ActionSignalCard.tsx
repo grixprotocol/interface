@@ -57,7 +57,13 @@ export const ActionSignalCard = ({ action, variant = 'pending' }: ActionSignalCa
       <VStack align="stretch" spacing={2}>
         <HStack spacing={4}>
           <VStack spacing={1} align="center">
-            <Avatar size="md" src={calypsoImage} icon={<Icon as={FaRobot} color="white" />} bg="blue.500" name="Calypso" />
+            <Avatar
+              size="md"
+              src={calypsoImage}
+              icon={<Icon as={FaRobot} color="white" />}
+              bg="blue.500"
+              name="Calypso"
+            />
             <Text color="white" fontWeight="bold" fontSize="xs">
               Agent Action
             </Text>

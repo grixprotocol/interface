@@ -48,7 +48,9 @@ export const ConfigurationSection = ({ prompt, actionRate, taskTarget }: Configu
             <Text color="gray.400" fontSize="sm">
               Risk Level
             </Text>
-            <Badge colorScheme={actionRate === 'conservative' ? 'green' : actionRate === 'moderate' ? 'yellow' : 'red'}>{actionRate}</Badge>
+            <Badge colorScheme={actionRate === 'conservative' ? 'green' : actionRate === 'moderate' ? 'yellow' : 'red'}>
+              {actionRate}
+            </Badge>
           </Box>
           <Box>
             <Text color="gray.400" fontSize="sm">

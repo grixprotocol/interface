@@ -16,7 +16,13 @@ type StrikeOptionTableCellProps = {
   accessor: OptionMatrixAccessor;
   onItemClick?: (item: OptionMatrixItem) => void;
 };
-export const StrikeOptionTableCell = ({ boardItem, matrixItem, type, accessor, onItemClick }: StrikeOptionTableCellProps) => {
+export const StrikeOptionTableCell = ({
+  boardItem,
+  matrixItem,
+  type,
+  accessor,
+  onItemClick,
+}: StrikeOptionTableCellProps) => {
   const icon = protocolsArrayData.find((protocol) => protocol.protocolName === boardItem.marketName)?.icon;
 
   const hasMultipleOptions = matrixItem[accessor].length > 1;

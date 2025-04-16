@@ -11,7 +11,6 @@ import { SignalCard } from './SignalCard';
 import { NoSignalsCard } from './SignalCard/NoSignalsCard';
 import { SignalsListProps } from './types';
 
-// Add type for progress
 type RequestProgress = 'completed' | 'pending' | 'failed';
 
 const INSTRUMENT_TYPE_OPTIONS = [
@@ -42,15 +41,15 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
     });
   };
 
-  // Get all signals from all requests for filtering
   const allSignals = signalRequests?.flatMap((request) => request.signals) || [];
 
   const filteredRequests = signalRequests?.filter((request) => {
     if (selectedInstrumentType === INSTRUMENT_TYPE_OPTIONS[0].value) return true;
-    return request.signals.some((signal) => signal.signal.instrument_type === (selectedInstrumentType as InstrumentType));
+    return request.signals.some(
+      (signal) => signal.signal.instrument_type === (selectedInstrumentType as InstrumentType)
+    );
   });
 
-  // Get unique instrument types for the dropdown
   const uniqueInstrumentTypes = [...new Set(allSignals?.map((signal) => signal.signal.instrument_type) || [])];
 
   return (
@@ -176,7 +175,6 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
           </Box>
         )}
 
-        {/* Scrollable content area */}
         <Box
           overflowY="auto"
           height="calc(100% - 60px)"
@@ -236,20 +234,30 @@ export const SignalsList = ({ signalRequests, isLoading, agent }: SignalsListPro
                         transition="border-color 0.2s ease"
                       >
                         <HStack spacing={4} align="center">
-                          {expandedRequests.has(request.id) ? <FaChevronDown size={16} /> : <FaChevronRight size={16} />}
+                          {expandedRequests.has(request.id) ? (
+                            <FaChevronDown size={16} />
+                          ) : (
+                            <FaChevronRight size={16} />
+                          )}
                           <VStack align="start" spacing={1}>
                             <HStack spacing={3}>
                               <Text color="gray.300" fontSize="sm">
                                 Request #{request.id.slice(-6)}
                               </Text>
                               <Text
-                                color={request.progress === ('completed' as RequestProgress) ? 'green.400' : 'yellow.400'}
+                                color={
+                                  request.progress === ('completed' as RequestProgress) ? 'green.400' : 'yellow.400'
+                                }
                                 fontSize="xs"
                                 fontWeight="medium"
                                 px={2}
                                 py={0.5}
                                 borderRadius="full"
-                                bg={request.progress === ('completed' as RequestProgress) ? 'green.400.15' : 'yellow.400.15'}
+                                bg={
+                                  request.progress === ('completed' as RequestProgress)
+                                    ? 'green.400.15'
+                                    : 'yellow.400.15'
+                                }
                               >
                                 {request.progress}
                               </Text>

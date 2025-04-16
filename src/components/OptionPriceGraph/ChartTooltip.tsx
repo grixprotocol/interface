@@ -52,7 +52,15 @@ const TooltipContent = ({ series, seriesData, time }: TooltipContentProps) => {
 };
 
 const TooltipContainer = ({ children }: { children: React.ReactNode }) => (
-  <Box p={3} minWidth="160px" bg="blackAlpha.800" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.200" boxShadow="dark-lg">
+  <Box
+    p={3}
+    minWidth="160px"
+    bg="blackAlpha.800"
+    borderRadius="xl"
+    border="1px solid"
+    borderColor="whiteAlpha.200"
+    boxShadow="dark-lg"
+  >
     {children}
   </Box>
 );

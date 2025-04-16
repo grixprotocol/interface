@@ -3,14 +3,21 @@ import { createRef, FocusEvent, useCallback, useEffect, useMemo, useRef } from '
 import { PickerData, PickerItemRef } from '../types';
 import { useScrollAnimation } from './useScrollAnimation';
 
-const calculatePercentageOfRootWithoutItem = (rootHeight: number, itemHeight: number) => 100 - (itemHeight / rootHeight) * 100;
+const calculatePercentageOfRootWithoutItem = (rootHeight: number, itemHeight: number) =>
+  100 - (itemHeight / rootHeight) * 100;
 
 const calculateMarginVertical = (rootHeight: number, itemHeight: number) =>
   calculatePercentageOfRootWithoutItem(rootHeight, itemHeight) / 2;
 
-const calculateRootMargin = (rootHeight: number, itemHeight: number) => `-${calculateMarginVertical(rootHeight, itemHeight)}% 0px`;
+const calculateRootMargin = (rootHeight: number, itemHeight: number) =>
+  `-${calculateMarginVertical(rootHeight, itemHeight)}% 0px`;
 
-export const useObserver = (data: PickerData[], selectedID: string, itemHeight: number, onChange: (value: string) => void) => {
+export const useObserver = (
+  data: PickerData[],
+  selectedID: string,
+  itemHeight: number,
+  onChange: (value: string) => void
+) => {
   const root = useRef<HTMLUListElement | null>(null);
   const refs = useMemo(
     () =>

@@ -13,7 +13,14 @@ export const renderAnimatedStat = (
   gradient: string
 ) => (
   <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-    <Box bg="rgba(255,255,255,0.05)" borderRadius="xl" p={6} backdropFilter="blur(10px)" position="relative" overflow="hidden">
+    <Box
+      bg="rgba(255,255,255,0.05)"
+      borderRadius="xl"
+      p={6}
+      backdropFilter="blur(10px)"
+      position="relative"
+      overflow="hidden"
+    >
       {isLoading ? (
         <Spinner color={colors.primary[500]} size="xl" />
       ) : (
@@ -49,7 +56,12 @@ export const renderEnhancedTransactionBreakdown = (stats: TransactionBreakdown, 
           { label: 'Limit Orders', value: stats.limitOrders },
           { label: 'Refunds', value: stats.refunds },
         ].map((item, index) => (
-          <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
+          <motion.div
+            key={item.label}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+          >
             <Box bg="rgba(255,255,255,0.03)" p={4} borderRadius="lg" textAlign="center">
               <Text color={colors.primary[500]} fontSize="2xl" fontWeight="bold">
                 {item.value}

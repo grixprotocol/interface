@@ -34,7 +34,9 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     /* Increase navigation timeout to handle potential delays with new navigation */
-    navigationTimeout: process.env.PLAYWRIGHT_NAVIGATION_TIMEOUT ? parseInt(process.env.PLAYWRIGHT_NAVIGATION_TIMEOUT) : 30000,
+    navigationTimeout: process.env.PLAYWRIGHT_NAVIGATION_TIMEOUT
+      ? parseInt(process.env.PLAYWRIGHT_NAVIGATION_TIMEOUT)
+      : 30000,
 
     /* Add screenshot on failure for better debugging */
     screenshot: 'only-on-failure',

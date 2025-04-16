@@ -1,4 +1,14 @@
-import { Box, HStack, Icon, Popover, PopoverBody, PopoverContent, PopoverTrigger, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Icon,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import { FaCog, FaRobot } from 'react-icons/fa';
 
 import { formatDate, formatDuration } from '@/utils/dateUtil';
@@ -51,7 +61,14 @@ export const AgentCard = ({ agent, onSelect, isSelected }: AgentCardProps) => {
                   <Icon as={FaCog} color="gray.400" _hover={{ color: 'blue.400' }} cursor="pointer" />
                 </Box>
               </PopoverTrigger>
-              <PopoverContent bg="gray.800" borderColor="whiteAlpha.200" width="300px" boxShadow="lg" _focus={{ outline: 'none' }} p={2}>
+              <PopoverContent
+                bg="gray.800"
+                borderColor="whiteAlpha.200"
+                width="300px"
+                boxShadow="lg"
+                _focus={{ outline: 'none' }}
+                p={2}
+              >
                 <PopoverBody>
                   <VStack align="start" spacing={3} p={2}>
                     <Text color="blue.400" fontSize="sm" fontWeight="bold" mb={1}>
@@ -79,7 +96,9 @@ export const AgentCard = ({ agent, onSelect, isSelected }: AgentCardProps) => {
                           Budget
                         </Text>
                         <Box p={2} bg="whiteAlpha.50" borderRadius="md" fontSize="sm">
-                          <Text color="white">${parseFloat(agent.config.signal_request_config?.budget_usd ?? '0').toLocaleString()}</Text>
+                          <Text color="white">
+                            ${parseFloat(agent.config.signal_request_config?.budget_usd ?? '0').toLocaleString()}
+                          </Text>
                         </Box>
                       </Box>
                       <Box flex={1}>
@@ -87,7 +106,9 @@ export const AgentCard = ({ agent, onSelect, isSelected }: AgentCardProps) => {
                           Trade Window
                         </Text>
                         <Box p={2} bg="whiteAlpha.50" borderRadius="md" fontSize="sm">
-                          <Text color="white">{formatTimeWindow(agent.config.signal_request_config?.trade_window_ms ?? 0)}</Text>
+                          <Text color="white">
+                            {formatTimeWindow(agent.config.signal_request_config?.trade_window_ms ?? 0)}
+                          </Text>
                         </Box>
                       </Box>
                     </HStack>
@@ -96,7 +117,9 @@ export const AgentCard = ({ agent, onSelect, isSelected }: AgentCardProps) => {
                         Context Window
                       </Text>
                       <Box p={2} bg="whiteAlpha.50" borderRadius="md" fontSize="sm">
-                        <Text color="white">{formatTimeWindow(agent.config.signal_request_config?.context_window_ms ?? 0)}</Text>
+                        <Text color="white">
+                          {formatTimeWindow(agent.config.signal_request_config?.context_window_ms ?? 0)}
+                        </Text>
                       </Box>
                     </Box>
                     {agent.config.signal_request_config?.user_prompt && (

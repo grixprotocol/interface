@@ -11,9 +11,19 @@ export const SignalCard = ({ signal }: { signal: SocialAgentAction }) => {
 
   return (
     <BaseCard>
-      <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: 3, md: 3 }} align={{ base: 'stretch', md: 'flex-start' }}>
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        gap={{ base: 3, md: 3 }}
+        align={{ base: 'stretch', md: 'flex-start' }}
+      >
         <Box width={{ base: '100%', md: 'auto' }} mb={{ base: 2, md: 0 }}>
-          <Image src={calypsoImage} alt="Profile" borderRadius="full" boxSize={{ base: '60px', md: '48px' }} mx={{ base: 'auto', md: 0 }} />
+          <Image
+            src={calypsoImage}
+            alt="Profile"
+            borderRadius="full"
+            boxSize={{ base: '60px', md: '48px' }}
+            mx={{ base: 'auto', md: 0 }}
+          />
         </Box>
 
         <Box flex="1">

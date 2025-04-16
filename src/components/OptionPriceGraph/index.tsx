@@ -13,13 +13,20 @@ import { SeriesToggle } from './SeriesToggle';
 import { OptionPriceGraphProps } from './types';
 import { useChart } from './useChart';
 
-export const OptionPriceGraph: React.FC<OptionPriceGraphProps> = ({ instrumentKey, isEnabled, entryTimestamp, positionType }) => {
+export const OptionPriceGraph: React.FC<OptionPriceGraphProps> = ({
+  instrumentKey,
+  isEnabled,
+  entryTimestamp,
+  positionType,
+}) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const { data: priceHistoryData, isLoading, isError } = useOptionPriceHistory({ optionkey: instrumentKey }, isEnabled);
 
   const assetName = instrumentKey.split('-')[0];
   const [visibleSeries, setVisibleSeries] = useState<string[]>(
-    defaultSeriesConfigs.filter(({ defaultVisible }) => defaultVisible).map(({ name }) => (name === 'Underlying' ? assetName : name))
+    defaultSeriesConfigs
+      .filter(({ defaultVisible }) => defaultVisible)
+      .map(({ name }) => (name === 'Underlying' ? assetName : name))
   );
 
   const [hoveredData, setHoveredData] = useState<{
@@ -32,7 +39,9 @@ export const OptionPriceGraph: React.FC<OptionPriceGraphProps> = ({ instrumentKe
   const toggleSeries = (index: number) => {
     const config = defaultSeriesConfigs[index];
     const seriesName = config.name === 'Underlying' ? assetName : config.name;
-    setVisibleSeries((prev) => (prev.includes(seriesName) ? prev.filter((name) => name !== seriesName) : [...prev, seriesName]));
+    setVisibleSeries((prev) =>
+      prev.includes(seriesName) ? prev.filter((name) => name !== seriesName) : [...prev, seriesName]
+    );
   };
 
   useChart(
@@ -77,7 +86,13 @@ export const OptionPriceGraph: React.FC<OptionPriceGraphProps> = ({ instrumentKe
         </GridItem>
 
         <GridItem>
-          <DataBox title="Best Ask" hoveredData={hoveredData} borderColor="red.500" optionKey={instrumentKey} positionType={positionType} />
+          <DataBox
+            title="Best Ask"
+            hoveredData={hoveredData}
+            borderColor="red.500"
+            optionKey={instrumentKey}
+            positionType={positionType}
+          />
         </GridItem>
 
         <GridItem colSpan={2}>

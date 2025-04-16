@@ -16,7 +16,9 @@ export const Milestones = () => {
     userAddress: address as `0x${string}`,
   });
 
-  const userPoints = userPointsResponse?.results[0]?.total_amount ? Number(userPointsResponse.results[0].total_amount) * 10 : 0;
+  const userPoints = userPointsResponse?.results[0]?.total_amount
+    ? Number(userPointsResponse.results[0].total_amount) * 10
+    : 0;
 
   const data = useMemo(() => {
     const nearestMilestone = milestones.find((milestone) => milestone > userPoints) ?? 0;

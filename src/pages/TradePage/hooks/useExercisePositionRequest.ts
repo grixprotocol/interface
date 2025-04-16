@@ -8,7 +8,13 @@ import { config } from '@/config';
 import { useAnalytics } from '@/services/analytics';
 import { getSignatureExpired } from '@/utils/dateUtil';
 import { handlePositionSignMessage } from '@/utils/signMessageWagmi';
-import { approveAllowance, approveErc1155Allowance, checkBalanceOfERC20, fetchAllowance, isApprovalSetForAll } from '@/utils/web3Util';
+import {
+  approveAllowance,
+  approveErc1155Allowance,
+  checkBalanceOfERC20,
+  fetchAllowance,
+  isApprovalSetForAll,
+} from '@/utils/web3Util';
 import { fetchPoolQuery } from '@/web3Config/premia/fillQuote';
 
 export type ExercisePositionRequest = {

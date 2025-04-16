@@ -17,7 +17,8 @@ export const useTradeAgents = ({ address }: TradeAgentsGetRequest) =>
       }
       const hasRunningRequests = agents.personalAgents.some(
         (agent) =>
-          agent.signal_requests.some((request) => request.progress !== RequestProgress.completed) && agent.status === AgentStatus.active
+          agent.signal_requests.some((request) => request.progress !== RequestProgress.completed) &&
+          agent.status === AgentStatus.active
       );
       return hasRunningRequests ? msValues.second * 2 : msValues.second * 10;
     },

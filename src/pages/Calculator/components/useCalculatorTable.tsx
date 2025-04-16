@@ -68,7 +68,9 @@ export const useCalculatorTable = ({
       createInputAccessor('strikePrice', 'Strike price'),
       createInputAccessor('premium', 'Premium'),
       columnHelper.display({
-        cell: (info) => <IconButton onClick={() => onRemoveRow(info.cell.row.index)} aria-label="Remove" icon={<CloseIcon />} />,
+        cell: (info) => (
+          <IconButton onClick={() => onRemoveRow(info.cell.row.index)} aria-label="Remove" icon={<CloseIcon />} />
+        ),
         header: 'Remove',
       }),
     ],

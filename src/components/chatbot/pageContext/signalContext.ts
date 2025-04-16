@@ -40,7 +40,11 @@ const getSignalFAQs = (signal: AgentSignal, protocolName: string): FAQQuestion[]
   },
 ];
 
-export const createSignalContext = (signal: AgentSignal, optionSymbol: string | null, protocolName: string): ChatContext => ({
+export const createSignalContext = (
+  signal: AgentSignal,
+  optionSymbol: string | null,
+  protocolName: string
+): ChatContext => ({
   chatContext: {
     pageName: 'Calypso Signal',
     pageDescription:

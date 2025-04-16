@@ -6,7 +6,14 @@ import { apiClient } from '@/services/apiClient';
 import { PaginatedResponse, UserOrdersCountParams, UserOrdersParams, UserOrderType, UserRequest } from './types';
 
 const queryKey = {
-  list: ({ userAddress, type, limit, offset, fetchAll }: UserOrdersParams) => ['user-orders', userAddress, type, limit, offset, fetchAll],
+  list: ({ userAddress, type, limit, offset, fetchAll }: UserOrdersParams) => [
+    'user-orders',
+    userAddress,
+    type,
+    limit,
+    offset,
+    fetchAll,
+  ],
   totalCount: ({ userAddress, type }: UserOrdersCountParams) => ['user-orders-count', userAddress, type],
 };
 

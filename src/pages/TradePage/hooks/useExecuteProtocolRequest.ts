@@ -12,7 +12,13 @@ import { approveAllowance, fetchAllowance, useUserNetwork } from '@/utils/web3Ut
 
 import { useTradeForm } from '../components/TradeFormProvider';
 
-export const useExecuteProtocolRequest = ({ userAddress, token }: { userAddress?: `0x${string}`; token: SupportedToken }) => {
+export const useExecuteProtocolRequest = ({
+  userAddress,
+  token,
+}: {
+  userAddress?: `0x${string}`;
+  token: SupportedToken;
+}) => {
   const { amount, asset } = useTradeForm();
   const { mutateAsync: createUserRequest } = useCreateUserRequest();
   const { chainId } = useUserNetwork();

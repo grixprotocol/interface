@@ -18,7 +18,9 @@ export const TradeAgentsV2 = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const personalAgents = agents?.personalAgents;
-  const publicAgents = agents?.publicAgents?.filter((agent) => agent.signal_requests?.some((request) => request.signals?.length > 0));
+  const publicAgents = agents?.publicAgents?.filter((agent) =>
+    agent.signal_requests?.some((request) => request.signals?.length > 0)
+  );
 
   const defaultSelectedAgentId = useMemo(() => {
     // If there's already a selected agent that exists in the current list, keep it
@@ -159,7 +161,11 @@ export const TradeAgentsV2 = () => {
         </GridItem>
         <GridItem>
           {selectedAgent && (
-            <SignalsList signalRequests={selectedAgent?.signal_requests || []} isLoading={isLoading} agent={selectedAgent} />
+            <SignalsList
+              signalRequests={selectedAgent?.signal_requests || []}
+              isLoading={isLoading}
+              agent={selectedAgent}
+            />
           )}
         </GridItem>
       </Grid>

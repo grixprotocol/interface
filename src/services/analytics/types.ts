@@ -25,5 +25,7 @@ export type HTMLTag = keyof HTMLTags;
 export function forwardRef<P = {}, S extends HTMLTag = 'div', TChildren extends boolean = true>(
   render: ForwardRefRenderFunction<HTMLTags[S], P>
 ) {
-  return reactForwardRef<HTMLTags[S], [TChildren] extends [true] ? PropsWithChildren<P> : P>((props, ref) => render(props as P, ref));
+  return reactForwardRef<HTMLTags[S], [TChildren] extends [true] ? PropsWithChildren<P> : P>((props, ref) =>
+    render(props as P, ref)
+  );
 }

@@ -1,4 +1,12 @@
-import { FormControl, FormErrorMessage, FormLabel, HStack, NumberInput, NumberInputField, Text } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  HStack,
+  NumberInput,
+  NumberInputField,
+  Text,
+} from '@chakra-ui/react';
 
 import { formControlStyles } from './theme';
 

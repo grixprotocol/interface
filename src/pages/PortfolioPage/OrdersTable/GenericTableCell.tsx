@@ -46,7 +46,17 @@ export const GenericTableCell = ({
   );
 
   const ImageComponent = img && (
-    <Img src={img} width="25px" height="25px" borderRadius="50%" border="1px solid" borderColor="gray.700" p={1} m={1} {...imgProps} />
+    <Img
+      src={img}
+      width="25px"
+      height="25px"
+      borderRadius="50%"
+      border="1px solid"
+      borderColor="gray.700"
+      p={1}
+      m={1}
+      {...imgProps}
+    />
   );
 
   const TitleComponent =

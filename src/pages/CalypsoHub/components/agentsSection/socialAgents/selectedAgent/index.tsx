@@ -16,9 +16,18 @@ type SelectedAgentProps = {
 export const SelectedAgent = ({ agent, onClose }: SelectedAgentProps) => (
   <Stack spacing={6}>
     <HStack justify="space-between">
-      <AgentHeader name={agent?.name} platforms={[agent?.task_target]} status={agent?.is_active ? 'active' : 'inactive'} />
+      <AgentHeader
+        name={agent?.name}
+        platforms={[agent?.task_target]}
+        status={agent?.is_active ? 'active' : 'inactive'}
+      />
       <HStack spacing={2}>
-        <Button size="sm" leftIcon={agent?.is_active ? <FaPause /> : <FaPlay />} variant="ghost" colorScheme="whiteAlpha">
+        <Button
+          size="sm"
+          leftIcon={agent?.is_active ? <FaPause /> : <FaPlay />}
+          variant="ghost"
+          colorScheme="whiteAlpha"
+        >
           {agent?.is_active ? 'Pause' : 'Activate'}
         </Button>
         <Button size="sm" leftIcon={<FaEdit />} colorScheme="blue">
@@ -37,7 +46,11 @@ export const SelectedAgent = ({ agent, onClose }: SelectedAgentProps) => (
 
       <TabPanels>
         <TabPanel px={0}>
-          <ConfigurationSection prompt={agent?.prompt} actionRate={String(agent?.action_rate ?? '')} taskTarget={agent?.task_target} />
+          <ConfigurationSection
+            prompt={agent?.prompt}
+            actionRate={String(agent?.action_rate ?? '')}
+            taskTarget={agent?.task_target}
+          />
         </TabPanel>
         <TabPanel px={0}>{/* <PerformanceSection /> */}</TabPanel>
         <TabPanel px={0}>

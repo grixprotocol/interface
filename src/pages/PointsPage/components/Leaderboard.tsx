@@ -53,7 +53,11 @@ export const Leaderboard = () => {
   );
 };
 
-const LeaderboardRow = ({ columns, isHighlighted, ...rest }: { columns: React.ReactNode[]; isHighlighted?: boolean } & StackProps) => (
+const LeaderboardRow = ({
+  columns,
+  isHighlighted,
+  ...rest
+}: { columns: React.ReactNode[]; isHighlighted?: boolean } & StackProps) => (
   <HStack w="full" alignItems="space-between" pb={2} pt={3} px="20px" style={separatorStyle} {...rest}>
     {columns.map((column, index) => (
       <Text

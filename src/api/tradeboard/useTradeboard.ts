@@ -50,7 +50,8 @@ export const fetchTradeboard = async ({
   asset: SupportedAsset;
 }) => {
   const protocolsFilter =
-    protocols ?? protocolsArrayData.filter((p) => !shouldFilterExecutionProtocols || p.isExecution).map((p) => p.protocolName);
+    protocols ??
+    protocolsArrayData.filter((p) => !shouldFilterExecutionProtocols || p.isExecution).map((p) => p.protocolName);
 
   const filters: TradeboardQueryFilters = {
     positionType,

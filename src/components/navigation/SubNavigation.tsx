@@ -138,7 +138,14 @@ export const SubNavigation = ({ items, isOpen, parentRef, onClose }: SubNavigati
             outline="none"
             _focus={{ boxShadow: 'none', outline: 'none' }}
           >
-            <Flex align="center" transition="all 0.2s" _hover={{ bg: 'whiteAlpha.100' }} borderRadius="md" p={2} position="relative">
+            <Flex
+              align="center"
+              transition="all 0.2s"
+              _hover={{ bg: 'whiteAlpha.100' }}
+              borderRadius="md"
+              p={2}
+              position="relative"
+            >
               {item.icon && !item.isExternal && (
                 <Icon
                   as={item.icon}
@@ -158,7 +165,16 @@ export const SubNavigation = ({ items, isOpen, parentRef, onClose }: SubNavigati
                 {item.label}
               </Text>
               {item.badge && (
-                <Box ml={2} px={2} py={0.5} borderRadius="full" bg="blue.500" color="white" fontSize="xs" fontWeight="bold">
+                <Box
+                  ml={2}
+                  px={2}
+                  py={0.5}
+                  borderRadius="full"
+                  bg="blue.500"
+                  color="white"
+                  fontSize="xs"
+                  fontWeight="bold"
+                >
                   {item.badge}
                 </Box>
               )}

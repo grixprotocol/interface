@@ -29,11 +29,21 @@ export const CalypsoHub = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             {navigationConfig.map((item) => (
-              <Route key={item.id} path={item.path.replace('/calypso/', '')} element={!item.comingSoon ? <item.component /> : null} />
+              <Route
+                key={item.id}
+                path={item.path.replace('/calypso/', '')}
+                element={!item.comingSoon ? <item.component /> : null}
+              />
             ))}
             <Route
               path="/"
-              element={isRootPath ? <Navigate to="/lobby" replace /> : <Navigate to={location.pathname.replace('/calypso', '')} replace />}
+              element={
+                isRootPath ? (
+                  <Navigate to="/lobby" replace />
+                ) : (
+                  <Navigate to={location.pathname.replace('/calypso', '')} replace />
+                )
+              }
             />
           </Routes>
         </Suspense>

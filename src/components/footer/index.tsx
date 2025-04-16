@@ -97,7 +97,12 @@ export const Footer = () => {
       justifyContent="space-between"
     >
       <HStack spacing={{ base: 2, md: 4 }}>
-        <Text {...TYPOGRAPHY.copyright} color="gray.400" transition="transform 0.2s ease" _hover={{ transform: 'translateY(-1px)' }}>
+        <Text
+          {...TYPOGRAPHY.copyright}
+          color="gray.400"
+          transition="transform 0.2s ease"
+          _hover={{ transform: 'translateY(-1px)' }}
+        >
           © Grix® 2024
         </Text>
         <HStack spacing={{ base: 1, md: 2 }}>

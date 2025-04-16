@@ -16,7 +16,9 @@ export const SeriesToggle: React.FC<SeriesToggleProps> = ({ seriesConfigs, onTog
         <Button
           size="sm"
           variant={config.visible ? 'solid' : 'outline'}
-          colorScheme={config.isEntryPoint ? 'yellow' : config.icon ? 'orange' : config.name.includes('Ask') ? 'red' : 'green'}
+          colorScheme={
+            config.isEntryPoint ? 'yellow' : config.icon ? 'orange' : config.name.includes('Ask') ? 'red' : 'green'
+          }
           onClick={() => onToggle(index)}
           leftIcon={
             config.isEntryPoint ? (

@@ -30,7 +30,9 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const res = await fetch('https://api.dexscreener.com/latest/dex/pairs/arbitrum/0x25d3ce097e413eeab09bbda72cd87d8972e673d4');
+        const res = await fetch(
+          'https://api.dexscreener.com/latest/dex/pairs/arbitrum/0x25d3ce097e413eeab09bbda72cd87d8972e673d4'
+        );
         const json = (await res.json()) as DexScreenerResponse;
         const price = json?.pairs?.[0]?.priceUsd ? parseFloat(json.pairs[0].priceUsd) : null;
         setGrixPrice(price);

@@ -16,7 +16,10 @@ export const useRequestMaxProfit = (signals: Signal[]) => {
   }
 
   const anyLoading = pnlResults.some((result) => result.isPriceHistoryLoading);
-  const maxValueChange = pnlResults.reduce((max, result) => Math.max(max, result.pnlResult?.values?.total?.maxValueChange ?? 0), 0);
+  const maxValueChange = pnlResults.reduce(
+    (max, result) => Math.max(max, result.pnlResult?.values?.total?.maxValueChange ?? 0),
+    0
+  );
 
   return { anyLoading, maxValueChange };
 };

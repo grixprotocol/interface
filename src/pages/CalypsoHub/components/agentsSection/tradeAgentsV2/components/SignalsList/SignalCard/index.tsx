@@ -1,4 +1,16 @@
-import { Box, Grid, HStack, Icon, IconButton, SimpleGrid, Tag, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Grid,
+  HStack,
+  Icon,
+  IconButton,
+  SimpleGrid,
+  Tag,
+  Text,
+  useDisclosure,
+  useToast,
+  VStack,
+} from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
 import { useMemo, useState } from 'react';
 import { FaChevronDown, FaChevronUp, FaPaperPlane } from 'react-icons/fa';
@@ -108,7 +120,11 @@ export const SignalCard = ({ signal, agent }: SignalCardProps) => {
                 <Text color="white" fontSize="sm" fontWeight="semibold">
                   {signal.signal.instrument}
                 </Text>
-                <Tag size="sm" colorScheme={signal.signal.position_type === 'long' ? 'green' : 'red'} borderRadius="full">
+                <Tag
+                  size="sm"
+                  colorScheme={signal.signal.position_type === 'long' ? 'green' : 'red'}
+                  borderRadius="full"
+                >
                   {signal.signal.position_type.toUpperCase()}
                 </Tag>
               </HStack>
@@ -192,7 +208,9 @@ export const SignalCard = ({ signal, agent }: SignalCardProps) => {
           <SimpleGrid columns={3} gap={4} bg="whiteAlpha.50" p={3} borderRadius="md">
             <MetricBox
               label="Position Size"
-              value={`${signal.signal.size} ${signal.signal.instrument_type === InstrumentType.asset ? 'units' : 'contracts'}`}
+              value={`${signal.signal.size} ${
+                signal.signal.instrument_type === InstrumentType.asset ? 'units' : 'contracts'
+              }`}
               valueColor="white"
             />
             <MetricBox
@@ -200,14 +218,20 @@ export const SignalCard = ({ signal, agent }: SignalCardProps) => {
               value={`$${signal.signal.expected_instrument_price_usd.toLocaleString()}`}
               valueColor="white"
             />
-            <MetricBox label="Total Value" value={`$${signal.signal.expected_total_price_usd.toLocaleString()}`} valueColor="white" />
+            <MetricBox
+              label="Total Value"
+              value={`$${signal.signal.expected_total_price_usd.toLocaleString()}`}
+              valueColor="white"
+            />
           </SimpleGrid>
 
           {/* Analysis Section */}
           <AnalysisMetrics signal={signal} />
 
           {/* Performance Section */}
-          {priceHistory?.[0]?.price_history && <PerformanceSection signal={signal} priceHistory={priceHistory?.[0]?.price_history} />}
+          {priceHistory?.[0]?.price_history && (
+            <PerformanceSection signal={signal} priceHistory={priceHistory?.[0]?.price_history} />
+          )}
         </VStack>
       )}
 

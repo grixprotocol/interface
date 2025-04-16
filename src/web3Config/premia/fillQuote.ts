@@ -3,7 +3,6 @@ import { OrderbookQuote, QuoteOB } from '@premia/v3-sdk';
 import { waitForTransactionReceipt, writeContract } from 'wagmi/actions';
 
 import { useGrixToast } from '@/components/useToast/useToast';
-import { PREMIA_KEY } from '@/config';
 import { checkBalanceOfERC1155 } from '@/utils/web3Util';
 import { wagmiConfig } from '@/web3Config/reownConfig';
 
@@ -63,7 +62,11 @@ const displayToast = (
   });
 };
 
-export const fetchPoolQuery = async (poolAddress: string, userAddress: `0x${string}`, fillSize: string): Promise<OrderbookQuote | null> => {
+export const fetchPoolQuery = async (
+  poolAddress: string,
+  userAddress: `0x${string}`,
+  fillSize: string
+): Promise<OrderbookQuote | null> => {
   const requestObject = {
     method: 'GET',
     headers: {

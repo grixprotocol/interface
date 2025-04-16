@@ -77,7 +77,9 @@ export const createPortfolioContext = (position: PortfolioPosition): ChatContext
       initialMessage: `I see you're looking at a ${position.contractsAmount} contract ${positionType} position for ${
         position.baseAsset
       } on ${position.selectedProtocol}. The strike price is $${position.strikePrice} and it ${
-        position.isExpired ? 'has expired' : `expires on ${new Date(position.expirationDateUnix * 1000).toLocaleDateString()}`
+        position.isExpired
+          ? 'has expired'
+          : `expires on ${new Date(position.expirationDateUnix * 1000).toLocaleDateString()}`
       }. Would you like to understand more about ${actionType}ing this position?`,
       defaultQuestions: getPortfolioFAQs(position),
       data: {

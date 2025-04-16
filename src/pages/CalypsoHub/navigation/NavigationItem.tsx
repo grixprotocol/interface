@@ -43,7 +43,14 @@ export const NavigationItem = ({ item, isExpanded, activeSection, onClick, isMob
   }
 
   return (
-    <Tooltip label="Coming Soon" isDisabled={!item.comingSoon} placement="bottom" hasArrow bg="whiteAlpha.200" color="gray.300">
+    <Tooltip
+      label="Coming Soon"
+      isDisabled={!item.comingSoon}
+      placement="bottom"
+      hasArrow
+      bg="whiteAlpha.200"
+      color="gray.300"
+    >
       <Box
         position="relative"
         opacity={item.comingSoon ? 0.6 : 1}

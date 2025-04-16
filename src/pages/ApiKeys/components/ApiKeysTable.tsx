@@ -51,7 +51,15 @@ const CopyableApiKey = ({ value }: { value: string }) => {
   const { hasCopied, onCopy } = useClipboard(value);
 
   return (
-    <Flex align="center" bg="whiteAlpha.100" p={2} borderRadius="lg" maxW="fit-content" border="1px solid" borderColor="whiteAlpha.200">
+    <Flex
+      align="center"
+      bg="whiteAlpha.100"
+      p={2}
+      borderRadius="lg"
+      maxW="fit-content"
+      border="1px solid"
+      borderColor="whiteAlpha.200"
+    >
       <Text fontFamily="mono" fontSize="sm" fontWeight="medium" letterSpacing="wide" color="base.white">
         {value}
       </Text>
@@ -71,26 +79,68 @@ const CopyableApiKey = ({ value }: { value: string }) => {
   );
 };
 
-export const ApiKeysTable: React.FC<ApiKeysTableProps> = ({ apiKeys, isLoading, selectedKeyId, onRecharge, isRecharging }) => (
+export const ApiKeysTable: React.FC<ApiKeysTableProps> = ({
+  apiKeys,
+  isLoading,
+  selectedKeyId,
+  onRecharge,
+  isRecharging,
+}) => (
   <Table variant="simple" size="sm">
     <Thead bg="rgba(17, 25, 40, 0.9)">
       <Tr>
-        <Th color={TABLE_COLORS.primary.light} borderColor="rgba(255, 255, 255, 0.1)" fontSize="xs" textTransform="uppercase" py={4}>
+        <Th
+          color={TABLE_COLORS.primary.light}
+          borderColor="rgba(255, 255, 255, 0.1)"
+          fontSize="xs"
+          textTransform="uppercase"
+          py={4}
+        >
           Key ID
         </Th>
-        <Th color={TABLE_COLORS.primary.light} borderColor="rgba(255, 255, 255, 0.1)" fontSize="xs" textTransform="uppercase" py={4}>
+        <Th
+          color={TABLE_COLORS.primary.light}
+          borderColor="rgba(255, 255, 255, 0.1)"
+          fontSize="xs"
+          textTransform="uppercase"
+          py={4}
+        >
           Credits
         </Th>
-        <Th color={TABLE_COLORS.primary.light} borderColor="rgba(255, 255, 255, 0.1)" fontSize="xs" textTransform="uppercase" py={4}>
+        <Th
+          color={TABLE_COLORS.primary.light}
+          borderColor="rgba(255, 255, 255, 0.1)"
+          fontSize="xs"
+          textTransform="uppercase"
+          py={4}
+        >
           Status
         </Th>
-        <Th color={TABLE_COLORS.primary.light} borderColor="rgba(255, 255, 255, 0.1)" fontSize="xs" textTransform="uppercase" py={4}>
+        <Th
+          color={TABLE_COLORS.primary.light}
+          borderColor="rgba(255, 255, 255, 0.1)"
+          fontSize="xs"
+          textTransform="uppercase"
+          py={4}
+        >
           API Key
         </Th>
-        <Th color={TABLE_COLORS.primary.light} borderColor="rgba(255, 255, 255, 0.1)" fontSize="xs" textTransform="uppercase" py={4}>
+        <Th
+          color={TABLE_COLORS.primary.light}
+          borderColor="rgba(255, 255, 255, 0.1)"
+          fontSize="xs"
+          textTransform="uppercase"
+          py={4}
+        >
           Created At
         </Th>
-        <Th color={TABLE_COLORS.primary.light} borderColor="rgba(255, 255, 255, 0.1)" fontSize="xs" textTransform="uppercase" py={4}>
+        <Th
+          color={TABLE_COLORS.primary.light}
+          borderColor="rgba(255, 255, 255, 0.1)"
+          fontSize="xs"
+          textTransform="uppercase"
+          py={4}
+        >
           Actions
         </Th>
       </Tr>

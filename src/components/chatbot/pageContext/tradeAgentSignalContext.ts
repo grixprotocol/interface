@@ -38,7 +38,8 @@ const getAgentSignalFAQs = (signal: Signal): FAQQuestion[] => [
 export const createAgentSignalContext = (signal: Signal, agent: TradeAgent): ChatContext => ({
   chatContext: {
     pageName: 'Agent Signal',
-    pageDescription: "I'm here to help you understand this trading signal and answer any questions about the recommendation.",
+    pageDescription:
+      "I'm here to help you understand this trading signal and answer any questions about the recommendation.",
     initialMessage: `I see you're looking at a ${signal.signal.position_type} ${signal.signal.action_type} signal for ${
       signal.signal.instrument
     } at $${signal.signal.expected_instrument_price_usd.toFixed(2)}. ${

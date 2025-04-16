@@ -31,7 +31,12 @@ export const OptionsContainer = ({
           <Box color="gray.500" fontSize="xs" fontWeight="500" visibility={description ? 'visible' : 'hidden'}>
             {description?.title ?? 'PLACEHOLDER'}
           </Box>
-          <Box color="gray.25" fontSize="xs" visibility={description ? 'visible' : 'hidden'} data-testid={description?.dataTestId}>
+          <Box
+            color="gray.25"
+            fontSize="xs"
+            visibility={description ? 'visible' : 'hidden'}
+            data-testid={description?.dataTestId}
+          >
             {description?.value ?? 'PLACEHOLDER'}
           </Box>
         </HStack>

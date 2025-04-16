@@ -6,11 +6,24 @@ import { PointsContainer, TradeButton } from '../utils';
 export const TradeAndEarn = ({ isBigScreen }: { isBigScreen: boolean }) => (
   <PointsContainer h={isBigScreen ? '130px' : '170px'}>
     <HStack w="full" spacing={5} py={2} overflow="auto">
-      <Icon as={FaBitcoin} boxSize={6} mt={1} color="#f7931a" transition="transform 0.2s" _hover={{ transform: 'scale(1.1)' }} />
+      <Icon
+        as={FaBitcoin}
+        boxSize={6}
+        mt={1}
+        color="#f7931a"
+        transition="transform 0.2s"
+        _hover={{ transform: 'scale(1.1)' }}
+      />
       <VStack alignItems="flex-start" flex={1} spacing={3}>
         <HStack spacing={2} alignItems="center">
           <PointsContainer.Title>Trade & Earn</PointsContainer.Title>
-          <Tooltip label="Start trading now to earn points" aria-label="Trade info" placement="top" hasArrow bg="gray.700">
+          <Tooltip
+            label="Start trading now to earn points"
+            aria-label="Trade info"
+            placement="top"
+            hasArrow
+            bg="gray.700"
+          >
             <Flex>
               <Icon
                 as={FaQuestionCircle}

@@ -65,9 +65,18 @@ export const DataBox: React.FC<DataBoxProps> = ({ title, hoveredData, borderColo
           </Text>
         </HStack>
 
-        <Grid templateColumns="1fr 1fr 1fr" gap={2} width="100%" pb={2} borderBottom="1px solid" borderColor="whiteAlpha.200">
+        <Grid
+          templateColumns="1fr 1fr 1fr"
+          gap={2}
+          width="100%"
+          pb={2}
+          borderBottom="1px solid"
+          borderColor="whiteAlpha.200"
+        >
           <HStack>
-            {protocol && <Image src={protocol.icon} alt={protocol.label} width="20px" height="20px" borderRadius="full" />}
+            {protocol && (
+              <Image src={protocol.icon} alt={protocol.label} width="20px" height="20px" borderRadius="full" />
+            )}
             <Text color={quote ? 'whiteAlpha.900' : 'whiteAlpha.600'} fontSize="sm" fontWeight="medium" isTruncated>
               {quote ? protocol?.label || quote.protocol : '-'}
             </Text>

@@ -16,7 +16,13 @@ export type SliderPickerProps<T extends string> = {
   variant?: ButtonProps['variant'];
 };
 
-export const SliderPicker = <T extends string>({ options, value, onChange, isLoading, variant }: SliderPickerProps<T>) => {
+export const SliderPicker = <T extends string>({
+  options,
+  value,
+  onChange,
+  isLoading,
+  variant,
+}: SliderPickerProps<T>) => {
   const buttonGroupRef = useRef<HTMLDivElement>(null);
 
   const handleRightScroll = () => {

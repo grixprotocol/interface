@@ -14,7 +14,16 @@ export const ToastBox = ({
   buttonProps: ButtonProps;
 }) => (
   <VStack paddingTop={componentStyleVariants.header.headerFlexStyle.h}>
-    <HStack borderRadius={6} borderWidth={1} borderColor="primary.600" paddingX={5} paddingY={3} gap={5} bgColor="primary.950" minW="380px">
+    <HStack
+      borderRadius={6}
+      borderWidth={1}
+      borderColor="primary.600"
+      paddingX={5}
+      paddingY={3}
+      gap={5}
+      bgColor="primary.950"
+      minW="380px"
+    >
       {icon}
       <VStack w="full" align="flex-start" spacing={1}>
         <Text fontWeight="600" color="white.950">

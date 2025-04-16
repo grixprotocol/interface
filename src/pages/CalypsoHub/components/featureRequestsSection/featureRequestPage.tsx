@@ -12,7 +12,8 @@ export const FeatureRequestsSection = () => {
           Help Shape Grix&apos;s Future
         </Heading>
         <Text color="gray.400">
-          Your ideas drive our innovation. Share your suggestions and help us build the trading platform you want to use.
+          Your ideas drive our innovation. Share your suggestions and help us build the trading platform you want to
+          use.
         </Text>
       </Box>
 
@@ -44,7 +45,9 @@ export const FeatureRequestsSection = () => {
                     <Text color="white" fontWeight="bold">
                       1. Share Your Vision
                     </Text>
-                    <Text color="gray.400">Tell us what you&apos;d like to see in Calypso. Big or small, every idea counts.</Text>
+                    <Text color="gray.400">
+                      Tell us what you&apos;d like to see in Calypso. Big or small, every idea counts.
+                    </Text>
                   </Box>
                 </HStack>
                 <HStack align="start" spacing={4}>
@@ -53,7 +56,9 @@ export const FeatureRequestsSection = () => {
                     <Text color="white" fontWeight="bold">
                       2. Join the Discussion
                     </Text>
-                    <Text color="gray.400">Connect with our community and team to refine your ideas and see them come to life.</Text>
+                    <Text color="gray.400">
+                      Connect with our community and team to refine your ideas and see them come to life.
+                    </Text>
                   </Box>
                 </HStack>
               </Stack>
@@ -62,7 +67,12 @@ export const FeatureRequestsSection = () => {
             {/* CTA Button */}
             <Box>
               <Link href={featureRequestFormUrl} isExternal>
-                <Button size="lg" colorScheme="blue" rightIcon={<ExternalLinkIcon />} width={{ base: 'full', md: 'auto' }}>
+                <Button
+                  size="lg"
+                  colorScheme="blue"
+                  rightIcon={<ExternalLinkIcon />}
+                  width={{ base: 'full', md: 'auto' }}
+                >
                   Submit Your Idea
                 </Button>
               </Link>

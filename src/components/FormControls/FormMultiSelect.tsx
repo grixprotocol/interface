@@ -30,7 +30,9 @@ export const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
   isRequired = false,
 }) => {
   const handleToggle = (value: string) => {
-    const newValues = selectedValues.includes(value) ? selectedValues.filter((v) => v !== value) : [...selectedValues, value];
+    const newValues = selectedValues.includes(value)
+      ? selectedValues.filter((v) => v !== value)
+      : [...selectedValues, value];
     onChange(newValues);
   };
 
@@ -56,7 +58,13 @@ export const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
               color={formControlStyles.label.color}
               borderWidth={0}
               onClick={() => handleToggle(value)}
-              leftIcon={iconUrl ? <Box as="img" src={iconUrl} alt={optionLabel} width="16px" height="16px" /> : icon || undefined}
+              leftIcon={
+                iconUrl ? (
+                  <Box as="img" src={iconUrl} alt={optionLabel} width="16px" height="16px" />
+                ) : (
+                  icon || undefined
+                )
+              }
             >
               {optionLabel}
             </Button>

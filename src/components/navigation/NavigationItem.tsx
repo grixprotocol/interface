@@ -107,7 +107,11 @@ export const NavigationItem = ({ item }: NavigationItemProps) => {
 
   // Determine the path to use for the main item
   const mainItemPath =
-    hasSubItems && item.subItems && item.subItems.length > 0 ? (item.subItems[0].isExternal ? '#' : item.subItems[0].path) : item.path;
+    hasSubItems && item.subItems && item.subItems.length > 0
+      ? item.subItems[0].isExternal
+        ? '#'
+        : item.subItems[0].path
+      : item.path;
 
   const linkStyle = {
     position: 'relative' as const,
@@ -168,8 +172,21 @@ export const NavigationItem = ({ item }: NavigationItemProps) => {
 
       {/* Sub navigation - only render when needed */}
       {hasSubItems && item.subItems && (
-        <Box position="absolute" top="100%" left="50%" transform="translateX(-50%)" pt={2} zIndex={2} display={isOpen ? 'block' : 'none'}>
-          <SubNavigation items={item.subItems} isOpen={isOpen} parentRef={navItemRef} onClose={() => setIsOpen(false)} />
+        <Box
+          position="absolute"
+          top="100%"
+          left="50%"
+          transform="translateX(-50%)"
+          pt={2}
+          zIndex={2}
+          display={isOpen ? 'block' : 'none'}
+        >
+          <SubNavigation
+            items={item.subItems}
+            isOpen={isOpen}
+            parentRef={navItemRef}
+            onClose={() => setIsOpen(false)}
+          />
         </Box>
       )}
     </Box>

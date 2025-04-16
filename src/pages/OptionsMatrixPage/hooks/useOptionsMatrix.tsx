@@ -15,7 +15,10 @@ export const useOptionsMatrix = ({
   expirationDate: string;
   protocols: string[];
 }) => {
-  const select = useCallback((tradeboard: TradeboardResponse) => transformOptionBoard(tradeboard, expirationDate), [expirationDate]);
+  const select = useCallback(
+    (tradeboard: TradeboardResponse) => transformOptionBoard(tradeboard, expirationDate),
+    [expirationDate]
+  );
 
   return useFetchOptions({ asset, protocols }, { select });
 };

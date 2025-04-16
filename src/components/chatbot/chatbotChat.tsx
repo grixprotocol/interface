@@ -163,7 +163,14 @@ export const Chatbot: React.FC<ChatbotProps> = ({ context }) => {
                       flexShrink={0}
                       mr={1.5}
                     />
-                    <Text fontSize="xs" color="gray.200" lineHeight="1.2" fontWeight="medium" noOfLines={2} textAlign="left">
+                    <Text
+                      fontSize="xs"
+                      color="gray.200"
+                      lineHeight="1.2"
+                      fontWeight="medium"
+                      noOfLines={2}
+                      textAlign="left"
+                    >
                       {q.question}
                     </Text>
                   </Box>
