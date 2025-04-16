@@ -12,10 +12,12 @@ export const wagmiAdapter = new WagmiAdapter({
 
 export const wagmiConfig = wagmiAdapter.wagmiConfig;
 
+/**
+ * TODO: Fix solana wallet adapter
+ */
 export const solanaWeb3JsAdapter = new SolanaAdapter({
-  wallets: [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
+  // wallets: [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
 });
-
 export const metadata = {
   name: 'Grix',
   description: 'Grix',
