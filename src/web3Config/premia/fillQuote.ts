@@ -72,7 +72,7 @@ export const fetchPoolQuery = async (
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'x-apikey': PREMIA_KEY,
+      'x-apikey': import.meta.env.VITE_PREMIA_KEY,
     },
     body: null,
   };

@@ -101,7 +101,6 @@ export const OptionType = {
 
 export const DECIMAL_PLACES_18 = 18;
 export const DECIMAL_PLACES_8 = 8;
-export const VITE_FUUL_API_KEY = import.meta.env.VITE_FUUL_API_KEY;
 
 export const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/simple/price';
 
@@ -253,7 +252,4 @@ export const deBridgeScriptSrc = 'https://app.debridge.finance/assets/scripts/wi
 
 export const WBTC_Address = '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f';
 
-export const PREMIA_KEY = 'grix_3ZkT6qWxydnaWLZArWMjE3jm';
-
-export const grixLogoUrl =
-  'https://statics.solscan.io/cdn/imgs/s60?ref=68747470733a2f2f697066732e696f2f697066732f516d52556977584b515a624d445766587a567833594c4c5a6852436d4a744c376a75557a5148437a795559427454';
+export const grixLogoUrl = 'https://statics.solscan.io/cdn/imgs/s60?ref=68747470733a2f2f697066732e696f2f697066732f516d52556977584b515a624d445766587a567833594c4c5a6852436d4a744c376a75557a5148437a795559427454';

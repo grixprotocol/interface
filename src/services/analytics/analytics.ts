@@ -2,7 +2,7 @@ import Mixpanel from 'mixpanel-browser';
 
 import { config, env } from '../../config';
 
-Mixpanel.init('2111331d11fb90732a2aa39342002652', {
+Mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {
   track_pageview: true,
   persistence: 'localStorage',
   ignore_dnt: true,
@@ -16,7 +16,7 @@ Mixpanel.init('2111331d11fb90732a2aa39342002652', {
     engage: 'data/account',
   },
   xhr_headers: {
-    'x-api-key': config[env].apiKey,
+    'x-api-key': import.meta.env.VITE_GRIX_API_KEY,
   },
 });
 

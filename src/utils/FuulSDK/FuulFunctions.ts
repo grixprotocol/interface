@@ -1,7 +1,6 @@
 import { Fuul } from '@fuul/sdk';
 import type { GetPointsLeaderboardParams } from '@fuul/sdk/dist/types/api';
 
-import { VITE_FUUL_API_KEY } from '@/config';
 
 type TotalPoints = {
   totalPoints: number;
@@ -9,7 +8,7 @@ type TotalPoints = {
 
 export const fuulInit = () => {
   Fuul.init({
-    apiKey: VITE_FUUL_API_KEY,
+    apiKey: import.meta.env.VITE_FUUL_API_KEY,
   });
 };
 

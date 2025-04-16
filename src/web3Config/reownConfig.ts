@@ -3,7 +3,7 @@ import { SolanaAdapter } from '@reown/appkit-adapter-solana/react';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 
-export const projectId = import.meta.env.VITE_ENV_WAGMI_PROJECT_ID;
+export const projectId = import.meta.env.VITE_WAGMI_PROJECT_ID;
 
 export const wagmiAdapter = new WagmiAdapter({
   networks: [arbitrum],
