@@ -37,7 +37,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({ vestingData }) => (
     <GridItem>
       <VStack align="stretch" spacing={0.5}>
         <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
-          <BoldGrix text="Total Vested GRIX" />
+          <BoldGrix text="Total Vested esGRIX" />
         </Text>
         <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
           {vestingData ? formatBalance(vestingData.totalVested) : '0.0000'}
