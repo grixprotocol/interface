@@ -16,7 +16,9 @@ type RewardsCardProps = {
 };
 
 type DexScreenerResponse = {
-  pairs?: { priceUsd?: string }[];
+  grix: {
+    usd: number;
+  };
 };
 
 export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Element => {
@@ -26,15 +28,13 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   const [grixPrice, setGrixPrice] = useState<number | null>(null);
   const toast = useToast();
 
-  // Fetch GRIX price from dexscreener
+  // Fetch GRIX price from CoinGecko
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const res = await fetch(
-          'https://api.dexscreener.com/latest/dex/pairs/arbitrum/0x25d3ce097e413eeab09bbda72cd87d8972e673d4'
-        );
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=grix&vs_currencies=usd');
         const json = (await res.json()) as DexScreenerResponse;
-        const price = json?.pairs?.[0]?.priceUsd ? parseFloat(json.pairs[0].priceUsd) : null;
+        const price = json.grix.usd;
         setGrixPrice(price);
       } catch {
         setGrixPrice(null);
