@@ -59,17 +59,17 @@ export const StakingPage: React.FC = () => {
 
   return (
     <Box bg="gray.950" minH="100vh">
-      <Container maxW="1400px" px={{ base: 4, md: 6 }} py={8}>
-        <VStack align="flex-start" spacing={2} mb={8}>
-          <Heading size="lg" color="white" fontWeight="600">
+      <Container maxW="1200px" px={{ base: 3, md: 4 }} py={6}>
+        <VStack align="flex-start" spacing={3} mb={6}>
+          <Heading size="lg" color="white" fontWeight="700" letterSpacing="-0.02em">
             Staking
           </Heading>
-          <Text color="gray.400" fontSize="md">
+          <Text color="gray.400" fontSize="md" fontWeight="500">
             <BoldGrix text="Stake GRIX and esGRIX to start earning rewards" />
           </Text>
         </VStack>
 
-        <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr) 340px' }} gap={6} mb={8}>
+        <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr) 300px' }} gap={4} mb={6}>
           <GridItem>
             <StakingCard
               title="GRIX Token"
@@ -91,13 +91,13 @@ export const StakingPage: React.FC = () => {
           </GridItem>
 
           <GridItem rowSpan={2}>
-            <VStack align="stretch" spacing={6}>
+            <VStack align="stretch" spacing={4}>
               <RewardsCard data={userRewardData} refetchData={handleDataRefresh} />
 
               <Box
                 bg="gray.950"
-                borderRadius="lg"
-                p={6}
+                borderRadius="md"
+                p={4}
                 border="1px solid"
                 borderColor="gray.900"
                 _hover={{ borderColor: 'gray.800' }}
@@ -109,11 +109,11 @@ export const StakingPage: React.FC = () => {
                 transition="all 0.2s"
                 _active={{ transform: 'scale(0.98)' }}
               >
-                <VStack align="stretch" spacing={2}>
-                  <Heading size="sm" color="white" fontWeight="600">
+                <VStack align="stretch" spacing={1}>
+                  <Heading size="sm" color="white" fontWeight="700" letterSpacing="-0.01em">
                     Learn about Staking
                   </Heading>
-                  <Text color="gray.400" fontSize="sm">
+                  <Text color="gray.400" fontSize="sm" fontWeight="500">
                     Check out our staking walkthrough and guides
                   </Text>
                 </VStack>
@@ -122,8 +122,8 @@ export const StakingPage: React.FC = () => {
           </GridItem>
         </Grid>
 
-        <VStack align="stretch" spacing={4} mb={8}>
-          <Heading size="md" color="white" fontWeight="600" mb={2}>
+        <VStack align="stretch" spacing={3} mb={6}>
+          <Heading size="md" color="white" fontWeight="700" letterSpacing="-0.02em" mb={1}>
             Vesting
           </Heading>
           <VestingCard onActionComplete={triggerRefresh} />

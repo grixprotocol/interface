@@ -59,56 +59,56 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
 }) => (
   <Box
     bg="gray.950"
-    borderRadius="lg"
-    p={6}
+    borderRadius="md"
+    p={4}
     height="fit-content"
     border="1px solid"
     borderColor="gray.900"
     _hover={{ borderColor: 'gray.800' }}
   >
-    <Flex align="center" mb={5}>
-      <GrixLogo boxSize={8} mr={3} />
+    <Flex align="center" mb={3}>
+      <GrixLogo boxSize={6} mr={2} />
       <div>
-        <Heading size="md" color="white" mb={1} fontWeight="600">
+        <Heading size="sm" color="white" mb={1} fontWeight="700" letterSpacing="-0.01em">
           <BoldGrix text={title} />
         </Heading>
-        <Text color="gray.400" fontSize="sm">
+        <Text color="gray.400" fontSize="sm" fontWeight="500">
           <BoldGrix text={description} />
         </Text>
       </div>
     </Flex>
 
-    <SimpleGrid columns={2} spacing={5} mb={5}>
-      <VStack align="stretch">
-        <Text fontSize="sm" color="gray.500" mb={1}>
+    <SimpleGrid columns={2} spacing={4} mb={4}>
+      <VStack align="stretch" spacing={0.5}>
+        <Text fontSize="xs" color="gray.400" mb={0.5} fontWeight="500">
           Staked
         </Text>
-        <Text fontSize="xl" fontWeight="700" color="white">
+        <Text fontSize="lg" fontWeight="700" color="white" letterSpacing="-0.01em">
           {formatBalance(stakedAmount)}
         </Text>
       </VStack>
 
-      <VStack align="stretch">
-        <Text fontSize="sm" color="gray.500" mb={1}>
+      <VStack align="stretch" spacing={0.5}>
+        <Text fontSize="xs" color="gray.400" mb={0.5} fontWeight="500">
           Available to stake
         </Text>
-        <Text fontSize="xl" fontWeight="700" color="white">
+        <Text fontSize="lg" fontWeight="700" color="white" letterSpacing="-0.01em">
           {formatBalance(availableBalance)}
         </Text>
       </VStack>
 
-      <VStack align="stretch">
-        <Text fontSize="sm" color="gray.500" mb={1}>
+      <VStack align="stretch" spacing={0.5}>
+        <Text fontSize="xs" color="gray.400" mb={0.5} fontWeight="500">
           APR
         </Text>
-        <Text fontSize="xl" fontWeight="700" color="white">
+        <Text fontSize="lg" fontWeight="700" color="white" letterSpacing="-0.01em">
           {apr.toFixed(2)}%
         </Text>
       </VStack>
     </SimpleGrid>
 
-    <VStack spacing={4} align="stretch">
-      <InputGroup size="lg">
+    <VStack spacing={3} align="stretch">
+      <InputGroup size="md">
         <Input
           placeholder="Enter amount"
           value={amount}
@@ -120,12 +120,13 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
           bg="gray.900"
           _hover={{ borderColor: 'gray.600' }}
           _focus={{ borderColor: 'primary.500' }}
-          height="48px"
+          height="40px"
+          fontSize="sm"
         />
-        <InputRightElement width="4.5rem" h="48px">
+        <InputRightElement width="4rem" h="40px">
           <Button
-            h="1.75rem"
-            size="sm"
+            h="1.5rem"
+            size="xs"
             onClick={handleMaxClick}
             variant="secondary"
             color="primary.400"
@@ -137,15 +138,16 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
         </InputRightElement>
       </InputGroup>
 
-      <HStack spacing={4}>
+      <HStack spacing={3}>
         {amount && needsApproval ? (
           <Button
             isLoading={isApproving}
             loadingText="Approving"
             onClick={handleApprove}
             variant="primary"
-            size="lg"
-            height="48px"
+            size="md"
+            height="40px"
+            fontSize="sm"
             isDisabled={!isAmountValid()}
           >
             Approve
@@ -156,8 +158,9 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
             loadingText="Staking"
             onClick={handleStake}
             variant="primary"
-            size="lg"
-            height="48px"
+            size="md"
+            height="40px"
+            fontSize="sm"
             isDisabled={!isAmountValid() || !amount}
           >
             Stake
@@ -168,8 +171,9 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
           loadingText="Unstaking"
           onClick={handleUnstake}
           variant="secondary"
-          size="lg"
-          height="48px"
+          size="md"
+          height="40px"
+          fontSize="sm"
           isDisabled={!isUnstakeAmountValid() || !amount}
           color="white"
           fontWeight="bold"
