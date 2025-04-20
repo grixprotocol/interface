@@ -246,31 +246,33 @@ export const getTotalStaked = async (userAddress: string) => {
   }
 };
 //Staking APR Formula = (ETH rewards + esGS emissions annualized) / (Total GS + esGS staked) * 100
-export const calculateAPR = async (userAddress: string) => {
-  // Get ETH reward rate
-  const ethRewardRate = await getRewardRate();
+export const calculateAPR = async () => {
+  // Get total staked amount using totalSupply from the reward tracker
+  const totalStaked = await readContract(wagmiConfig, {
+    abi: rewardTrackerAbi,
+    address: normalizeAddress(stakingContracts.rewardTracker.address),
+    functionName: 'totalSupply',
+    args: [],
+  });
 
+  if (totalStaked === 0n) return 0;
+
+  // Get ETH reward rate from rewardDistributor
+  const ethRewardRate = await getTokenPerInterval();
+
+  // Get esGrix emission rate (assuming it's from the reward distributor as well)
   const esGrixRewardRate = await getTokenPerInterval();
 
-  const totalStaked = await getTotalStaked(userAddress);
-  if (totalStaked === 0n) {
-    return 0;
-  }
-
+  // Calculate annual rewards (seconds in a year * tokens per interval)
   const SECONDS_PER_YEAR = 365n * 24n * 60n * 60n;
+  const annualEthRewards = (ethRewardRate as bigint) * SECONDS_PER_YEAR;
+  const annualEsGrixRewards = (esGrixRewardRate as bigint) * SECONDS_PER_YEAR;
+  const totalAnnualRewards = annualEthRewards + annualEsGrixRewards;
 
-  // Calculate annualized rewards for both ETH and esGS
-  const ethRewardsPerYear = ethRewardRate * SECONDS_PER_YEAR;
-  const esGrixRewardsPerYear = esGrixRewardRate * SECONDS_PER_YEAR;
+  // Calculate APR: (totalAnnualRewards / totalStaked) * 100
+  const apr = (totalAnnualRewards * 100n) / (totalStaked as bigint);
 
-  // Calculate total rewards (ETH + esGS)
-  const totalRewardsPerYear = ethRewardsPerYear + esGrixRewardsPerYear;
-
-  // Calculate APR including both reward types
-  const aprBips = (totalRewardsPerYear * 10000n) / totalStaked;
-  const aprPercentage = Number(aprBips) / 100;
-
-  return aprPercentage;
+  return Number(apr);
 };
 // Add vesting allowance check
 export const checkVestingAllowance = async (owner: string, token: string) => {
