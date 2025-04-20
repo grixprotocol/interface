@@ -1,5 +1,7 @@
 # Interface
 
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
+
 ## Overview
 
 This directory contains the interface for the Grix protocol. The Grix Interface is a web application that provides a user-friendly interface for interacting with the Grix protocol. It includes various pages and components to facilitate user interactions with the protocol.
