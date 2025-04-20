@@ -93,7 +93,7 @@ export const useNavigationConfig = (): NavigationConfig => {
       ],
     },
     {
-      label: 'Staking',
+      label: 'Stake',
       path: '/staking',
     },
     {
