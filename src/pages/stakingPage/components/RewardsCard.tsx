@@ -2,6 +2,7 @@ import { Box, Button, HStack, Text, useToast, VStack } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
+import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { GrixLogo } from '@/components/commons/Logo';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
@@ -110,7 +111,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
       <VStack spacing={4} align="stretch">
         <HStack justify="space-between">
           <HStack spacing={2}>
-            <Text fontSize="lg">🔷</Text>
+            <EthLogo boxSize="20px" />
             <Text color="white" fontWeight="500">
               WETH
             </Text>
