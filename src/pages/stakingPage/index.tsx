@@ -73,7 +73,7 @@ export const StakingPage: React.FC = () => {
           <StakingCard
             title="GRIX Token"
             description="Stake your GRIX tokens for WETH fees and esGRIX incentives."
-            type="gs"
+            type="gx"
             refreshTrigger={refreshTrigger}
             onActionComplete={triggerRefresh}
           />
@@ -83,7 +83,7 @@ export const StakingPage: React.FC = () => {
           <StakingCard
             title="Escrowed GRIX (esGRIX)"
             description="Stake your earned esGRIX for WETH fees and esGRIX incentives."
-            type="esgs"
+            type="esgx"
             refreshTrigger={refreshTrigger}
             onActionComplete={triggerRefresh}
           />
