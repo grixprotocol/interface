@@ -89,7 +89,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
   const fetchAPR = useCallback(async () => {
     const calculatedAPR = await calculateAPR();
     setApr(calculatedAPR);
-  }, [address]);
+  }, []);
 
   useEffect(() => {
     void fetchBalance();
