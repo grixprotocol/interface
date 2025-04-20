@@ -265,8 +265,8 @@ export const calculateAPR = async () => {
 
   // Calculate annual rewards (seconds in a year * tokens per interval)
   const SECONDS_PER_YEAR = 365n * 24n * 60n * 60n;
-  const annualEthRewards = (ethRewardRate as bigint) * SECONDS_PER_YEAR;
-  const annualEsGrixRewards = (esGrixRewardRate as bigint) * SECONDS_PER_YEAR;
+  const annualEthRewards = (ethRewardRate) * SECONDS_PER_YEAR;
+  const annualEsGrixRewards = (esGrixRewardRate) * SECONDS_PER_YEAR;
   const totalAnnualRewards = annualEthRewards + annualEsGrixRewards;
 
   // Calculate APR: (totalAnnualRewards / totalStaked) * 100
