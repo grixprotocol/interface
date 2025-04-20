@@ -121,12 +121,16 @@ export const StakingPage: React.FC = () => {
         </GridItem>
       </Grid>
 
-      <VStack align="stretch" spacing={3} mb={6} bg="gray.950" p={4} borderRadius="xl">
-        <Heading size="md" color="white" fontWeight="700" letterSpacing="-0.02em" mb={1}>
-          Vesting
-        </Heading>
-        <VestingCard onActionComplete={triggerRefresh} />
-      </VStack>
+      <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr) 300px' }} gap={4} mb={6}>
+        <GridItem colSpan={{ base: 1, lg: 2 }} bg="gray.950" p={4} borderRadius="xl">
+          <VStack align="stretch" spacing={3}>
+            <Heading size="md" color="white" fontWeight="700" letterSpacing="-0.02em" mb={1}>
+              Vesting
+            </Heading>
+            <VestingCard onActionComplete={triggerRefresh} />
+          </VStack>
+        </GridItem>
+      </Grid>
     </Container>
   );
 };
