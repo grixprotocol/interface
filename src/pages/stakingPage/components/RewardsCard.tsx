@@ -2,8 +2,8 @@ import { Box, Button, HStack, Text, useToast, VStack } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
-import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { GrixLogo } from '@/components/commons/Logo';
+import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
 type RewardsCardProps = {
