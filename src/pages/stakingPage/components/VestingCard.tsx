@@ -208,7 +208,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
         <VStack spacing={4} align="stretch">
           <InputGroup size="lg">
             <Input
-              placeholder="Enter amount"
+              placeholder="Enter esGrix amount"
               value={amount}
               onChange={handleAmountChange}
               type="text"

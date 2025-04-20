@@ -22,7 +22,7 @@ import { StakingCardContent } from './StakingCardContent.js';
 type StakingCardProps = {
   title: string;
   description: string;
-  type: 'gs' | 'esgs';
+  type: 'gx' | 'esgx';
   refreshTrigger: number;
   onActionComplete: () => void;
 };
@@ -45,7 +45,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
   const [apr, setApr] = useState(0);
   const [_showError, setShowError] = useState(false);
   const toast = useToast();
-  const tokenAddress = type === 'gs' ? stakingContracts.grixToken.address : stakingContracts.esGRIXToken.address;
+  const tokenAddress = type === 'gx' ? stakingContracts.grixToken.address : stakingContracts.esGRIXToken.address;
 
   const showToast = useCallback(
     (title: string, description: string, status: 'success' | 'error') => {
@@ -64,7 +64,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     if (!address) return;
 
     try {
-      if (type === 'esgs') {
+      if (type === 'esgx') {
         const staked = await getEsGrixStakedAmount(address);
         setStakedAmount(staked);
       } else {
@@ -107,7 +107,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
   }, [fetchBalance, fetchStakedAmount, fetchAPR, refreshTrigger]);
 
   const handleMaxClick = () => {
-    if (type === 'esgs') {
+    if (type === 'esgx') {
       setAmount(stakedAmount);
     } else {
       setAmount(availableBalance);
@@ -169,9 +169,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     [fetchBalance, fetchStakedAmount, fetchAPR, onActionComplete]
   );
 
-  // Add a useEffect to handle refreshTrigger changes without causing infinite loops
   useEffect(() => {
-    // Skip the initial render
     if (refreshTrigger > 0) {
       void refreshAllData(false);
     }
@@ -209,7 +207,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       setIsStaking(true);
       const amountBigInt = parseEther(amount);
 
-      if (type === 'gs') {
+      if (type === 'gx') {
         await stakeGs(amountBigInt);
       } else {
         await stakeEsGs(amountBigInt);
@@ -231,7 +229,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     if (!amount || !address) return;
 
     try {
-      const currentStaked = type === 'gs' ? await getStakedAmount(address) : await getEsGrixStakedAmount(address);
+      const currentStaked = type === 'gx' ? await getStakedAmount(address) : await getEsGrixStakedAmount(address);
 
       if (Number(amount) > Number(currentStaked)) {
         showToast('Invalid Amount', 'Amount exceeds staked balance', 'error');
@@ -242,7 +240,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       setIsUnstaking(true);
       const amountBigInt = parseEther(amount);
 
-      if (type === 'gs') {
+      if (type === 'gx') {
         await unstakeGs(amountBigInt);
       } else {
         await unstakeEsGs(amountBigInt);

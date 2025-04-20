@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { GrixLogo } from '@/components/commons/Logo';
+import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
 type RewardsCardProps = {
@@ -16,7 +17,9 @@ type RewardsCardProps = {
 };
 
 type DexScreenerResponse = {
-  pairs?: { priceUsd?: string }[];
+  grix: {
+    usd: number;
+  };
 };
 
 export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Element => {
@@ -26,15 +29,13 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   const [grixPrice, setGrixPrice] = useState<number | null>(null);
   const toast = useToast();
 
-  // Fetch GRIX price from dexscreener
+  // Fetch GRIX price from CoinGecko
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const res = await fetch(
-          'https://api.dexscreener.com/latest/dex/pairs/arbitrum/0x25d3ce097e413eeab09bbda72cd87d8972e673d4'
-        );
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=grix&vs_currencies=usd');
         const json = (await res.json()) as DexScreenerResponse;
-        const price = json?.pairs?.[0]?.priceUsd ? parseFloat(json.pairs[0].priceUsd) : null;
+        const price = json.grix.usd;
         setGrixPrice(price);
       } catch {
         setGrixPrice(null);
@@ -100,49 +101,49 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   return (
     <Box
       bg="gray.950"
-      borderRadius="lg"
-      p={6}
+      borderRadius="md"
+      p={4}
       height="fit-content"
       border="1px solid"
       borderColor="gray.900"
       _hover={{ borderColor: 'gray.800' }}
     >
-      <VStack spacing={4} align="stretch">
+      <VStack spacing={3} align="stretch">
         <HStack justify="space-between">
           <HStack spacing={2}>
-            <Text fontSize="lg">🔷</Text>
-            <Text color="white" fontWeight="500">
+            <EthLogo boxSize="16px" />
+            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
               WETH
             </Text>
           </HStack>
-          <Text color="gray.400" fontSize="sm">
+          <Text color="gray.400" fontSize="sm" fontWeight="500">
             ≤{(0.0001).toFixed(4)} WETH (≤${(0.01).toFixed(2)})
           </Text>
         </HStack>
 
         <HStack justify="space-between">
           <HStack spacing={2}>
-            <GrixLogo boxSize="20px" />
-            <Text color="white" fontWeight="500">
+            <GrixLogo boxSize="16px" />
+            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
               Staked Amount
             </Text>
           </HStack>
-          <Text color="gray.400" fontSize="sm">
+          <Text color="gray.400" fontSize="sm" fontWeight="500">
             {data?.stakedAmount ? Number(data.stakedAmount).toFixed(4) : '0.0000'} GRIX
           </Text>
         </HStack>
 
         <HStack justify="space-between">
           <HStack spacing={2}>
-            <GrixLogo boxSize="20px" />
-            <Text color="white" fontWeight="500">
+            <GrixLogo boxSize="16px" />
+            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
               Claimable Rewards
             </Text>
           </HStack>
-          <Text color="gray.400" fontSize="sm">
+          <Text color="gray.400" fontSize="sm" fontWeight="500">
             {data?.claimable ? Number(data.claimable).toFixed(4) : '0.0000'} esGRIX
             {grixPrice && data?.claimable && (
-              <Text as="span" color="green.300" fontWeight="500" fontSize="sm">
+              <Text as="span" color="green.300" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
                 &nbsp;($
                 {(Number(data.claimable) * grixPrice).toLocaleString(undefined, {
                   minimumFractionDigits: 2,
@@ -159,9 +160,10 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
           loadingText="Claiming"
           bg="teal.400"
           color="white"
-          size="lg"
+          size="md"
           width="full"
-          height="48px"
+          height="40px"
+          fontSize="sm"
           isDisabled={!data?.claimable || Number(data?.claimable) <= 0}
           _hover={{ bg: 'teal.500' }}
           _active={{ bg: 'teal.600' }}
@@ -175,9 +177,10 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
           loadingText="Compounding"
           bg="teal.400"
           color="white"
-          size="lg"
+          size="md"
           width="full"
-          height="48px"
+          height="40px"
+          fontSize="sm"
           _hover={{ bg: 'teal.500' }}
           _active={{ bg: 'teal.600' }}
         >

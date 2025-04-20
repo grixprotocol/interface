@@ -1,6 +1,9 @@
 import { Grid, GridItem, Progress, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
+import { formatBalance } from '../../utils/formatters';
+import { BoldGrix } from '../BoldGrix';
+
 type VestingProgress = {
   remainingDays: number;
   progress: number;
@@ -21,65 +24,69 @@ type VestingStatsProps = {
 export const VestingStats: React.FC<VestingStatsProps> = ({ vestingData }) => (
   <Grid templateColumns="repeat(2, 1fr)" gap={4}>
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Claimable
-      </Text>
-      <Text color="white" fontSize="lg">
-        {vestingData?.claimable || '0'} Grix
-      </Text>
+      <VStack align="stretch" spacing={0.5}>
+        <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
+          <BoldGrix text="Claimable GRIX" />
+        </Text>
+        <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
+          {vestingData ? formatBalance(vestingData.claimable) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Total Vested
-      </Text>
-      <Text color="white" fontSize="lg">
-        {vestingData?.totalVested || '0'} esGrix
-      </Text>
+      <VStack align="stretch" spacing={0.5}>
+        <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
+          <BoldGrix text="Total Vested GRIX" />
+        </Text>
+        <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
+          {vestingData ? formatBalance(vestingData.totalVested) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Available to vest{' '}
-      </Text>
-      <Text color="white" fontSize="lg">
-        {vestingData?.esGrixBalance || '0'} esGrix
-      </Text>
+      <VStack align="stretch" spacing={0.5}>
+        <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
+          <BoldGrix text="Available esGRIX" />
+        </Text>
+        <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
+          {vestingData?.esGrixBalance ? formatBalance(vestingData.esGrixBalance) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Last Vesting Time
-      </Text>
-      <Text color="white" fontSize="sm">
-        {vestingData?.lastVestingTime
-          ? new Date(Number(vestingData.lastVestingTime) * 1000).toLocaleString('en-GB', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })
-          : '----------'}
-      </Text>
+      <VStack align="stretch" spacing={0.5}>
+        <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
+          <BoldGrix text="Max Vestable esGRIX" />
+        </Text>
+        <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
+          {vestingData ? formatBalance(vestingData.maxVestableAmount) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem colSpan={2}>
-      <VStack align="stretch" spacing={1}>
-        <Text color="gray.500" fontSize="sm">
+      <VStack align="stretch" spacing={0.5}>
+        <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
           Vesting Progress
         </Text>
         {vestingData?.vestingProgress?.isVesting ? (
           <>
             <Progress
               value={vestingData.vestingProgress.progress}
-              size="sm"
+              size="xs"
               colorScheme="primary"
               borderRadius="full"
               bg="gray.700"
             />
-            <Text color="white" fontSize="sm">
+            <Text color="white" fontSize="sm" fontWeight="500">
               {vestingData.vestingProgress.remainingDays} days remaining
             </Text>
           </>
         ) : (
-          <Text color="white" fontSize="sm">
+          <Text color="white" fontSize="sm" fontWeight="500">
             No active vesting
           </Text>
         )}

@@ -16,6 +16,7 @@ import React from 'react';
 import { GrixLogo } from '@/components/commons/Logo';
 
 import { formatBalance } from '../utils/formatters';
+import { BoldGrix } from './BoldGrix';
 
 type StakingCardContentProps = {
   title: string;
@@ -69,10 +70,10 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
       <GrixLogo boxSize={8} mr={3} />
       <div>
         <Heading size="md" color="white" mb={1} fontWeight="600">
-          {title}
+          <BoldGrix text={title} />
         </Heading>
         <Text color="gray.400" fontSize="sm">
-          {description}
+          <BoldGrix text={description} />
         </Text>
       </div>
     </Flex>
@@ -100,7 +101,10 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
         <Text fontSize="sm" color="gray.500" mb={1}>
           APR
         </Text>
-        <Text fontSize="xl" fontWeight="700" color="white">
+        <Text fontSize="xl" fontWeight="700" color="green.200" display="flex" alignItems="center" gap={2}>
+          <Text as="span" color="green.300">
+            ↗
+          </Text>
           {apr.toFixed(2)}%
         </Text>
       </VStack>
