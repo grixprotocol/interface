@@ -101,6 +101,13 @@ export const StakingPage: React.FC = () => {
                 border="1px solid"
                 borderColor="gray.900"
                 _hover={{ borderColor: 'gray.800' }}
+                as="a"
+                href="https://docs.grix.finance/gitbook/tokenomics/overview"
+                target="_blank"
+                rel="noopener noreferrer"
+                cursor="pointer"
+                transition="all 0.2s"
+                _active={{ transform: 'scale(0.98)' }}
               >
                 <VStack align="stretch" spacing={2}>
                   <Heading size="sm" color="white" fontWeight="600">
