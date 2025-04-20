@@ -1,6 +1,9 @@
 import { Grid, GridItem, Progress, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
+import { BoldGrix } from '../BoldGrix';
+import { formatBalance } from '../../utils/formatters';
+
 type VestingProgress = {
   remainingDays: number;
   progress: number;
@@ -19,47 +22,51 @@ type VestingStatsProps = {
 };
 
 export const VestingStats: React.FC<VestingStatsProps> = ({ vestingData }) => (
-  <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+  <Grid templateColumns="repeat(2, 1fr)" gap={6}>
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Claimable
-      </Text>
-      <Text color="white" fontSize="lg">
-        {vestingData?.claimable || '0'} Grix
-      </Text>
+      <VStack align="stretch" spacing={1}>
+        <Text color="gray.500" fontSize="sm">
+          <BoldGrix text="Claimable GRIX" />
+        </Text>
+        <Text color="white" fontSize="xl" fontWeight="700">
+          {vestingData ? formatBalance(vestingData.claimable) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Total Vested
-      </Text>
-      <Text color="white" fontSize="lg">
-        {vestingData?.totalVested || '0'} esGrix
-      </Text>
+      <VStack align="stretch" spacing={1}>
+        <Text color="gray.500" fontSize="sm">
+          <BoldGrix text="Total Vested GRIX" />
+        </Text>
+        <Text color="white" fontSize="xl" fontWeight="700">
+          {vestingData ? formatBalance(vestingData.totalVested) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Available to vest{' '}
-      </Text>
-      <Text color="white" fontSize="lg">
-        {vestingData?.esGrixBalance || '0'} esGrix
-      </Text>
+      <VStack align="stretch" spacing={1}>
+        <Text color="gray.500" fontSize="sm">
+          <BoldGrix text="Available esGRIX" />
+        </Text>
+        <Text color="white" fontSize="xl" fontWeight="700">
+          {vestingData?.esGrixBalance ? formatBalance(vestingData.esGrixBalance) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem>
-      <Text color="gray.500" fontSize="sm">
-        Last Vesting Time
-      </Text>
-      <Text color="white" fontSize="sm">
-        {vestingData?.lastVestingTime
-          ? new Date(Number(vestingData.lastVestingTime) * 1000).toLocaleString('en-GB', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })
-          : '----------'}
-      </Text>
+      <VStack align="stretch" spacing={1}>
+        <Text color="gray.500" fontSize="sm">
+          <BoldGrix text="Max Vestable esGRIX" />
+        </Text>
+        <Text color="white" fontSize="xl" fontWeight="700">
+          {vestingData ? formatBalance(vestingData.maxVestableAmount) : '0.0000'}
+        </Text>
+      </VStack>
     </GridItem>
+
     <GridItem colSpan={2}>
       <VStack align="stretch" spacing={1}>
         <Text color="gray.500" fontSize="sm">

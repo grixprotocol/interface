@@ -4,6 +4,7 @@ import { useAccount } from 'wagmi';
 
 import { getUserRewardTrackerData } from '@/web3Config/staking/hooks';
 
+import { BoldGrix } from './components/BoldGrix';
 import { RewardsCard } from './components/RewardsCard';
 import { StakingCard } from './components/StakingCard';
 import { VestingCard } from './components/VestingCard';
@@ -64,7 +65,7 @@ export const StakingPage: React.FC = () => {
             Staking
           </Heading>
           <Text color="gray.400" fontSize="md">
-            Stake GRIX and esGRIX to start earning rewards
+            <BoldGrix text="Stake GRIX and esGRIX to start earning rewards" />
           </Text>
         </VStack>
 
