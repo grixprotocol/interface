@@ -1,8 +1,8 @@
 import { Grid, GridItem, Progress, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
-import { BoldGrix } from '../BoldGrix';
 import { formatBalance } from '../../utils/formatters';
+import { BoldGrix } from '../BoldGrix';
 
 type VestingProgress = {
   remainingDays: number;
