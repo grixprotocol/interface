@@ -81,8 +81,7 @@ There are many ways to contribute, including:
 2.  Ensure all linters and formatters pass (`pnpm format`).
 3.  Ensure all tests pass (`pnpm test` and `pnpm playwright`).
 4.  Update the `README.md` or other documentation if your changes affect usage or setup.
-5.  Fill out the PR template with a clear description of your changes and why they are needed.
-6.  Be responsive to feedback and code reviews.
+5.  Be responsive to feedback and code reviews.
 
 ## License
 
