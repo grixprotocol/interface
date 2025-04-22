@@ -120,7 +120,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
             ≤{(0.0001).toFixed(4)} WETH (≤${(0.01).toFixed(2)})
           </Text>
         </HStack>
-
+{/* 
         <HStack justify="space-between">
           <HStack spacing={2}>
             <GrixLogo boxSize="16px" />
@@ -131,7 +131,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
           <Text color="gray.400" fontSize="sm" fontWeight="500">
             {data?.stakedAmount ? Number(data.stakedAmount).toFixed(4) : '0.0000'} GRIX
           </Text>
-        </HStack>
+        </HStack> */}
 
         <HStack justify="space-between">
           <HStack spacing={2}>
