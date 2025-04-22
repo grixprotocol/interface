@@ -46,7 +46,7 @@ export const CreditPackageCard: React.FC<{
         fontSize="sm"
         fontWeight="medium"
       >
-        ${pricePerCredit.toFixed(2)}/credit
+        ${pricePerCredit.toFixed(2)}
       </Badge>
     </VStack>
   </Card>
