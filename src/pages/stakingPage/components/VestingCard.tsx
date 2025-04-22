@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Input, InputGroup, InputRightElement, useToast, VStack } from '@chakra-ui/react';
+import { Box, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { parseEther } from 'viem';
 import { useAccount } from 'wagmi';
@@ -18,16 +18,26 @@ import {
 import { VestingHeader } from './VestingComponents/VestingHeader';
 import { VestingInfo } from './VestingComponents/VestingInfo';
 import { VestingStats } from './VestingComponents/VestingStats';
+import { VestingModal } from './VestingModal';
+import { WithdrawModal } from './WithdrawModal';
 
 type VestingCardProps = {
   onActionComplete?: () => void;
+  userRewardData?: {
+    claimable: string;
+    stakedAmount: string;
+    cumulativeRewards: string;
+    averageStaked: string;
+  } | null;
 };
 
-export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) => {
+export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, userRewardData }) => {
+  const { isOpen: isVestingOpen, onOpen: onVestingOpen, onClose: onVestingClose } = useDisclosure();
+  const { isOpen: isWithdrawOpen, onOpen: onWithdrawOpen, onClose: onWithdrawClose } = useDisclosure();
   const { address } = useAccount();
   const toast = useToast();
-  const [amount, setAmount] = useState('');
   const [esGrixBalance, setEsGrixBalance] = useState('0');
+  const [grixBalance, setGrixBalance] = useState('0');
   const [isApproving, setIsApproving] = useState(false);
   const [isVesting, setIsVesting] = useState(false);
   const [needsApproval, setNeedsApproval] = useState(true);
@@ -60,16 +70,15 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
   );
 
   const checkAllowance = useCallback(async () => {
-    if (!address || !amount) return;
+    if (!address) return;
 
     try {
       const allowance = await checkVestingAllowance(address, stakingContracts.esGRIXToken.address);
-      const amountBigInt = parseEther(amount);
-      setNeedsApproval(allowance < amountBigInt);
+      setNeedsApproval(allowance === 0n);
     } catch (error) {
       setNeedsApproval(true);
     }
-  }, [address, amount]);
+  }, [address]);
 
   useEffect(() => {
     void fetchVestingData();
@@ -80,6 +89,12 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
   useEffect(() => {
     void checkAllowance();
   }, [checkAllowance]);
+
+  useEffect(() => {
+    if (!isApproving) {
+      void checkAllowance();
+    }
+  }, [isApproving, checkAllowance]);
 
   const fetchBalance = useCallback(async () => {
     if (!address) return;
@@ -93,70 +108,59 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
     return () => clearInterval(interval);
   }, [fetchBalance]);
 
-  const handleAction = useCallback(
-    async (action: 'approve' | 'vest' | 'withdraw') => {
-      if (!address || (!amount && action !== 'withdraw')) return;
+  const fetchGrixBalance = useCallback(async () => {
+    if (!address) return;
+    const balance = await getTokenBalance(stakingContracts.grixToken.address, address);
+    setGrixBalance(balance);
+  }, [address]);
 
-      const actions = {
-        approve: async () => {
-          setIsApproving(true);
-          await approveVesting(stakingContracts.esGRIXToken.address, parseEther(amount));
-          setNeedsApproval(false);
-        },
-        vest: async () => {
-          setIsVesting(true);
-          await vestEsGrix(parseEther(amount));
-          setAmount('');
-        },
-        withdraw: async () => {
-          setIsWithdrawing(true);
-          await withdrawEsGrix();
-        },
-      };
+  useEffect(() => {
+    void fetchGrixBalance();
+    const interval = setInterval(() => void fetchGrixBalance(), 15000);
+    return () => clearInterval(interval);
+  }, [fetchGrixBalance]);
+
+  const handleVest = useCallback(
+    async (vestAmount: string) => {
+      if (!address) return;
 
       try {
-        await actions[action]();
-        await Promise.all([fetchBalance(), fetchVestingData(true)]);
-
-        if (onActionComplete) {
-          onActionComplete();
+        if (needsApproval) {
+          setIsApproving(true);
+          await approveVesting(stakingContracts.esGRIXToken.address, parseEther(vestAmount));
+          await checkAllowance();
+        } else {
+          setIsVesting(true);
+          await vestEsGrix(parseEther(vestAmount));
         }
 
+        await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+
         toast({
-          title: `${action.charAt(0).toUpperCase() + action.slice(1)} Successful`,
+          title: needsApproval ? 'Approval Successful' : 'Vesting Successful',
           status: 'success',
           duration: 5000,
           isClosable: true,
         });
+
+        if (!needsApproval) {
+          onVestingClose();
+        }
       } catch (error) {
         toast({
-          title: `${action.charAt(0).toUpperCase() + action.slice(1)} Failed`,
-          description: `There was an error during the ${action} process`,
+          title: needsApproval ? 'Approval Failed' : 'Vesting Failed',
+          description: `There was an error during the ${needsApproval ? 'approval' : 'vesting'} process`,
           status: 'error',
           duration: 5000,
           isClosable: true,
         });
       } finally {
-        if (action === 'approve') setIsApproving(false);
-        if (action === 'vest') setIsVesting(false);
-        if (action === 'withdraw') setIsWithdrawing(false);
+        setIsApproving(false);
+        setIsVesting(false);
       }
     },
-    [address, amount, fetchVestingData, toast, fetchBalance, onActionComplete]
+    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onVestingClose, checkAllowance]
   );
-
-  const handleMaxClick = useCallback(async () => {
-    await fetchBalance();
-    await fetchVestingData();
-    setAmount(esGrixBalance);
-  }, [esGrixBalance, fetchVestingData, fetchBalance]);
-
-  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (!value || /^\d*\.?\d*$/.test(value)) {
-      setAmount(value);
-    }
-  };
 
   // Calculate remaining days and progress
   const calculateVestingProgress = useCallback(() => {
@@ -181,6 +185,34 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
     };
   }, [lastVestingTime, vestingDuration, vestingData]);
 
+  const handleWithdraw = useCallback(async () => {
+    if (!address) return;
+
+    try {
+      setIsWithdrawing(true);
+      await withdrawEsGrix();
+      await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+
+      toast({
+        title: 'Withdrawal Successful',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      onWithdrawClose();
+    } catch (error) {
+      toast({
+        title: 'Withdrawal Failed',
+        description: 'There was an error during the withdrawal process',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setIsWithdrawing(false);
+    }
+  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onWithdrawClose]);
+
   return (
     <Box
       bg="gray.950"
@@ -202,96 +234,36 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete }) =>
               vestingProgress: calculateVestingProgress(),
             }
           }
+          onVestClick={onVestingOpen}
+          isVesting={isVesting || isApproving}
+          needsApproval={needsApproval}
+          onWithdraw={onWithdrawOpen}
+          isWithdrawing={isWithdrawing}
         />
+
+        <VestingModal
+          isOpen={isVestingOpen}
+          onClose={onVestingClose}
+          esGrixBalance={esGrixBalance}
+          grixBalance={grixBalance}
+          isLoading={isVesting || isApproving}
+          onVest={handleVest}
+          claimableRewards={userRewardData?.claimable || '0'}
+        />
+
+        <WithdrawModal
+          isOpen={isWithdrawOpen}
+          onClose={onWithdrawClose}
+          onWithdraw={() => void handleWithdraw()}
+          isLoading={isWithdrawing}
+          claimableGS={vestingData?.claimable || '0'}
+          vestingAmount={vestingData?.totalVested || '0'}
+          totalReserved={
+            vestingData ? (parseFloat(vestingData.claimable) + parseFloat(vestingData.totalVested)).toString() : '0'
+          }
+        />
+
         <VestingInfo />
-
-        <VStack spacing={4} align="stretch">
-          <InputGroup size="lg">
-            <Input
-              placeholder="Enter esGrix amount"
-              value={amount}
-              onChange={handleAmountChange}
-              type="text"
-              borderRadius="md"
-              borderColor="gray.700"
-              color="white"
-              bg="gray.900"
-              _hover={{ borderColor: 'gray.600' }}
-              _focus={{ borderColor: 'primary.500' }}
-              height="48px"
-            />
-            <InputRightElement width="4.5rem" h="48px">
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  void handleMaxClick();
-                }}
-                h="1.75rem"
-                size="sm"
-                variant="secondary"
-                color="primary.400"
-                fontSize="xs"
-                mr={1}
-              >
-                Max
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-
-          <HStack spacing={4}>
-            {needsApproval && amount ? (
-              <Button
-                onClick={() => void handleAction('approve')}
-                isLoading={isApproving}
-                loadingText="Approving"
-                variant="primary"
-                size="lg"
-                height="48px"
-                flex="1"
-                isDisabled={!amount}
-              >
-                Approve
-              </Button>
-            ) : (
-              <Button
-                onClick={() => void handleAction('vest')}
-                isLoading={isVesting}
-                loadingText="Vesting"
-                variant="primary"
-                size="lg"
-                height="48px"
-                flex="1"
-                isDisabled={!amount}
-              >
-                Vest
-              </Button>
-            )}
-
-            <Button
-              onClick={() => void handleAction('withdraw')}
-              isLoading={isWithdrawing}
-              loadingText="Withdrawing"
-              variant="secondary"
-              size="lg"
-              height="48px"
-              flex="1"
-              isDisabled={!vestingData || parseFloat(vestingData.claimable) <= 0}
-              color="white"
-              fontWeight="bold"
-              borderColor="gray.600"
-              _hover={{
-                bg: 'gray.800',
-                borderColor: 'gray.500',
-              }}
-              _active={{
-                bg: 'gray.700',
-                borderColor: 'primary.500',
-              }}
-            >
-              Withdraw
-            </Button>
-          </HStack>
-        </VStack>
       </VStack>
     </Box>
   );

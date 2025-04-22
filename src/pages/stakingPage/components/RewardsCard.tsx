@@ -103,6 +103,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
       bg="gray.950"
       borderRadius="md"
       p={4}
+      minW="360px"
       height="fit-content"
       border="1px solid"
       borderColor="gray.900"
@@ -111,36 +112,24 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
       <VStack spacing={3} align="stretch">
         <HStack justify="space-between">
           <HStack spacing={2}>
-            <EthLogo boxSize="16px" />
+            <EthLogo boxSize="14px" />
             <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
               WETH
             </Text>
           </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500">
+          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0}>
             ≤{(0.0001).toFixed(4)} WETH (≤${(0.01).toFixed(2)})
           </Text>
         </HStack>
 
         <HStack justify="space-between">
           <HStack spacing={2}>
-            <GrixLogo boxSize="16px" />
-            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-              Staked Amount
-            </Text>
-          </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500">
-            {data?.stakedAmount ? Number(data.stakedAmount).toFixed(4) : '0.0000'} GRIX
-          </Text>
-        </HStack>
-
-        <HStack justify="space-between">
-          <HStack spacing={2}>
-            <GrixLogo boxSize="16px" />
+            <GrixLogo boxSize="14px" />
             <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
               Claimable Rewards
             </Text>
           </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500">
+          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0} textAlign="right">
             {data?.claimable ? Number(data.claimable).toFixed(4) : '0.0000'} esGRIX
             {grixPrice && data?.claimable && (
               <Text as="span" color="green.300" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">

@@ -106,7 +106,15 @@ export const getCoreTracker = async () =>
     vester: string;
     loanVester: string;
   };
-
+const getCumulativeRewards = async (address: string) => {
+  const cumulativeRewards = await readContract(wagmiConfig, {
+    abi: rewardTrackerAbi,
+    address: normalizeAddress(stakingContracts.rewardTracker.address),
+    functionName: 'cumulativeRewards',
+    args: [address],
+  });
+  return cumulativeRewards;
+};
 // Get user reward tracker data
 export const getUserRewardTrackerData = async (address: string) => {
   if (!address) return null;
@@ -126,12 +134,7 @@ export const getUserRewardTrackerData = async (address: string) => {
       args: [address],
     });
 
-    const cumulativeRewards = await readContract(wagmiConfig, {
-      abi: rewardTrackerAbi,
-      address: normalizeAddress(stakingContracts.rewardTracker.address),
-      functionName: 'cumulativeRewards',
-      args: [address],
-    });
+    const cumulativeRewards = await getCumulativeRewards(address);
 
     const averageStaked = await readContract(wagmiConfig, {
       abi: rewardTrackerAbi,
@@ -295,16 +298,21 @@ export const approveVesting = async (token: string, amount: bigint) =>
     args: [normalizeAddress(stakingContracts.vester.address), amount],
   });
 
+const getClaimable = async (address: `0x${string}`) => {
+  const claimable = await readContract(wagmiConfig, {
+    abi: vesterAbi,
+    address: normalizeAddress(stakingContracts.vester.address),
+    functionName: 'claimable',
+    args: [address],
+  });
+  return claimable;
+};
+
 // Get vesting data
 export const getVestingData = async (address: `0x${string}`) => {
   try {
     const [claimable, totalVested, maxVestableAmount] = await Promise.all([
-      readContract(wagmiConfig, {
-        abi: vesterAbi,
-        address: normalizeAddress(stakingContracts.vester.address),
-        functionName: 'claimable',
-        args: [address],
-      }),
+      getClaimable(address),
       readContract(wagmiConfig, {
         abi: vesterAbi,
         address: normalizeAddress(stakingContracts.vester.address),
