@@ -1,23 +1,24 @@
 import {
   Box,
   Button,
+  Flex,
   HStack,
-  Text,
+  Icon,
+  Input,
   Modal,
-  ModalOverlay,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  Input,
-  VStack,
+  ModalOverlay,
+  Text,
   useToast,
-  Icon,
-  Flex,
+  VStack,
 } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
-import { FaChevronDown, FaPlus, FaEquals } from 'react-icons/fa';
-import { getVestingDuration } from '@/web3Config/staking/hooks';
+import { FaChevronDown, FaEquals,FaPlus } from 'react-icons/fa';
+
 import { GrixLogo } from '@/components/commons/Logo';
+import { getVestingDuration } from '@/web3Config/staking/hooks';
 
 type VestingModalProps = {
   isOpen: boolean;

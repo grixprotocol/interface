@@ -1,4 +1,4 @@
-import { Grid, GridItem, Progress, Text, VStack, Button, HStack } from '@chakra-ui/react';
+import { Button, Grid, GridItem, HStack,Progress, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 import { formatBalance } from '../../utils/formatters';

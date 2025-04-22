@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
 import { parseEther } from 'viem';
+import { useAccount } from 'wagmi';
 
+import { stakingContracts } from '@/web3Config/staking/config';
 import {
-  checkVestingAllowance,
   approveVesting,
-  vestEsGs,
+  checkVestingAllowance,
   getTokenBalance,
   getVestingData,
+  vestEsGs,
 } from '@/web3Config/staking/hooks';
-import { stakingContracts } from '@/web3Config/staking/config';
 
 export const useVesting = () => {
   const { address } = useAccount();
@@ -28,7 +28,7 @@ export const useVesting = () => {
         checkVestingAllowance(address, stakingContracts.esGRIXToken.address),
         getTokenBalance(stakingContracts.esGRIXToken.address, address),
         getTokenBalance(stakingContracts.grixToken.address, address),
-        getVestingData(address as `0x${string}`),
+        getVestingData(address),
       ]);
 
       setVestingAllowance(allowance.toString());
