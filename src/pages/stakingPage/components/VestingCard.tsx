@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Input,
-  InputGroup,
-  InputRightElement,
-  useDisclosure,
-  useToast,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { parseEther } from 'viem';
 import { useAccount } from 'wagmi';
@@ -85,7 +75,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
       const allowance = await checkVestingAllowance(address, stakingContracts.esGRIXToken.address);
       setNeedsApproval(allowance === 0n);
     } catch (error) {
-      console.error('Error checking allowance:', error);
       setNeedsApproval(true);
     }
   }, [address]);
@@ -159,7 +148,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
           onClose();
         }
       } catch (error) {
-        console.error('Error in handleVest:', error);
         toast({
           title: needsApproval ? 'Approval Failed' : 'Vesting Failed',
           description: `There was an error during the ${needsApproval ? 'approval' : 'vesting'} process`,
@@ -174,19 +162,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     },
     [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onClose, checkAllowance]
   );
-
-  const handleMaxClick = useCallback(async () => {
-    await fetchBalance();
-    await fetchVestingData();
-    setAmount(esGrixBalance);
-  }, [esGrixBalance, fetchVestingData, fetchBalance]);
-
-  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (!value || /^\d*\.?\d*$/.test(value)) {
-      setAmount(value);
-    }
-  };
 
   // Calculate remaining days and progress
   const calculateVestingProgress = useCallback(() => {
