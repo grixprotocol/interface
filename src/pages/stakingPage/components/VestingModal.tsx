@@ -18,7 +18,6 @@ import { useEffect, useState } from 'react';
 import { FaEquals, FaPlus } from 'react-icons/fa';
 
 import { GrixLogo } from '@/components/commons/Logo';
-import { getVestingDuration } from '@/web3Config/staking/hooks';
 
 type VestingModalProps = {
   isOpen: boolean;
@@ -46,20 +45,8 @@ export const VestingModal = ({
   claimableRewards,
 }: VestingModalProps): JSX.Element => {
   const [amount, setAmount] = useState('');
-  const [vestingDuration, setVestingDuration] = useState<bigint | null>(null);
   const [grixPrice, setGrixPrice] = useState<number | null>(null);
   const toast = useToast();
-
-  // Fetch vesting duration when modal opens
-  useEffect(() => {
-    const fetchVestingDuration = async () => {
-      const duration = await getVestingDuration();
-      setVestingDuration(duration);
-    };
-    if (isOpen) {
-      void fetchVestingDuration();
-    }
-  }, [isOpen]);
 
   // Fetch GRIX price from CoinGecko
   useEffect(() => {

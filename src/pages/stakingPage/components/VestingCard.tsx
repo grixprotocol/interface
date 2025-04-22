@@ -243,7 +243,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
           onClose={onClose}
           esGrixBalance={esGrixBalance}
           grixBalance={grixBalance}
-           isLoading={isVesting || isApproving}
+          isLoading={isVesting || isApproving}
           onVest={handleVest}
           claimableRewards={userRewardData?.claimable || '0'}
         />
