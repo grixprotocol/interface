@@ -32,8 +32,7 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({
   claimableGS,
   vestingAmount,
   totalReserved,
-}) => {
-  return (
+}) => (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay bg="blackAlpha.800" backdropFilter="blur(5px)" />
       <ModalContent bg="#111" maxW="360px">
@@ -97,4 +96,3 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({
       </ModalContent>
     </Modal>
   );
-};

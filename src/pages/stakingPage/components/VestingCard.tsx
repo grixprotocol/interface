@@ -254,7 +254,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
         <WithdrawModal
           isOpen={isWithdrawOpen}
           onClose={onWithdrawClose}
-          onWithdraw={handleWithdraw}
+          onWithdraw={() => void handleWithdraw()}
           isLoading={isWithdrawing}
           claimableGS={vestingData?.claimable || '0'}
           vestingAmount={vestingData?.totalVested || '0'}
