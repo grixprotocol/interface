@@ -203,7 +203,6 @@ export const VestingModal = ({
               />
             </HStack>
 
-         
             <HStack justify="space-between">
               <Text color="gray.500" fontSize="sm">
                 Vestable Balance
