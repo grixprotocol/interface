@@ -59,16 +59,18 @@ export const StakingPage: React.FC = () => {
 
   return (
     <Container maxW="1200px" px={{ base: 3, md: 4 }} py={6}>
-      <VStack align="flex-start" spacing={3} mb={6} bg="gray.950" p={4} borderRadius="xl">
-        <Heading size="lg" color="white" fontWeight="700" letterSpacing="-0.02em">
-          Staking
-        </Heading>
-        <Text color="gray.400" fontSize="md" fontWeight="500">
-          <BoldGrix text="Stake GRIX and esGRIX to start earning rewards" />
-        </Text>
-      </VStack>
+      <Grid templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }} gap={4} mb={6}>
+        <GridItem colSpan={{ base: 1, lg: 3 }}>
+          <VStack align="flex-start" spacing={3} bg="gray.950" p={4} borderRadius="xl">
+            <Heading size="lg" color="white" fontWeight="700" letterSpacing="-0.02em">
+              Staking
+            </Heading>
+            <Text color="gray.400" fontSize="md" fontWeight="500">
+              <BoldGrix text="Stake GRIX and esGRIX to start earning rewards" />
+            </Text>
+          </VStack>
+        </GridItem>
 
-      <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr) 300px' }} gap={4} mb={6}>
         <GridItem>
           <StakingCard
             title="GRIX Token"
@@ -121,8 +123,8 @@ export const StakingPage: React.FC = () => {
         </GridItem>
       </Grid>
 
-      <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr) 300px' }} gap={4} mb={6}>
-        <GridItem colSpan={{ base: 1, lg: 2 }} bg="gray.950" p={4} borderRadius="xl">
+      <Grid templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }} gap={4} mb={6}>
+        <GridItem colSpan={{ base: 1, lg: 3 }} bg="gray.950" p={4} borderRadius="xl">
           <VStack align="stretch" spacing={3}>
             <Heading size="md" color="white" fontWeight="700" letterSpacing="-0.02em" mb={1}>
               Vesting
