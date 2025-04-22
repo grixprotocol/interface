@@ -84,28 +84,31 @@ export const VestingModal = ({
   }, []);
 
   // Calculate expected GRIX at different time periods
-  const calculateVestingProjections = useCallback((inputAmount: string): VestingProjection[] => {
-    if (!inputAmount || Number(inputAmount) <= 0) return [];
+  const calculateVestingProjections = useCallback(
+    (inputAmount: string): VestingProjection[] => {
+      if (!inputAmount || Number(inputAmount) <= 0) return [];
 
-    const amount = Number(inputAmount);
-    const oneDay = 24 * 60 * 60; // seconds in a day
-    const totalDays = 30; // Default to 30 days if vestingDuration not available
+      const amount = Number(inputAmount);
+      const oneDay = 24 * 60 * 60; // seconds in a day
+      const totalDays = vestingDuration ? Number(vestingDuration) / oneDay : 30; // Convert vesting duration to days
 
-    return [
-      {
-        days: 1,
-        amount: ((amount * oneDay) / (totalDays * oneDay)).toFixed(3),
-      },
-      {
-        days: 15,
-        amount: ((amount * 15) / totalDays).toFixed(3),
-      },
-      {
-        days: totalDays,
-        amount: amount.toFixed(3),
-      },
-    ];
-  }, []);
+      return [
+        {
+          days: 1,
+          amount: ((amount * oneDay) / (totalDays * oneDay)).toFixed(3),
+        },
+        {
+          days: Math.floor(totalDays / 2),
+          amount: ((amount * Math.floor(totalDays / 2)) / totalDays).toFixed(3),
+        },
+        {
+          days: totalDays,
+          amount: amount.toFixed(3),
+        },
+      ];
+    },
+    [vestingDuration]
+  );
 
   const formatUsdValue = (tokenAmount: string | number) => {
     if (!grixPrice) return '';
@@ -200,6 +203,7 @@ export const VestingModal = ({
               />
             </HStack>
 
+         
             <HStack justify="space-between">
               <Text color="gray.500" fontSize="sm">
                 Vestable Balance

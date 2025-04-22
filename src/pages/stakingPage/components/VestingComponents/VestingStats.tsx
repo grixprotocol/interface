@@ -111,7 +111,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
       <Button
         onClick={onVestClick}
         isLoading={isVesting}
-        loadingText="Vesting"
+        loadingText={needsApproval ? 'Approving' : 'Vesting'}
         bg="teal.400"
         color="white"
         size="lg"
@@ -121,7 +121,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
         _hover={{ bg: 'teal.500' }}
         _active={{ bg: 'teal.600' }}
       >
-        Vesting
+        {needsApproval ? 'Approve' : 'Vesting'}
       </Button>
 
       <Button

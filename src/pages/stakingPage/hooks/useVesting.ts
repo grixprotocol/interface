@@ -11,13 +11,19 @@ import {
   vestEsGs,
 } from '@/web3Config/staking/hooks';
 
+type VestingData = {
+  claimable: string;
+  totalVested: string;
+  maxVestableAmount: string;
+};
+
 export const useVesting = () => {
   const { address } = useAccount();
   const [isVestingModalOpen, setIsVestingModalOpen] = useState(false);
   const [vestingAllowance, setVestingAllowance] = useState('0');
   const [esGrixBalance, setEsGrixBalance] = useState('0');
   const [grixBalance, setGrixBalance] = useState('0');
-  const [vestingData, setVestingData] = useState<any>(null);
+  const [vestingData, setVestingData] = useState<VestingData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchVestingData = useCallback(async () => {
@@ -34,9 +40,10 @@ export const useVesting = () => {
       setVestingAllowance(allowance.toString());
       setEsGrixBalance(esGrixBal);
       setGrixBalance(grixBal);
-      setVestingData(vesting);
+      setVestingData(vesting as VestingData);
     } catch (error) {
-      console.error('Error fetching vesting data:', error);
+      setVestingData(null);
+      throw error;
     }
   }, [address]);
 
@@ -53,18 +60,16 @@ export const useVesting = () => {
 
       // Check if approval is needed
       if (BigInt(vestingAllowance) < parsedAmount) {
-        const approveTx = await approveVesting(stakingContracts.esGRIXToken.address, parsedAmount);
-        // await approveTx.wait();
+        await approveVesting(stakingContracts.esGRIXToken.address, parsedAmount);
       }
 
       // Perform vesting
-      const vestTx = await vestEsGs(parsedAmount);
-      // await vestTx.wait();
+      await vestEsGs(parsedAmount);
 
       // Refresh data
       await fetchVestingData();
     } catch (error) {
-      console.error('Error vesting:', error);
+      throw error;
     } finally {
       setIsLoading(false);
     }

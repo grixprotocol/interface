@@ -234,7 +234,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
           onVestClick={onOpen}
           isVesting={isVesting || isApproving}
           needsApproval={needsApproval}
-          onWithdraw={handleWithdraw}
+          onWithdraw={() => void handleWithdraw()}
           isWithdrawing={isWithdrawing}
         />
 
