@@ -34,7 +34,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { address } = useAccount();
   const toast = useToast();
-  const [amount, setAmount] = useState('');
   const [esGrixBalance, setEsGrixBalance] = useState('0');
   const [grixBalance, setGrixBalance] = useState('0');
   const [isApproving, setIsApproving] = useState(false);
@@ -122,7 +121,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
   const handleVest = useCallback(
     async (vestAmount: string) => {
       if (!address) return;
-      setAmount(vestAmount);
 
       try {
         if (needsApproval) {
@@ -132,7 +130,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
         } else {
           setIsVesting(true);
           await vestEsGrix(parseEther(vestAmount));
-          setAmount('');
         }
 
         await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);

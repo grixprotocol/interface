@@ -15,7 +15,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
-import { FaChevronDown, FaEquals,FaPlus } from 'react-icons/fa';
+import { FaChevronDown, FaEquals, FaPlus } from 'react-icons/fa';
 
 import { GrixLogo } from '@/components/commons/Logo';
 import { getVestingDuration } from '@/web3Config/staking/hooks';
