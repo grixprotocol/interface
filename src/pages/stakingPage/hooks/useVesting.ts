@@ -68,8 +68,6 @@ export const useVesting = () => {
 
       // Refresh data
       await fetchVestingData();
-    } catch (error) {
-      throw error;
     } finally {
       setIsLoading(false);
     }
