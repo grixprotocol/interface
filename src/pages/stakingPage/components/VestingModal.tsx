@@ -17,6 +17,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { FaChevronDown, FaPlus, FaEquals } from 'react-icons/fa';
 import { getVestingDuration } from '@/web3Config/staking/hooks';
+import { GrixLogo } from '@/components/commons/Logo';
 
 type VestingModalProps = {
   isOpen: boolean;
@@ -175,38 +176,41 @@ export const VestingModal = ({
 
         <Box px={4} pb={4}>
           <VStack spacing={3} align="stretch">
-            {/* Token Selection */}
-            <HStack spacing={2} mb={2} bg="#1A1A1A" p={3} borderRadius="md">
+            <HStack spacing={2} bg="#1A1A1A" p={3} borderRadius="md" justify="space-between" align="center">
               <HStack spacing={1}>
-                <Icon as={FaChevronDown} color="gray.400" boxSize={3} mr={1} />
+                <GrixLogo boxSize="16px" />
                 <Text color="gray.400">esGRIX</Text>
               </HStack>
-              <Text color="gray.500" ml="auto">
-                Enter Amount
-              </Text>
+              <Input
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0.0"
+                variant="unstyled"
+                color="white"
+                fontSize="md"
+                width="auto"
+                textAlign="right"
+                sx={{
+                  '::placeholder': {
+                    color: 'gray.400',
+                    opacity: 1,
+                  },
+                }}
+              />
             </HStack>
 
-            {/* Input Field */}
-            <Input
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="Enter Amount"
-              variant="unstyled"
-              textAlign="left"
-              color="white"
-              fontSize="lg"
-              p={3}
-              bg="#1A1A1A"
-              borderRadius="md"
-              _placeholder={{ color: 'gray.500' }}
-            />
-
-            {/* Vestable Balance */}
-            <HStack justify="space-between" mb={2}>
+            <HStack justify="space-between">
               <Text color="gray.500" fontSize="sm">
                 Vestable Balance
               </Text>
-              <Text color="gray.400" fontSize="sm" cursor="pointer" onClick={handleSetMaxAmount}>
+              <Text
+                color="gray.400"
+                fontSize="sm"
+                cursor="pointer"
+                onClick={handleSetMaxAmount}
+                _hover={{ color: 'white' }}
+                transition="color 0.2s"
+              >
                 {Number(esGrixBalance).toFixed(4)} esGRIX
               </Text>
             </HStack>
@@ -259,7 +263,7 @@ export const VestingModal = ({
                       Reserving
                     </Text>
                     <Text color="gray.400" fontSize="sm">
-                      {amount ? `${Number(amount).toFixed(4)} Token ${formatUsdValue(amount)}` : '-'}
+                      {amount ? `${Number(amount).toFixed(2)} Token ${formatUsdValue(amount)}` : '-'}
                     </Text>
                   </Flex>
                 </Box>
@@ -271,15 +275,15 @@ export const VestingModal = ({
               onClick={() => void handleVest()}
               isLoading={isLoading}
               loadingText="Vesting"
-              bg="blue.500"
+              bg="teal.400"
               color="white"
               size="lg"
               width="full"
               height="40px"
               fontSize="sm"
               isDisabled={!amount || Number(amount) <= 0 || Number(amount) > Number(esGrixBalance)}
-              _hover={{ bg: 'blue.600' }}
-              _active={{ bg: 'blue.700' }}
+              _hover={{ bg: 'teal.500' }}
+              _active={{ bg: 'teal.600' }}
             >
               Vest
             </Button>
