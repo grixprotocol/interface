@@ -19,6 +19,7 @@ import { VestingHeader } from './VestingComponents/VestingHeader';
 import { VestingInfo } from './VestingComponents/VestingInfo';
 import { VestingStats } from './VestingComponents/VestingStats';
 import { VestingModal } from './VestingModal';
+import { WithdrawModal } from './WithdrawModal';
 
 type VestingCardProps = {
   onActionComplete?: () => void;
@@ -31,7 +32,8 @@ type VestingCardProps = {
 };
 
 export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, userRewardData }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isVestingOpen, onOpen: onVestingOpen, onClose: onVestingClose } = useDisclosure();
+  const { isOpen: isWithdrawOpen, onOpen: onWithdrawOpen, onClose: onWithdrawClose } = useDisclosure();
   const { address } = useAccount();
   const toast = useToast();
   const [esGrixBalance, setEsGrixBalance] = useState('0');
@@ -142,7 +144,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
         });
 
         if (!needsApproval) {
-          onClose();
+          onVestingClose();
         }
       } catch (error) {
         toast({
@@ -157,7 +159,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
         setIsVesting(false);
       }
     },
-    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onClose, checkAllowance]
+    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onVestingClose, checkAllowance]
   );
 
   // Calculate remaining days and progress
@@ -197,6 +199,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
         duration: 5000,
         isClosable: true,
       });
+      onWithdrawClose();
     } catch (error) {
       toast({
         title: 'Withdrawal Failed',
@@ -208,7 +211,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     } finally {
       setIsWithdrawing(false);
     }
-  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, toast]);
+  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onWithdrawClose]);
 
   return (
     <Box
@@ -231,21 +234,33 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
               vestingProgress: calculateVestingProgress(),
             }
           }
-          onVestClick={onOpen}
+          onVestClick={onVestingOpen}
           isVesting={isVesting || isApproving}
           needsApproval={needsApproval}
-          onWithdraw={() => void handleWithdraw()}
+          onWithdraw={onWithdrawOpen}
           isWithdrawing={isWithdrawing}
         />
 
         <VestingModal
-          isOpen={isOpen}
-          onClose={onClose}
+          isOpen={isVestingOpen}
+          onClose={onVestingClose}
           esGrixBalance={esGrixBalance}
           grixBalance={grixBalance}
           isLoading={isVesting || isApproving}
           onVest={handleVest}
           claimableRewards={userRewardData?.claimable || '0'}
+        />
+
+        <WithdrawModal
+          isOpen={isWithdrawOpen}
+          onClose={onWithdrawClose}
+          onWithdraw={handleWithdraw}
+          isLoading={isWithdrawing}
+          claimableGS={vestingData?.claimable || '0'}
+          vestingAmount={vestingData?.totalVested || '0'}
+          totalReserved={
+            vestingData ? (parseFloat(vestingData.claimable) + parseFloat(vestingData.totalVested)).toString() : '0'
+          }
         />
 
         <VestingInfo />
