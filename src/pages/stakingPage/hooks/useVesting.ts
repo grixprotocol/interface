@@ -44,7 +44,7 @@ export const useVesting = () => {
     } catch (error) {
       setVestingData(null);
       throw error;
-    }
+    }                            
   }, [address]);
 
   useEffect(() => {
