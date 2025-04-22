@@ -15,7 +15,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
-import {  FaEquals, FaPlus } from 'react-icons/fa';
+import { FaEquals, FaPlus } from 'react-icons/fa';
 
 import { GrixLogo } from '@/components/commons/Logo';
 import { getVestingDuration } from '@/web3Config/staking/hooks';
@@ -165,7 +165,6 @@ export const VestingModal = ({
     setAmount(esGrixBalance);
   };
 
- 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay bg="blackAlpha.800" backdropFilter="blur(5px)" />
