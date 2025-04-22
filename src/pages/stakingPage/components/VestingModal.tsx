@@ -14,7 +14,7 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaEquals, FaPlus } from 'react-icons/fa';
 
 import { GrixLogo } from '@/components/commons/Logo';
@@ -25,15 +25,9 @@ type VestingModalProps = {
   onClose: () => void;
   esGrixBalance: string;
   grixBalance: string;
-  vestingAllowance: string;
   isLoading: boolean;
   onVest: (amount: string) => Promise<void>;
   claimableRewards: string;
-};
-
-type VestingProjection = {
-  days: number;
-  amount: string;
 };
 
 type DexScreenerResponse = {
@@ -47,7 +41,6 @@ export const VestingModal = ({
   onClose,
   esGrixBalance,
   grixBalance,
-  vestingAllowance,
   isLoading,
   onVest,
   claimableRewards,
@@ -82,33 +75,6 @@ export const VestingModal = ({
     };
     void fetchPrice();
   }, []);
-
-  // Calculate expected GRIX at different time periods
-  const calculateVestingProjections = useCallback(
-    (inputAmount: string): VestingProjection[] => {
-      if (!inputAmount || Number(inputAmount) <= 0) return [];
-
-      const amount = Number(inputAmount);
-      const oneDay = 24 * 60 * 60; // seconds in a day
-      const totalDays = vestingDuration ? Number(vestingDuration) / oneDay : 30; // Convert vesting duration to days
-
-      return [
-        {
-          days: 1,
-          amount: ((amount * oneDay) / (totalDays * oneDay)).toFixed(3),
-        },
-        {
-          days: Math.floor(totalDays / 2),
-          amount: ((amount * Math.floor(totalDays / 2)) / totalDays).toFixed(3),
-        },
-        {
-          days: totalDays,
-          amount: amount.toFixed(3),
-        },
-      ];
-    },
-    [vestingDuration]
-  );
 
   const formatUsdValue = (tokenAmount: string | number) => {
     if (!grixPrice) return '';
