@@ -127,7 +127,7 @@ export const StakingPage: React.FC = () => {
             <Heading size="md" color="white" fontWeight="700" letterSpacing="-0.02em" mb={1}>
               Vesting
             </Heading>
-            <VestingCard onActionComplete={triggerRefresh} />
+            <VestingCard onActionComplete={triggerRefresh} userRewardData={userRewardData} />
           </VStack>
         </GridItem>
       </Grid>
