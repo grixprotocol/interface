@@ -158,6 +158,10 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     }
   };
 
+  const clearAmount = () => {
+    setAmount('');
+  };
+
   const refreshAllData = useCallback(
     async (triggerParentRefresh = true) => {
       await Promise.all([fetchBalance(), fetchStakedAmount(), fetchAPR()]);
@@ -276,6 +280,8 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       handleStake={() => void handleStake()}
       isUnstaking={isUnstaking}
       handleUnstake={() => void handleUnstake()}
+      type={type}
+      clearAmount={clearAmount}
     />
   );
 };

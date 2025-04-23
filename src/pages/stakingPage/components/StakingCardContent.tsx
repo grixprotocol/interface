@@ -1,22 +1,11 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  Input,
-  InputGroup,
-  InputRightElement,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, HStack, SimpleGrid, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 import { GrixLogo } from '@/components/commons/Logo';
 
 import { formatBalance } from '../utils/formatters';
 import { BoldGrix } from './BoldGrix';
+import { StakeUnstakeModal } from './StakeUnstakeModal';
 
 type StakingCardContentProps = {
   title: string;
@@ -36,6 +25,8 @@ type StakingCardContentProps = {
   handleStake: () => void;
   isUnstaking: boolean;
   handleUnstake: () => void;
+  type: 'gx' | 'esgx';
+  clearAmount: () => void;
 };
 
 export const StakingCardContent: React.FC<StakingCardContentProps> = ({
@@ -56,124 +47,87 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
   handleStake,
   isUnstaking,
   handleUnstake,
-}) => (
-  <Box
-    bg="gray.950"
-    borderRadius="lg"
-    p={6}
-    height="fit-content"
-    border="1px solid"
-    borderColor="gray.900"
-    _hover={{ borderColor: 'gray.800' }}
-  >
-    <Flex align="center" mb={5}>
-      <GrixLogo boxSize={8} mr={3} />
-      <div>
-        <Heading size="md" color="white" mb={1} fontWeight="600">
-          <BoldGrix text={title} />
-        </Heading>
-        <Text color="gray.400" fontSize="sm">
-          <BoldGrix text={description} />
-        </Text>
-      </div>
-    </Flex>
+  type,
+  clearAmount,
+}) => {
+  const { isOpen: isStakeModalOpen, onOpen: onStakeModalOpen, onClose: onStakeModalClose } = useDisclosure();
+  const { isOpen: isUnstakeModalOpen, onOpen: onUnstakeModalOpen, onClose: onUnstakeModalClose } = useDisclosure();
 
-    <SimpleGrid columns={2} spacing={5} mb={5}>
-      <VStack align="stretch">
-        <Text fontSize="sm" color="gray.500" mb={1}>
-          Staked
-        </Text>
-        <Text fontSize="xl" fontWeight="700" color="white">
-          {formatBalance(stakedAmount)}
-        </Text>
-      </VStack>
+  const tokenSymbol = type === 'esgx' ? 'esGRIX' : 'GRIX';
 
-      <VStack align="stretch">
-        <Text fontSize="sm" color="gray.500" mb={1}>
-          Available to stake
-        </Text>
-        <Text fontSize="xl" fontWeight="700" color="white">
-          {formatBalance(availableBalance)}
-        </Text>
-      </VStack>
+  const handleStakeModalClose = () => {
+    clearAmount();
+    onStakeModalClose();
+  };
 
-      <VStack align="stretch">
-        <Text fontSize="sm" color="gray.500" mb={1}>
-          APR
-        </Text>
-        <Text fontSize="xl" fontWeight="700" color="green.200" display="flex" alignItems="center" gap={2}>
-          <Text as="span" color="green.300">
-            ↗
+  const handleUnstakeModalClose = () => {
+    clearAmount();
+    onUnstakeModalClose();
+  };
+
+  return (
+    <Box
+      bg="gray.950"
+      borderRadius="lg"
+      p={6}
+      height="fit-content"
+      border="1px solid"
+      borderColor="gray.900"
+      _hover={{ borderColor: 'gray.800' }}
+    >
+      <Flex align="center" mb={5}>
+        <GrixLogo boxSize={8} mr={3} />
+        <div>
+          <Heading size="md" color="white" mb={1} fontWeight="600">
+            <BoldGrix text={title} />
+          </Heading>
+          <Text color="gray.400" fontSize="sm">
+            <BoldGrix text={description} />
           </Text>
-          {apr.toFixed(2)}%
-        </Text>
-      </VStack>
-    </SimpleGrid>
+        </div>
+      </Flex>
 
-    <VStack spacing={4} align="stretch">
-      <InputGroup size="lg">
-        <Input
-          placeholder="Enter amount"
-          value={amount}
-          onChange={handleInputChange}
-          type="text"
-          borderRadius="md"
-          borderColor="gray.700"
-          color="white"
-          bg="gray.900"
-          _hover={{ borderColor: 'gray.600' }}
-          _focus={{ borderColor: 'primary.500' }}
-          height="48px"
-        />
-        <InputRightElement width="4.5rem" h="48px">
-          <Button
-            h="1.75rem"
-            size="sm"
-            onClick={handleMaxClick}
-            variant="secondary"
-            color="primary.400"
-            fontSize="xs"
-            mr={1}
-          >
-            Max
-          </Button>
-        </InputRightElement>
-      </InputGroup>
+      <SimpleGrid columns={2} spacing={5} mb={5}>
+        <VStack align="stretch">
+          <Text fontSize="sm" color="gray.500" mb={1}>
+            Staked
+          </Text>
+          <Text fontSize="xl" fontWeight="700" color="white">
+            {formatBalance(stakedAmount)}
+          </Text>
+        </VStack>
+
+        <VStack align="stretch">
+          <Text fontSize="sm" color="gray.500" mb={1}>
+            Available to stake
+          </Text>
+          <Text fontSize="xl" fontWeight="700" color="white">
+            {formatBalance(availableBalance)}
+          </Text>
+        </VStack>
+
+        <VStack align="stretch">
+          <Text fontSize="sm" color="gray.500" mb={1}>
+            APR
+          </Text>
+          <Text fontSize="xl" fontWeight="700" color="green.200" display="flex" alignItems="center" gap={2}>
+            <Text as="span" color="green.300">
+              ↗
+            </Text>
+            {apr.toFixed(2)}%
+          </Text>
+        </VStack>
+      </SimpleGrid>
 
       <HStack spacing={4}>
-        {amount && needsApproval ? (
-          <Button
-            isLoading={isApproving}
-            loadingText="Approving"
-            onClick={handleApprove}
-            variant="primary"
-            size="lg"
-            height="48px"
-            isDisabled={!isAmountValid()}
-          >
-            Approve
-          </Button>
-        ) : (
-          <Button
-            isLoading={isStaking}
-            loadingText="Staking"
-            onClick={handleStake}
-            variant="primary"
-            size="lg"
-            height="48px"
-            isDisabled={!isAmountValid() || !amount}
-          >
-            Stake
-          </Button>
-        )}
+        <Button onClick={onStakeModalOpen} variant="primary" size="lg" height="48px">
+          Stake
+        </Button>
         <Button
-          isLoading={isUnstaking}
-          loadingText="Unstaking"
-          onClick={handleUnstake}
+          onClick={onUnstakeModalOpen}
           variant="secondary"
           size="lg"
           height="48px"
-          isDisabled={!isUnstakeAmountValid() || !amount}
           color="white"
           fontWeight="bold"
           borderColor="gray.600"
@@ -189,6 +143,44 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
           Unstake
         </Button>
       </HStack>
-    </VStack>
-  </Box>
-);
+
+      <StakeUnstakeModal
+        isOpen={isStakeModalOpen}
+        onClose={handleStakeModalClose}
+        mode="stake"
+        title={`Stake ${tokenSymbol}`}
+        amount={amount}
+        handleInputChange={handleInputChange}
+        handleMaxClick={handleMaxClick}
+        needsApproval={needsApproval}
+        isApproving={isApproving}
+        handleApprove={handleApprove}
+        isAmountValid={isAmountValid}
+        isLoading={isStaking}
+        onSubmit={handleStake}
+        availableAmount={availableBalance}
+        tokenSymbol={tokenSymbol}
+        tokenType={type}
+      />
+
+      <StakeUnstakeModal
+        isOpen={isUnstakeModalOpen}
+        onClose={handleUnstakeModalClose}
+        mode="unstake"
+        title={`Unstake ${tokenSymbol}`}
+        amount={amount}
+        handleInputChange={handleInputChange}
+        handleMaxClick={handleMaxClick}
+        needsApproval={false}
+        isApproving={false}
+        handleApprove={() => {}}
+        isAmountValid={isUnstakeAmountValid}
+        isLoading={isUnstaking}
+        onSubmit={handleUnstake}
+        availableAmount={stakedAmount}
+        tokenSymbol={tokenSymbol}
+        tokenType={type}
+      />
+    </Box>
+  );
+};

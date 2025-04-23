@@ -43,7 +43,7 @@ export const approveStaking = async (token: string, amount: bigint) =>
     args: [normalizeAddress(stakingContracts.rewardTracker.address), amount],
   });
 
-// Stake GS tokens
+// Stake GRIX tokens
 export const stakeGs = async (amount: bigint) =>
   await writeContract(wagmiConfig, {
     abi: stakingRouterAbi,
