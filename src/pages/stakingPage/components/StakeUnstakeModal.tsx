@@ -14,6 +14,7 @@ import {
 import React, { useMemo } from 'react';
 
 import { GrixLogo } from '@/components/commons/Logo';
+
 import { formatBalance } from '../utils/formatters';
 
 type StakeUnstakeModalProps = {
