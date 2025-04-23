@@ -249,7 +249,6 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       apr={apr}
       amount={amount}
       handleInputChange={handleInputChange}
-      handleMaxClick={handleMaxClick}
       needsApproval={needsApproval}
       isApproving={isApproving}
       handleApprove={() => void handleApprove()}

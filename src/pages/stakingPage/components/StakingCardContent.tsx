@@ -15,7 +15,6 @@ type StakingCardContentProps = {
   apr: number;
   amount: string;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleMaxClick: () => void;
   needsApproval: boolean;
   isApproving: boolean;
   handleApprove: () => void;
@@ -37,7 +36,6 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
   apr,
   amount,
   handleInputChange,
-  handleMaxClick,
   needsApproval,
   isApproving,
   handleApprove,
