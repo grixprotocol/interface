@@ -24,7 +24,6 @@ type StakeUnstakeModalProps = {
   title: string;
   amount: string;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleMaxClick: () => void;
   needsApproval: boolean;
   isApproving: boolean;
   handleApprove: () => void;
@@ -32,7 +31,6 @@ type StakeUnstakeModalProps = {
   isLoading: boolean;
   onSubmit: () => void;
   availableAmount: string;
-  tokenSymbol: string;
   tokenType: 'gx' | 'esgx';
 };
 
@@ -43,7 +41,6 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
   title,
   amount,
   handleInputChange,
-  handleMaxClick,
   needsApproval,
   isApproving,
   handleApprove,
@@ -51,7 +48,6 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
   isLoading,
   onSubmit,
   availableAmount,
-  tokenSymbol,
   tokenType,
 }) => {
   const isStakeMode = mode === 'stake';
@@ -79,25 +75,22 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
     }
 
     // For other percentages, use string manipulation to maintain precision
-    try {
-      const baseAmount = availableAmount.replace('.', '');
-      const decimals = availableAmount.split('.')[1]?.length || 0;
-      const multiplier = BigInt(percentage);
-      const result = (BigInt(baseAmount) * multiplier) / BigInt(100);
 
-      let valueStr = result.toString();
-      if (decimals > 0) {
-        const padded = valueStr.padStart(decimals + 1, '0');
-        valueStr = `${padded.slice(0, -decimals)}.${padded.slice(-decimals)}`;
-      }
+    const baseAmount = availableAmount.replace('.', '');
+    const decimals = availableAmount.split('.')[1]?.length || 0;
+    const multiplier = BigInt(percentage);
+    const result = (BigInt(baseAmount) * multiplier) / BigInt(100);
 
-      const event = {
-        target: { value: valueStr },
-      } as React.ChangeEvent<HTMLInputElement>;
-      handleInputChange(event);
-    } catch (error) {
-      console.error('Error calculating percentage:', error);
+    let valueStr = result.toString();
+    if (decimals > 0) {
+      const padded = valueStr.padStart(decimals + 1, '0');
+      valueStr = `${padded.slice(0, -decimals)}.${padded.slice(-decimals)}`;
     }
+
+    const event = {
+      target: { value: valueStr },
+    } as React.ChangeEvent<HTMLInputElement>;
+    handleInputChange(event);
   };
 
   return (

@@ -38,7 +38,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
   const toast = useToast();
   const [esGrixBalance, setEsGrixBalance] = useState('0');
   const [grixBalance, setGrixBalance] = useState('0');
-  const [isApproving, setIsApproving] = useState(false);
   const [isVesting, setIsVesting] = useState(false);
   const [needsApproval, setNeedsApproval] = useState(true);
   const [lastVestingTime, setLastVestingTime] = useState<bigint | null>(null);
@@ -90,12 +89,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     void checkAllowance();
   }, [checkAllowance]);
 
-  useEffect(() => {
-    if (!isApproving) {
-      void checkAllowance();
-    }
-  }, [isApproving, checkAllowance]);
-
   const fetchBalance = useCallback(async () => {
     if (!address) return;
     const balance = await getTokenBalance(stakingContracts.esGRIXToken.address, address);
@@ -131,12 +124,9 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
         // Step 1: Handle Approval if needed
         if (needsApproval) {
           try {
-            console.log('Attempting approval...');
             await approveVesting(stakingContracts.esGRIXToken.address, amountToVest);
-            console.log('Approval successful.');
             // Approval succeeded, proceed to vesting. Do NOT close modal here.
           } catch (approvalError) {
-            console.error('Approval failed:', approvalError);
             toast({
               title: 'Approval Failed',
               description: 'Could not approve esGRIX spending. Please try again.',
@@ -166,7 +156,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
 
         onVestingClose();
       } catch (error) {
-        console.error('Vesting failed:', error);
         toast({
           title: 'Vesting Failed',
           description: 'Could not vest esGRIX. Please try again.',
@@ -254,8 +243,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
             }
           }
           onVestClick={onVestingOpen}
-          isVesting={isVesting || isApproving}
-          needsApproval={needsApproval}
+          isVesting={isVesting}
           onWithdraw={onWithdrawOpen}
           isWithdrawing={isWithdrawing}
         />
@@ -265,7 +253,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
           onClose={onVestingClose}
           esGrixBalance={esGrixBalance}
           grixBalance={grixBalance}
-          isLoading={isVesting || isApproving}
+          isLoading={isVesting}
           onVest={handleVest}
           claimableRewards={userRewardData?.claimable || '0'}
         />

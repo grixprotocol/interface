@@ -21,7 +21,6 @@ type VestingStatsProps = {
   } | null;
   onVestClick: () => void;
   isVesting: boolean;
-  needsApproval: boolean;
   onWithdraw: () => void;
   isWithdrawing: boolean;
 };
@@ -30,7 +29,6 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
   vestingData,
   onVestClick,
   isVesting,
-  needsApproval,
   onWithdraw,
   isWithdrawing,
 }) => (

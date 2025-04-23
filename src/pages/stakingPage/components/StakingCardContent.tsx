@@ -151,7 +151,6 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
         title={`Stake ${tokenSymbol}`}
         amount={amount}
         handleInputChange={handleInputChange}
-        handleMaxClick={handleMaxClick}
         needsApproval={needsApproval}
         isApproving={isApproving}
         handleApprove={handleApprove}
@@ -159,7 +158,6 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
         isLoading={isStaking}
         onSubmit={handleStake}
         availableAmount={availableBalance}
-        tokenSymbol={tokenSymbol}
         tokenType={type}
       />
 
@@ -170,7 +168,6 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
         title={`Unstake ${tokenSymbol}`}
         amount={amount}
         handleInputChange={handleInputChange}
-        handleMaxClick={handleMaxClick}
         needsApproval={false}
         isApproving={false}
         handleApprove={() => {}}
@@ -178,7 +175,6 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
         isLoading={isUnstaking}
         onSubmit={handleUnstake}
         availableAmount={stakedAmount}
-        tokenSymbol={tokenSymbol}
         tokenType={type}
       />
     </Box>
