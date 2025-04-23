@@ -128,7 +128,7 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                 </HStack>
                 <Input
                   placeholder="Enter Amount"
-                  value={Number(amount) ? Number(amount).toFixed(2) : amount}
+                  value={Number(amount) ? Number(amount).toFixed(3) : amount}
                   onChange={handleInputChange}
                   variant="unstyled"
                   textAlign="right"
