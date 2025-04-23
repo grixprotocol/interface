@@ -11,7 +11,7 @@ import {
   getTokenBalance,
   getVestingData,
   getVestingDuration,
-  vestEsGs as vestEsGrix,
+  vestEsGRIX as vestEsGrix,
   withdrawEsGs as withdrawEsGrix,
 } from '@/web3Config/staking/hooks';
 
@@ -38,7 +38,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
   const toast = useToast();
   const [esGrixBalance, setEsGrixBalance] = useState('0');
   const [grixBalance, setGrixBalance] = useState('0');
-  const [isApproving, setIsApproving] = useState(false);
   const [isVesting, setIsVesting] = useState(false);
   const [needsApproval, setNeedsApproval] = useState(true);
   const [lastVestingTime, setLastVestingTime] = useState<bigint | null>(null);
@@ -82,19 +81,13 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
 
   useEffect(() => {
     void fetchVestingData();
-    const interval = setInterval(() => void fetchVestingData(), 30000);
+    const interval = setInterval(() => void fetchVestingData(), 15000);
     return () => clearInterval(interval);
   }, [fetchVestingData]);
 
   useEffect(() => {
     void checkAllowance();
   }, [checkAllowance]);
-
-  useEffect(() => {
-    if (!isApproving) {
-      void checkAllowance();
-    }
-  }, [isApproving, checkAllowance]);
 
   const fetchBalance = useCallback(async () => {
     if (!address) return;
@@ -122,44 +115,59 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
 
   const handleVest = useCallback(
     async (vestAmount: string) => {
-      if (!address) return;
+      if (!address || !vestAmount || parseFloat(vestAmount) <= 0) return;
+
+      const amountToVest = parseEther(vestAmount);
+      setIsVesting(true); // Start loading
 
       try {
+        // Step 1: Handle Approval if needed
         if (needsApproval) {
-          setIsApproving(true);
-          await approveVesting(stakingContracts.esGRIXToken.address, parseEther(vestAmount));
-          await checkAllowance();
-        } else {
-          setIsVesting(true);
-          await vestEsGrix(parseEther(vestAmount));
+          try {
+            await approveVesting(stakingContracts.esGRIXToken.address, amountToVest);
+            // Approval succeeded, proceed to vesting. Do NOT close modal here.
+          } catch (approvalError) {
+            toast({
+              title: 'Approval Failed',
+              description: 'Could not approve esGRIX spending. Please try again.',
+              status: 'error',
+              duration: 5000,
+              isClosable: true,
+            });
+            setIsVesting(false); // Stop loading on approval failure
+            return; // Exit the function, modal stays open
+          }
         }
 
-        await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+        // Step 2: Perform vesting
+        await vestEsGrix(amountToVest);
+
+        // Step 3: Refresh all data with a small delay to ensure blockchain state is updated
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Add small delay
+        await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance(), checkAllowance()]);
 
         toast({
-          title: needsApproval ? 'Approval Successful' : 'Vesting Successful',
+          title: 'Success',
+          description: 'Successfully vested esGRIX',
           status: 'success',
           duration: 5000,
           isClosable: true,
         });
 
-        if (!needsApproval) {
-          onVestingClose();
-        }
+        onVestingClose();
       } catch (error) {
         toast({
-          title: needsApproval ? 'Approval Failed' : 'Vesting Failed',
-          description: `There was an error during the ${needsApproval ? 'approval' : 'vesting'} process`,
+          title: 'Vesting Failed',
+          description: 'Could not vest esGRIX. Please try again.',
           status: 'error',
           duration: 5000,
           isClosable: true,
         });
       } finally {
-        setIsApproving(false);
         setIsVesting(false);
       }
     },
-    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onVestingClose, checkAllowance]
+    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, checkAllowance, toast, onVestingClose]
   );
 
   // Calculate remaining days and progress
@@ -191,10 +199,15 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     try {
       setIsWithdrawing(true);
       await withdrawEsGrix();
-      await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+
+      // Add delay to ensure blockchain state is updated
+
+      // Refresh all relevant data
+      await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance(), checkAllowance()]);
 
       toast({
         title: 'Withdrawal Successful',
+        description: 'Successfully withdrew GRIX tokens',
         status: 'success',
         duration: 5000,
         isClosable: true,
@@ -211,7 +224,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     } finally {
       setIsWithdrawing(false);
     }
-  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onWithdrawClose]);
+  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, checkAllowance, toast, onWithdrawClose]);
 
   return (
     <Box
@@ -235,8 +248,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
             }
           }
           onVestClick={onVestingOpen}
-          isVesting={isVesting || isApproving}
-          needsApproval={needsApproval}
+          isVesting={isVesting}
           onWithdraw={onWithdrawOpen}
           isWithdrawing={isWithdrawing}
         />
@@ -246,7 +258,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
           onClose={onVestingClose}
           esGrixBalance={esGrixBalance}
           grixBalance={grixBalance}
-          isLoading={isVesting || isApproving}
+          isLoading={isVesting}
           onVest={handleVest}
           claimableRewards={userRewardData?.claimable || '0'}
         />

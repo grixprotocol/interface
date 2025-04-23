@@ -21,7 +21,6 @@ type VestingStatsProps = {
   } | null;
   onVestClick: () => void;
   isVesting: boolean;
-  needsApproval: boolean;
   onWithdraw: () => void;
   isWithdrawing: boolean;
 };
@@ -30,7 +29,6 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
   vestingData,
   onVestClick,
   isVesting,
-  needsApproval,
   onWithdraw,
   isWithdrawing,
 }) => (
@@ -53,29 +51,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
             <BoldGrix text="Total Vested esGRIX" />
           </Text>
           <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData ? formatBalance(vestingData.totalVested) : '0.0000'}
-          </Text>
-        </VStack>
-      </GridItem>
-
-      <GridItem>
-        <VStack align="stretch" spacing={0.5}>
-          <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
-            <BoldGrix text="Available esGRIX to vest" />
-          </Text>
-          <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData?.esGrixBalance ? formatBalance(vestingData.esGrixBalance) : '0.0000'}
-          </Text>
-        </VStack>
-      </GridItem>
-
-      <GridItem>
-        <VStack align="stretch" spacing={0.5}>
-          <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
-            <BoldGrix text="Max Vestable esGRIX" />
-          </Text>
-          <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData ? formatBalance(vestingData.maxVestableAmount) : '0.0000'}
+            {vestingData ? Number(formatBalance(vestingData.totalVested)).toFixed(2) : '0.0000'}
           </Text>
         </VStack>
       </GridItem>
@@ -111,7 +87,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
       <Button
         onClick={onVestClick}
         isLoading={isVesting}
-        loadingText={needsApproval ? 'Approving' : 'Vesting'}
+        loadingText="Vesting"
         bg="teal.400"
         color="white"
         size="lg"
@@ -121,7 +97,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
         _hover={{ bg: 'teal.500' }}
         _active={{ bg: 'teal.600' }}
       >
-        {needsApproval ? 'Approve' : 'Vesting'}
+        Vest
       </Button>
 
       <Button
