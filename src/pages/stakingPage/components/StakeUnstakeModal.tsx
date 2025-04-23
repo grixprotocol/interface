@@ -68,11 +68,35 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
   const handlePercentageClick = (percentage: number) => {
     if (!hasBalance) return;
 
-    const value = ((Number(availableAmount) * percentage) / 100).toString();
-    const event = {
-      target: { value },
-    } as React.ChangeEvent<HTMLInputElement>;
-    handleInputChange(event);
+    if (percentage === 100) {
+      // Use exact available amount without any calculations
+      const event = {
+        target: { value: availableAmount },
+      } as React.ChangeEvent<HTMLInputElement>;
+      handleInputChange(event);
+      return;
+    }
+
+    // For other percentages, use string manipulation to maintain precision
+    try {
+      const baseAmount = availableAmount.replace('.', '');
+      const decimals = availableAmount.split('.')[1]?.length || 0;
+      const multiplier = BigInt(percentage);
+      const result = (BigInt(baseAmount) * multiplier) / BigInt(100);
+
+      let valueStr = result.toString();
+      if (decimals > 0) {
+        const padded = valueStr.padStart(decimals + 1, '0');
+        valueStr = `${padded.slice(0, -decimals)}.${padded.slice(-decimals)}`;
+      }
+
+      const event = {
+        target: { value: valueStr },
+      } as React.ChangeEvent<HTMLInputElement>;
+      handleInputChange(event);
+    } catch (error) {
+      console.error('Error calculating percentage:', error);
+    }
   };
 
   return (
@@ -104,7 +128,7 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                 </HStack>
                 <Input
                   placeholder="Enter Amount"
-                  value={amount}
+                  value={Number(amount) ? Number(amount).toFixed(2) : amount}
                   onChange={handleInputChange}
                   variant="unstyled"
                   textAlign="right"
