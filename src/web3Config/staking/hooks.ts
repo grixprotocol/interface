@@ -44,7 +44,7 @@ export const approveStaking = async (token: string, amount: bigint) =>
   });
 
 // Stake GRIX tokens
-export const stakeGs = async (amount: bigint) =>
+export const stakeGRIX = async (amount: bigint) =>
   await writeContract(wagmiConfig, {
     abi: stakingRouterAbi,
     address: normalizeAddress(stakingContracts.grixStakingRouter.address),
@@ -53,7 +53,7 @@ export const stakeGs = async (amount: bigint) =>
   });
 
 // Stake EsGs tokens
-export const stakeEsGs = async (amount: bigint) =>
+export const stakeEsGRIX = async (amount: bigint) =>
   await writeContract(wagmiConfig, {
     abi: stakingRouterAbi,
     address: normalizeAddress(stakingContracts.grixStakingRouter.address),
@@ -62,7 +62,7 @@ export const stakeEsGs = async (amount: bigint) =>
   });
 
 // Unstake EsGs tokens
-export const unstakeEsGs = async (amount: bigint) =>
+export const unstakeEsGRIX = async (amount: bigint) =>
   await writeContract(wagmiConfig, {
     abi: stakingRouterAbi,
     address: normalizeAddress(stakingContracts.grixStakingRouter.address),
@@ -80,7 +80,7 @@ export const claim = async (shouldClaimRewards: boolean, shouldClaimFee: boolean
   });
 
 // Vest EsGs tokens
-export const vestEsGs = async (amount: bigint) =>
+export const vestEsGRIX = async (amount: bigint) =>
   await writeContract(wagmiConfig, {
     abi: stakingRouterAbi,
     address: normalizeAddress(stakingContracts.grixStakingRouter.address),

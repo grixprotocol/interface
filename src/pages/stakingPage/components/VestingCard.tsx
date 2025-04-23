@@ -11,7 +11,7 @@ import {
   getTokenBalance,
   getVestingData,
   getVestingDuration,
-  vestEsGs as vestEsGrix,
+  vestEsGRIX as vestEsGrix,
   withdrawEsGs as withdrawEsGrix,
 } from '@/web3Config/staking/hooks';
 

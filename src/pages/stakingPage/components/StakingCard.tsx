@@ -11,9 +11,9 @@ import {
   getEsGrixStakedAmount,
   getStakedAmount,
   getTokenBalance,
-  stakeEsGs,
-  stakeGs,
-  unstakeEsGs,
+  stakeEsGRIX,
+  stakeGRIX,
+  unstakeEsGRIX,
   unstakeGs,
 } from '@/web3Config/staking/hooks';
 
@@ -202,9 +202,9 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       const amountBigInt = parseEther(amount);
 
       if (type === 'gx') {
-        await stakeGs(amountBigInt);
+        await stakeGRIX(amountBigInt);
       } else {
-        await stakeEsGs(amountBigInt);
+        await stakeEsGRIX(amountBigInt);
       }
 
       showToast('Staking Successful', 'Your tokens have been staked', 'success');
@@ -227,7 +227,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       if (type === 'gx') {
         await unstakeGs(amountBigInt);
       } else {
-        await unstakeEsGs(amountBigInt);
+        await unstakeEsGRIX(amountBigInt);
       }
 
       showToast('Unstaking Successful', 'Your tokens have been unstaked', 'success');
