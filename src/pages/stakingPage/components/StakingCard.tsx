@@ -104,13 +104,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     return () => clearInterval(interval);
   }, [fetchBalance, fetchStakedAmount, fetchAPR, refreshTrigger]);
 
-  const handleMaxClick = () => {
-    if (type === 'esgx') {
-      setAmount(stakedAmount);
-    } else {
-      setAmount(availableBalance);
-    }
-  };
+
 
   const isAmountValid = useCallback(() => {
     if (!amount) return false;
