@@ -122,43 +122,79 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
 
   const handleVest = useCallback(
     async (vestAmount: string) => {
-      if (!address) return;
+      if (!address || !vestAmount || parseFloat(vestAmount) <= 0) return;
+
+      const amountToVest = parseEther(vestAmount);
+      setIsVesting(true); // Start loading
 
       try {
+        // Step 1: Handle Approval if needed
         if (needsApproval) {
-          setIsApproving(true);
-          await approveVesting(stakingContracts.esGRIXToken.address, parseEther(vestAmount));
-          await checkAllowance();
-        } else {
-          setIsVesting(true);
-          await vestEsGrix(parseEther(vestAmount));
+          try {
+            console.log('Attempting approval...');
+            await approveVesting(stakingContracts.esGRIXToken.address, amountToVest);
+            console.log('Approval successful.');
+            // Approval succeeded, proceed to vesting. Do NOT close modal here.
+          } catch (approvalError) {
+            console.error('Approval failed:', approvalError);
+            toast({
+              title: 'Approval Failed',
+              description: 'Could not approve esGRIX spending. Please try again.',
+              status: 'error',
+              duration: 5000,
+              isClosable: true,
+            });
+            setIsVesting(false); // Stop loading on approval failure
+            return; // Exit the function, modal stays open
+          }
         }
 
-        await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+        // Step 2: Perform Vesting (runs if approval wasn't needed or succeeded)
+        try {
+          console.log('Attempting vesting...');
+          await vestEsGrix(amountToVest);
+          console.log('Vesting successful.');
 
-        toast({
-          title: needsApproval ? 'Approval Successful' : 'Vesting Successful',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-        });
+          // Vesting succeeded: Fetch data, show success toast, THEN close modal
+          await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
 
-        if (!needsApproval) {
-          onVestingClose();
+          toast({
+            title: 'Vesting Successful',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+
+          onVestingClose(); // Close modal ONLY after successful vesting
+        } catch (vestingError) {
+          console.error('Vesting failed:', vestingError);
+          toast({
+            title: 'Vesting Failed',
+            description: 'Could not complete the vesting process. Please try again.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          // Do not close modal on vesting failure, allow user to retry if desired.
+          // Loading state will be turned off in finally block.
         }
       } catch (error) {
+        // Catch unexpected errors during the process
+        console.error('Unexpected error during vesting process:', error);
         toast({
-          title: needsApproval ? 'Approval Failed' : 'Vesting Failed',
-          description: `There was an error during the ${needsApproval ? 'approval' : 'vesting'} process`,
+          title: 'Vesting Error',
+          description: 'An unexpected error occurred. Please try again.',
           status: 'error',
           duration: 5000,
           isClosable: true,
         });
       } finally {
-        setIsApproving(false);
+        // Ensure loading state is turned off and allowance is re-checked
         setIsVesting(false);
+        void checkAllowance(); // Update approval status for next time
       }
     },
+    // Dependencies now only need needsApproval, not the setter for it mid-function
     [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onVestingClose, checkAllowance]
   );
 
