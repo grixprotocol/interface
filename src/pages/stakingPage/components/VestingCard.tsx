@@ -82,7 +82,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
 
   useEffect(() => {
     void fetchVestingData();
-    const interval = setInterval(() => void fetchVestingData(), 30000);
+    const interval = setInterval(() => void fetchVestingData(), 15000);
     return () => clearInterval(interval);
   }, [fetchVestingData]);
 
@@ -149,53 +149,36 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
           }
         }
 
-        // Step 2: Perform Vesting (runs if approval wasn't needed or succeeded)
-        try {
-          console.log('Attempting vesting...');
-          await vestEsGrix(amountToVest);
-          console.log('Vesting successful.');
+        // Step 2: Perform vesting
+        await vestEsGrix(amountToVest);
 
-          // Vesting succeeded: Fetch data, show success toast, THEN close modal
-          await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+        // Step 3: Refresh all data with a small delay to ensure blockchain state is updated
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Add small delay
+        await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance(), checkAllowance()]);
 
-          toast({
-            title: 'Vesting Successful',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-          });
-
-          onVestingClose(); // Close modal ONLY after successful vesting
-        } catch (vestingError) {
-          console.error('Vesting failed:', vestingError);
-          toast({
-            title: 'Vesting Failed',
-            description: 'Could not complete the vesting process. Please try again.',
-            status: 'error',
-            duration: 5000,
-            isClosable: true,
-          });
-          // Do not close modal on vesting failure, allow user to retry if desired.
-          // Loading state will be turned off in finally block.
-        }
-      } catch (error) {
-        // Catch unexpected errors during the process
-        console.error('Unexpected error during vesting process:', error);
         toast({
-          title: 'Vesting Error',
-          description: 'An unexpected error occurred. Please try again.',
+          title: 'Success',
+          description: 'Successfully vested esGRIX',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+
+        onVestingClose();
+      } catch (error) {
+        console.error('Vesting failed:', error);
+        toast({
+          title: 'Vesting Failed',
+          description: 'Could not vest esGRIX. Please try again.',
           status: 'error',
           duration: 5000,
           isClosable: true,
         });
       } finally {
-        // Ensure loading state is turned off and allowance is re-checked
         setIsVesting(false);
-        void checkAllowance(); // Update approval status for next time
       }
     },
-    // Dependencies now only need needsApproval, not the setter for it mid-function
-    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onVestingClose, checkAllowance]
+    [address, needsApproval, fetchBalance, fetchVestingData, fetchGrixBalance, checkAllowance, toast, onVestingClose]
   );
 
   // Calculate remaining days and progress
