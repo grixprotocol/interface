@@ -53,29 +53,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
             <BoldGrix text="Total Vested esGRIX" />
           </Text>
           <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData ? formatBalance(vestingData.totalVested) : '0.0000'}
-          </Text>
-        </VStack>
-      </GridItem>
-
-      <GridItem>
-        <VStack align="stretch" spacing={0.5}>
-          <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
-            <BoldGrix text="Available esGRIX to vest" />
-          </Text>
-          <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData?.esGrixBalance ? formatBalance(vestingData.esGrixBalance) : '0.0000'}
-          </Text>
-        </VStack>
-      </GridItem>
-
-      <GridItem>
-        <VStack align="stretch" spacing={0.5}>
-          <Text color="gray.400" fontSize="xs" fontWeight="600" letterSpacing="-0.01em">
-            <BoldGrix text="Max Vestable esGRIX" />
-          </Text>
-          <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData ? formatBalance(vestingData.maxVestableAmount) : '0.0000'}
+            {vestingData ? Number(formatBalance(vestingData.totalVested)).toFixed(2) : '0.0000'}
           </Text>
         </VStack>
       </GridItem>
