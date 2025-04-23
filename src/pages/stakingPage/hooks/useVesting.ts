@@ -8,7 +8,7 @@ import {
   checkVestingAllowance,
   getTokenBalance,
   getVestingData,
-  vestEsGs,
+  vestEsGRIX,
 } from '@/web3Config/staking/hooks';
 
 type VestingData = {
@@ -64,7 +64,7 @@ export const useVesting = () => {
       }
 
       // Perform vesting
-      await vestEsGs(parsedAmount);
+      await vestEsGRIX(parsedAmount);
 
       // Refresh data
       await fetchVestingData();

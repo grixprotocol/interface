@@ -11,13 +11,13 @@ import {
   getEsGrixStakedAmount,
   getStakedAmount,
   getTokenBalance,
-  stakeEsGs,
-  stakeGs,
-  unstakeEsGs,
+  stakeEsGRIX,
+  stakeGRIX,
+  unstakeEsGRIX,
   unstakeGs,
 } from '@/web3Config/staking/hooks';
 
-import { StakingCardContent } from './StakingCardContent.js';
+import { StakingCardContent } from './StakingCardContent';
 
 type StakingCardProps = {
   title: string;
@@ -43,7 +43,6 @@ export const StakingCard: React.FC<StakingCardProps> = ({
   const [availableBalance, setAvailableBalance] = useState('0');
   const [stakedAmount, setStakedAmount] = useState('0');
   const [apr, setApr] = useState(0);
-  const [_showError, setShowError] = useState(false);
   const toast = useToast();
   const tokenAddress = type === 'gx' ? stakingContracts.grixToken.address : stakingContracts.esGRIXToken.address;
 
@@ -105,14 +104,6 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     return () => clearInterval(interval);
   }, [fetchBalance, fetchStakedAmount, fetchAPR, refreshTrigger]);
 
-  const handleMaxClick = () => {
-    if (type === 'esgx') {
-      setAmount(stakedAmount);
-    } else {
-      setAmount(availableBalance);
-    }
-  };
-
   const isAmountValid = useCallback(() => {
     if (!amount) return false;
     try {
@@ -143,7 +134,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       const amountBigInt = amount ? parseEther(amount) : 0n;
       setNeedsApproval(allowance < amountBigInt);
     } catch (error) {
-      setNeedsApproval(true); // Default to needing approval on error
+      setNeedsApproval(true);
     }
   }, [address, amount, tokenAddress]);
 
@@ -156,6 +147,10 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     if (value === '' || (!isNaN(Number(value)) && Number(value) >= 0)) {
       setAmount(value);
     }
+  };
+
+  const clearAmount = () => {
+    setAmount('');
   };
 
   const refreshAllData = useCallback(
@@ -181,9 +176,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       setIsApproving(true);
       const amountBigInt = parseEther(amount);
       await approveStaking(tokenAddress, amountBigInt);
-
       showToast('Approval Successful', 'You can now stake your tokens', 'success');
-
       setNeedsApproval(false);
       await refreshAllData();
     } catch (error) {
@@ -196,26 +189,18 @@ export const StakingCard: React.FC<StakingCardProps> = ({
   const handleStake = async () => {
     if (!amount || !address) return;
 
-    if (!isAmountValid()) {
-      showToast('Invalid Amount', 'Amount exceeds available balance', 'error');
-      setShowError(true);
-      return;
-    }
-
     try {
       setIsStaking(true);
       const amountBigInt = parseEther(amount);
 
       if (type === 'gx') {
-        await stakeGs(amountBigInt);
+        await stakeGRIX(amountBigInt);
       } else {
-        await stakeEsGs(amountBigInt);
+        await stakeEsGRIX(amountBigInt);
       }
 
       showToast('Staking Successful', 'Your tokens have been staked', 'success');
-
       setAmount('');
-      setShowError(false);
       await refreshAllData();
     } catch (error) {
       showToast('Staking Failed', 'There was an error staking your tokens', 'error');
@@ -228,27 +213,17 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     if (!amount || !address) return;
 
     try {
-      const currentStaked = type === 'gx' ? await getStakedAmount(address) : await getEsGrixStakedAmount(address);
-
-      if (Number(amount) > Number(currentStaked)) {
-        showToast('Invalid Amount', 'Amount exceeds staked balance', 'error');
-        setShowError(true);
-        return;
-      }
-
       setIsUnstaking(true);
       const amountBigInt = parseEther(amount);
 
       if (type === 'gx') {
         await unstakeGs(amountBigInt);
       } else {
-        await unstakeEsGs(amountBigInt);
+        await unstakeEsGRIX(amountBigInt);
       }
 
       showToast('Unstaking Successful', 'Your tokens have been unstaked', 'success');
-
       setAmount('');
-      setShowError(false);
       await refreshAllData();
     } catch (error) {
       showToast('Unstaking Failed', 'There was an error unstaking your tokens', 'error');
@@ -266,7 +241,6 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       apr={apr}
       amount={amount}
       handleInputChange={handleInputChange}
-      handleMaxClick={handleMaxClick}
       needsApproval={needsApproval}
       isApproving={isApproving}
       handleApprove={() => void handleApprove()}
@@ -276,6 +250,8 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       handleStake={() => void handleStake()}
       isUnstaking={isUnstaking}
       handleUnstake={() => void handleUnstake()}
+      type={type}
+      clearAmount={clearAmount}
     />
   );
 };
