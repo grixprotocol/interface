@@ -53,7 +53,7 @@ export const StakingPage: React.FC = () => {
 
   useEffect(() => {
     void fetchUserRewards();
-    const interval = setInterval(() => void fetchUserRewards(), 30000);
+    const interval = setInterval(() => void fetchUserRewards(), 15000);
     return () => clearInterval(interval);
   }, [fetchUserRewards, refreshTrigger]);
 

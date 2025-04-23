@@ -199,16 +199,22 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     try {
       setIsWithdrawing(true);
       await withdrawEsGrix();
-      await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance()]);
+
+      // Add delay to ensure blockchain state is updated
+
+      // Refresh all relevant data
+      await Promise.all([fetchBalance(), fetchVestingData(true), fetchGrixBalance(), checkAllowance()]);
 
       toast({
         title: 'Withdrawal Successful',
+        description: 'Successfully withdrew GRIX tokens',
         status: 'success',
         duration: 5000,
         isClosable: true,
       });
       onWithdrawClose();
     } catch (error) {
+      console.error('Withdrawal failed:', error);
       toast({
         title: 'Withdrawal Failed',
         description: 'There was an error during the withdrawal process',
@@ -219,7 +225,7 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
     } finally {
       setIsWithdrawing(false);
     }
-  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, toast, onWithdrawClose]);
+  }, [address, fetchBalance, fetchVestingData, fetchGrixBalance, checkAllowance, toast, onWithdrawClose]);
 
   return (
     <Box
