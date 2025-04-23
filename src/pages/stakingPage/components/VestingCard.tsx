@@ -214,7 +214,6 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
       });
       onWithdrawClose();
     } catch (error) {
-      console.error('Withdrawal failed:', error);
       toast({
         title: 'Withdrawal Failed',
         description: 'There was an error during the withdrawal process',
