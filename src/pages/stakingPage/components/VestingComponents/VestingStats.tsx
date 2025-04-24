@@ -40,7 +40,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
             <BoldGrix text="Claimable GRIX" />
           </Text>
           <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData ? formatBalance(vestingData.claimable) : '0.0000'}
+            {vestingData ? formatBalance(vestingData.claimable) : '0'}
           </Text>
         </VStack>
       </GridItem>
@@ -51,7 +51,7 @@ export const VestingStats: React.FC<VestingStatsProps> = ({
             <BoldGrix text="Total Vested esGRIX" />
           </Text>
           <Text color="white" fontSize="lg" fontWeight="700" letterSpacing="-0.01em">
-            {vestingData ? Number(formatBalance(vestingData.totalVested)).toFixed(2) : '0.0000'}
+            {vestingData ? formatBalance(vestingData.totalVested) : '0'}
           </Text>
         </VStack>
       </GridItem>
