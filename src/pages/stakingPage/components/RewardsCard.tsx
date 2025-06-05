@@ -204,7 +204,6 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
         >
           Compound
         </Button>
-
       </VStack>
     </Box>
   );

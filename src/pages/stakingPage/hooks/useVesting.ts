@@ -39,7 +39,7 @@ export const useVesting = () => {
         functionName: 'balanceOf',
         args: [normalizeAddress(stakingContracts.rewardTracker.address)],
       });
-      
+
       const amount = formatEther(balance);
       setTotalStaked(amount);
     } catch (error) {
