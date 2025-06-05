@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { parseEther } from 'viem';
+import { erc20Abi, formatEther, parseEther } from 'viem';
 import { useAccount } from 'wagmi';
+import { readContract } from 'wagmi/actions';
 
+import { normalizeAddress } from '@/utils/web3Util';
+import { wagmiConfig } from '@/web3Config/reownConfig';
 import { stakingContracts } from '@/web3Config/staking/config';
 import {
   approveVesting,
@@ -24,7 +27,25 @@ export const useVesting = () => {
   const [esGrixBalance, setEsGrixBalance] = useState('0');
   const [grixBalance, setGrixBalance] = useState('0');
   const [vestingData, setVestingData] = useState<VestingData | null>(null);
+  const [totalStaked, setTotalStaked] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
+
+  const fetchTotalStaked = useCallback(async () => {
+    try {
+      // Get total GRIX tokens staked in the vester contract
+      const balance = await readContract(wagmiConfig, {
+        abi: erc20Abi,
+        address: normalizeAddress(stakingContracts.grixToken.address),
+        functionName: 'balanceOf',
+        args: [normalizeAddress(stakingContracts.rewardTracker.address)],
+      });
+
+      const amount = formatEther(balance);
+      setTotalStaked(amount);
+    } catch (error) {
+      setTotalStaked('0');
+    }
+  }, []);
 
   const fetchVestingData = useCallback(async () => {
     if (!address) return;
@@ -35,6 +56,7 @@ export const useVesting = () => {
         getTokenBalance(stakingContracts.esGRIXToken.address, address),
         getTokenBalance(stakingContracts.grixToken.address, address),
         getVestingData(address),
+        fetchTotalStaked(),
       ]);
 
       setVestingAllowance(allowance.toString());
@@ -45,7 +67,7 @@ export const useVesting = () => {
       setVestingData(null);
       throw error;
     }
-  }, [address]);
+  }, [address, fetchTotalStaked]);
 
   useEffect(() => {
     void fetchVestingData();
@@ -80,6 +102,7 @@ export const useVesting = () => {
     esGrixBalance,
     grixBalance,
     vestingData,
+    totalStaked,
     isLoading,
     handleVest,
     fetchVestingData,
