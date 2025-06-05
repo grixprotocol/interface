@@ -156,8 +156,8 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
           </HStack>
           <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0} textAlign="right">
             {Number(totalStaked).toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
+              minimumFractionDigits: 1,
+              maximumFractionDigits: 1,
             })}{' '}
             GRIX
             {grixPrice && Number(totalStaked) > 0 && (
