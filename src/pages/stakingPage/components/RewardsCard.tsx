@@ -6,6 +6,8 @@ import { GrixLogo } from '@/components/commons/Logo';
 import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
+import { useVesting } from '../hooks/useVesting';
+
 type RewardsCardProps = {
   data: {
     claimable: string;
@@ -27,6 +29,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   const [isClaiming, setIsClaiming] = useState(false);
   const [isCompounding, setIsCompounding] = useState(false);
   const [grixPrice, setGrixPrice] = useState<number | null>(null);
+  const { totalStaked } = useVesting();
   const toast = useToast();
 
   // Fetch GRIX price from CoinGecko
@@ -143,6 +146,32 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
             )}
           </Text>
         </HStack>
+
+        <HStack justify="space-between" pt={2} borderTop="1px solid" borderColor="gray.800">
+          <HStack spacing={2}>
+            <GrixLogo boxSize="14px" />
+            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
+              Total Staked
+            </Text>
+          </HStack>
+          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0} textAlign="right">
+            {Number(totalStaked).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}{' '}
+            GRIX
+            {grixPrice && Number(totalStaked) > 0 && (
+              <Text as="span" color="green.300" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
+                &nbsp;($
+                {(Number(totalStaked) * grixPrice).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+                )
+              </Text>
+            )}
+          </Text>
+        </HStack>
         <Button
           onClick={() => void handleClaim()}
           isLoading={isClaiming}
@@ -175,6 +204,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
         >
           Compound
         </Button>
+
       </VStack>
     </Box>
   );
