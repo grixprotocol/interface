@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { FaEquals, FaPlus } from 'react-icons/fa';
 
 import { GrixLogo } from '@/components/commons/Logo';
+import { AssetPriceResponse } from '@/types/api';
 
 type VestingModalProps = {
   isOpen: boolean;
@@ -27,12 +28,6 @@ type VestingModalProps = {
   isLoading: boolean;
   onVest: (amount: string) => Promise<void>;
   claimableRewards: string;
-};
-
-type DexScreenerResponse = {
-  grix: {
-    usd: number;
-  };
 };
 
 export const VestingModal = ({
@@ -52,9 +47,14 @@ export const VestingModal = ({
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=grix&vs_currencies=usd');
-        const json = (await res.json()) as DexScreenerResponse;
-        const price = json.grix.usd;
+        const res = await fetch('https://z61hgkwkn8.execute-api.us-east-1.amazonaws.com/dev/assetprice?asset=GRIX', {
+          headers: {
+            'x-api-key': import.meta.env.VITE_GRIX_API_KEY,
+            origin: 'https://app.grix.finance',
+          },
+        });
+        const json = (await res.json()) as AssetPriceResponse;
+        const price = json.assetPrice;
         setGrixPrice(price);
       } catch {
         setGrixPrice(null);

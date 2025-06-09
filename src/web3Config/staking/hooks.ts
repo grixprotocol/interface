@@ -185,6 +185,36 @@ export const getStakedAmount = async (userAddress: string) => {
   }
 };
 
+// Get total GRIX staked in the protocol
+export const getTotalGrixStaked = async () => {
+  try {
+    const balance = await readContract(wagmiConfig, {
+      abi: erc20Abi,
+      address: normalizeAddress(stakingContracts.grixToken.address),
+      functionName: 'balanceOf',
+      args: [normalizeAddress(stakingContracts.rewardTracker.address)],
+    });
+    return formatEther(balance);
+  } catch (error) {
+    return '0';
+  }
+};
+
+// Get total esGRIX staked in the protocol
+export const getTotalEsGrixStaked = async () => {
+  try {
+    const balance = await readContract(wagmiConfig, {
+      abi: erc20Abi,
+      address: normalizeAddress(stakingContracts.esGRIXToken.address),
+      functionName: 'balanceOf',
+      args: [normalizeAddress(stakingContracts.rewardTracker.address)],
+    });
+    return formatEther(balance);
+  } catch (error) {
+    return '0';
+  }
+};
+
 // Update the getEsGrixStakedAmount function to correctly fetch esGRIX staked amount
 export const getEsGrixStakedAmount = async (userAddress: string) => {
   try {
@@ -250,32 +280,53 @@ export const getTotalStaked = async (userAddress: string) => {
 };
 //Staking APR Formula = (ETH rewards + esGS emissions annualized) / (Total GS + esGS staked) * 100
 export const calculateAPR = async () => {
-  // Get total staked amount using totalSupply from the reward tracker
-  const totalStaked = await readContract(wagmiConfig, {
-    abi: rewardTrackerAbi,
-    address: normalizeAddress(stakingContracts.rewardTracker.address),
-    functionName: 'totalSupply',
-    args: [],
-  });
+  try {
+    // Get total staked amount using totalSupply from the reward tracker
+    const totalStaked = await readContract(wagmiConfig, {
+      abi: rewardTrackerAbi,
+      address: normalizeAddress(stakingContracts.rewardTracker.address),
+      functionName: 'totalSupply',
+      args: [],
+    });
 
-  if (totalStaked === 0n) return 0;
+    if (totalStaked === 0n) return 0;
 
-  // Get ETH reward rate from rewardDistributor
-  const ethRewardRate = await getTokenPerInterval();
+    // Get core tracker to access fee distributor for ETH rewards
+    const coreTracker = await getCoreTracker();
 
-  // Get esGrix emission rate (assuming it's from the reward distributor as well)
-  const esGrixRewardRate = await getTokenPerInterval();
+    // Get esGRIX emission rate from the main reward distributor
+    const esGrixRewardRate = await getTokenPerInterval();
 
-  // Calculate annual rewards (seconds in a year * tokens per interval)
-  const SECONDS_PER_YEAR = 365n * 24n * 60n * 60n;
-  const annualEthRewards = ethRewardRate * SECONDS_PER_YEAR;
-  const annualEsGrixRewards = esGrixRewardRate * SECONDS_PER_YEAR;
-  const totalAnnualRewards = annualEthRewards + annualEsGrixRewards;
+    // Get ETH reward rate from the fee distributor
+    let ethRewardRate = 0n;
+    if (coreTracker.feeDistributor && coreTracker.feeDistributor !== '0x0000000000000000000000000000000000000000') {
+      try {
+        ethRewardRate = await readContract(wagmiConfig, {
+          abi: rewardDistributorAbi,
+          address: normalizeAddress(coreTracker.feeDistributor),
+          functionName: 'tokensPerInterval',
+          args: [],
+        });
+      } catch {
+        // Error fetching ETH reward rate
+      }
+    }
 
-  // Calculate APR: (totalAnnualRewards / totalStaked) * 100
-  const apr = (totalAnnualRewards * 100n) / (totalStaked as bigint);
+    // Calculate annual rewards (seconds in a year * tokens per interval)
+    const SECONDS_PER_YEAR = 365n * 24n * 60n * 60n;
+    const annualEthRewards = ethRewardRate * SECONDS_PER_YEAR;
+    const annualEsGrixRewards = esGrixRewardRate * SECONDS_PER_YEAR;
+    const totalAnnualRewards = annualEthRewards + annualEsGrixRewards;
 
-  return Number(apr);
+    // Calculate APR: (totalAnnualRewards / totalStaked) * 100
+    const apr = (totalAnnualRewards * 10000n) / (totalStaked as bigint);
+
+    // Convert to percentage with 2 decimal places
+    return Number(apr) / 100;
+  } catch {
+    // Error calculating APR
+    return 0;
+  }
 };
 // Add vesting allowance check
 export const checkVestingAllowance = async (owner: string, token: string) => {

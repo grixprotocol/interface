@@ -4,6 +4,7 @@ import { useAccount } from 'wagmi';
 
 import { GrixLogo } from '@/components/commons/Logo';
 import { EthLogo } from '@/components/commons/Logo/EthLogo';
+import { AssetPriceResponse } from '@/types/api';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
 import { useVesting } from '../hooks/useVesting';
@@ -18,12 +19,6 @@ type RewardsCardProps = {
   refetchData: () => Promise<void>;
 };
 
-type DexScreenerResponse = {
-  grix: {
-    usd: number;
-  };
-};
-
 export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Element => {
   const { address } = useAccount();
   const [isClaiming, setIsClaiming] = useState(false);
@@ -36,9 +31,14 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=grix&vs_currencies=usd');
-        const json = (await res.json()) as DexScreenerResponse;
-        const price = json.grix.usd;
+        const res = await fetch('https://z61hgkwkn8.execute-api.us-east-1.amazonaws.com/dev/assetprice?asset=GRIX', {
+          headers: {
+            'x-api-key': import.meta.env.VITE_GRIX_API_KEY,
+            origin: 'https://app.grix.finance',
+          },
+        });
+        const json = (await res.json()) as AssetPriceResponse;
+        const price = json.assetPrice;
         setGrixPrice(price);
       } catch {
         setGrixPrice(null);
