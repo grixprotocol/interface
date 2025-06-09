@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { FaEquals, FaPlus } from 'react-icons/fa';
 
 import { GrixLogo } from '@/components/commons/Logo';
+import { AssetPriceResponse } from '@/types/api';
 
 type VestingModalProps = {
   isOpen: boolean;
@@ -27,12 +28,6 @@ type VestingModalProps = {
   isLoading: boolean;
   onVest: (amount: string) => Promise<void>;
   claimableRewards: string;
-};
-
-type DexScreenerResponse = {
-  grix: {
-    usd: number;
-  };
 };
 
 export const VestingModal = ({
@@ -58,7 +53,7 @@ export const VestingModal = ({
             origin: 'https://app.grix.finance',
           },
         });
-        const json = await res.json();
+        const json = (await res.json()) as AssetPriceResponse;
         const price = json.assetPrice;
         setGrixPrice(price);
       } catch {

@@ -4,6 +4,7 @@ import { useAccount } from 'wagmi';
 
 import { GrixLogo } from '@/components/commons/Logo';
 import { EthLogo } from '@/components/commons/Logo/EthLogo';
+import { AssetPriceResponse } from '@/types/api';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
 import { useVesting } from '../hooks/useVesting';
@@ -16,12 +17,6 @@ type RewardsCardProps = {
     averageStaked: string;
   } | null;
   refetchData: () => Promise<void>;
-};
-
-type DexScreenerResponse = {
-  grix: {
-    usd: number;
-  };
 };
 
 export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Element => {
@@ -42,7 +37,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
             origin: 'https://app.grix.finance',
           },
         });
-        const json = await res.json();
+        const json = (await res.json()) as AssetPriceResponse;
         const price = json.assetPrice;
         setGrixPrice(price);
       } catch {

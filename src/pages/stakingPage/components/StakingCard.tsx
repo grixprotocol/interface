@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { parseEther } from 'viem';
 import { useAccount } from 'wagmi';
 
+import { AssetPriceResponse } from '@/types/api';
 import { stakingContracts } from '@/web3Config/staking/config';
 import {
   approveStaking,
@@ -116,7 +117,7 @@ export const StakingCard: React.FC<StakingCardProps> = ({
           origin: 'https://app.grix.finance',
         },
       });
-      const json = await res.json();
+      const json = (await res.json()) as AssetPriceResponse;
       const price = json.assetPrice;
       setGrixPrice(price);
     } catch {

@@ -307,8 +307,8 @@ export const calculateAPR = async () => {
           functionName: 'tokensPerInterval',
           args: [],
         });
-      } catch (error) {
-        console.error('Error fetching ETH reward rate:', error);
+      } catch {
+        // Error fetching ETH reward rate
       }
     }
 
@@ -323,8 +323,8 @@ export const calculateAPR = async () => {
 
     // Convert to percentage with 2 decimal places
     return Number(apr) / 100;
-  } catch (error) {
-    console.error('Error calculating APR:', error);
+  } catch {
+    // Error calculating APR
     return 0;
   }
 };
