@@ -293,10 +293,10 @@ export const calculateAPR = async () => {
 
     // Get core tracker to access fee distributor for ETH rewards
     const coreTracker = await getCoreTracker();
-    
+
     // Get esGRIX emission rate from the main reward distributor
     const esGrixRewardRate = await getTokenPerInterval();
-    
+
     // Get ETH reward rate from the fee distributor
     let ethRewardRate = 0n;
     if (coreTracker.feeDistributor && coreTracker.feeDistributor !== '0x0000000000000000000000000000000000000000') {
