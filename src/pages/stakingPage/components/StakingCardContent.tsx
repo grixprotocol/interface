@@ -12,6 +12,8 @@ type StakingCardContentProps = {
   description: string;
   stakedAmount: string;
   availableBalance: string;
+  totalStakedInProtocol: string;
+  grixPrice: number | null;
   apr: number;
   amount: string;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -33,6 +35,8 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
   description,
   stakedAmount,
   availableBalance,
+  totalStakedInProtocol,
+  grixPrice,
   apr,
   amount,
   handleInputChange,
@@ -114,6 +118,30 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
             </Text>
             {apr.toFixed(2)}%
           </Text>
+        </VStack>
+
+        <VStack align="stretch">
+          <Text fontSize="sm" color="gray.500" mb={1}>
+            Total Staked
+          </Text>
+          <VStack align="flex-start" spacing={1}>
+            <Text fontSize="xl" fontWeight="700" color="white">
+              {Number(totalStakedInProtocol).toLocaleString(undefined, {
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 1,
+              })}
+            </Text>
+            {grixPrice && Number(totalStakedInProtocol) > 0 && (
+              <Text fontSize="sm" color="green.300" fontWeight="600">
+                ($
+                {(Number(totalStakedInProtocol) * grixPrice).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+                )
+              </Text>
+            )}
+          </VStack>
         </VStack>
       </SimpleGrid>
 

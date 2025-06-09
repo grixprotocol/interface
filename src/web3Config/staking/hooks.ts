@@ -185,6 +185,36 @@ export const getStakedAmount = async (userAddress: string) => {
   }
 };
 
+// Get total GRIX staked in the protocol
+export const getTotalGrixStaked = async () => {
+  try {
+    const balance = await readContract(wagmiConfig, {
+      abi: erc20Abi,
+      address: normalizeAddress(stakingContracts.grixToken.address),
+      functionName: 'balanceOf',
+      args: [normalizeAddress(stakingContracts.rewardTracker.address)],
+    });
+    return formatEther(balance);
+  } catch (error) {
+    return '0';
+  }
+};
+
+// Get total esGRIX staked in the protocol
+export const getTotalEsGrixStaked = async () => {
+  try {
+    const balance = await readContract(wagmiConfig, {
+      abi: erc20Abi,
+      address: normalizeAddress(stakingContracts.esGRIXToken.address),
+      functionName: 'balanceOf',
+      args: [normalizeAddress(stakingContracts.rewardTracker.address)],
+    });
+    return formatEther(balance);
+  } catch (error) {
+    return '0';
+  }
+};
+
 // Update the getEsGrixStakedAmount function to correctly fetch esGRIX staked amount
 export const getEsGrixStakedAmount = async (userAddress: string) => {
   try {

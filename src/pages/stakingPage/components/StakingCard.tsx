@@ -11,6 +11,8 @@ import {
   getEsGrixStakedAmount,
   getStakedAmount,
   getTokenBalance,
+  getTotalEsGrixStaked,
+  getTotalGrixStaked,
   stakeEsGRIX,
   stakeGRIX,
   unstakeEsGRIX,
@@ -42,6 +44,8 @@ export const StakingCard: React.FC<StakingCardProps> = ({
   const [needsApproval, setNeedsApproval] = useState(true);
   const [availableBalance, setAvailableBalance] = useState('0');
   const [stakedAmount, setStakedAmount] = useState('0');
+  const [totalStakedInProtocol, setTotalStakedInProtocol] = useState('0');
+  const [grixPrice, setGrixPrice] = useState<number | null>(null);
   const [apr, setApr] = useState(0);
   const toast = useToast();
   const tokenAddress = type === 'gx' ? stakingContracts.grixToken.address : stakingContracts.esGRIXToken.address;
@@ -90,19 +94,53 @@ export const StakingCard: React.FC<StakingCardProps> = ({
     setApr(calculatedAPR);
   }, []);
 
+  const fetchTotalStaked = useCallback(async () => {
+    try {
+      if (type === 'gx') {
+        const total = await getTotalGrixStaked();
+        setTotalStakedInProtocol(total);
+      } else {
+        const total = await getTotalEsGrixStaked();
+        setTotalStakedInProtocol(total);
+      }
+    } catch (error) {
+      setTotalStakedInProtocol('0');
+    }
+  }, [type]);
+
+  const fetchGrixPrice = useCallback(async () => {
+    try {
+      const res = await fetch('https://z61hgkwkn8.execute-api.us-east-1.amazonaws.com/dev/assetprice?asset=GRIX', {
+        headers: {
+          'x-api-key': import.meta.env.VITE_GRIX_API_KEY,
+          origin: 'https://app.grix.finance',
+        },
+      });
+      const json = await res.json();
+      const price = json.assetPrice;
+      setGrixPrice(price);
+    } catch {
+      setGrixPrice(null);
+    }
+  }, []);
+
   useEffect(() => {
     void fetchBalance();
     void fetchStakedAmount();
     void fetchAPR();
+    void fetchTotalStaked();
+    void fetchGrixPrice();
 
     const interval = setInterval(() => {
       void fetchBalance();
       void fetchStakedAmount();
       void fetchAPR();
+      void fetchTotalStaked();
+      void fetchGrixPrice();
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [fetchBalance, fetchStakedAmount, fetchAPR, refreshTrigger]);
+  }, [fetchBalance, fetchStakedAmount, fetchAPR, fetchTotalStaked, fetchGrixPrice, refreshTrigger]);
 
   const isAmountValid = useCallback(() => {
     if (!amount) return false;
@@ -155,12 +193,12 @@ export const StakingCard: React.FC<StakingCardProps> = ({
 
   const refreshAllData = useCallback(
     async (triggerParentRefresh = true) => {
-      await Promise.all([fetchBalance(), fetchStakedAmount(), fetchAPR()]);
+      await Promise.all([fetchBalance(), fetchStakedAmount(), fetchAPR(), fetchTotalStaked(), fetchGrixPrice()]);
       if (triggerParentRefresh) {
         onActionComplete();
       }
     },
-    [fetchBalance, fetchStakedAmount, fetchAPR, onActionComplete]
+    [fetchBalance, fetchStakedAmount, fetchAPR, fetchTotalStaked, fetchGrixPrice, onActionComplete]
   );
 
   useEffect(() => {
@@ -238,6 +276,8 @@ export const StakingCard: React.FC<StakingCardProps> = ({
       description={description}
       stakedAmount={stakedAmount}
       availableBalance={availableBalance}
+      totalStakedInProtocol={totalStakedInProtocol}
+      grixPrice={grixPrice}
       apr={apr}
       amount={amount}
       handleInputChange={handleInputChange}
