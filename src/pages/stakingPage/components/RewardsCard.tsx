@@ -24,7 +24,6 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   const [isClaiming, setIsClaiming] = useState(false);
   const [isCompounding, setIsCompounding] = useState(false);
   const [grixPrice, setGrixPrice] = useState<number | null>(null);
-  const { totalStaked } = useVesting();
   const toast = useToast();
 
   // Fetch GRIX price from CoinGecko
