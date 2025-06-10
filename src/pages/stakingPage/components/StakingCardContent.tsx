@@ -92,7 +92,7 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
       <SimpleGrid columns={2} spacing={3} mb={4}>
         <VStack align="stretch" spacing={1}>
           <Text fontSize="xs" color="gray.500">
-            Staked
+            Staked {type === 'esgx' ? 'esGRIX' : 'GRIX'}
           </Text>
           <Text fontSize="sm" fontWeight="600" color="white">
             {formatBalance(stakedAmount)}
@@ -147,7 +147,7 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
 
       <HStack spacing={3}>
         <Button onClick={onStakeModalOpen} variant="primary" size="md" height="40px" fontSize="sm">
-          Stake {type === 'esgx' ? 'esGRIX' : 'GRIX'}
+          Stake 
         </Button>
         <Button
           onClick={onUnstakeModalOpen}
