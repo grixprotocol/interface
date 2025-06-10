@@ -147,31 +147,7 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
           </Text>
         </HStack>
 
-        <HStack justify="space-between" pt={2} borderTop="1px solid" borderColor="gray.800">
-          <HStack spacing={2}>
-            <GrixLogo boxSize="14px" />
-            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-              Total Staked
-            </Text>
-          </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0} textAlign="right">
-            {Number(totalStaked).toLocaleString(undefined, {
-              minimumFractionDigits: 1,
-              maximumFractionDigits: 1,
-            })}{' '}
-            GRIX
-            {grixPrice && Number(totalStaked) > 0 && (
-              <Text as="span" color="green.300" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-                &nbsp;($
-                {(Number(totalStaked) * grixPrice).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                )
-              </Text>
-            )}
-          </Text>
-        </HStack>
+  
         <Button
           onClick={() => void handleClaim()}
           isLoading={isClaiming}
