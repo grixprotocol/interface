@@ -229,15 +229,15 @@ export const VestingCard: React.FC<VestingCardProps> = ({ onActionComplete, user
   return (
     <Box
       bg="gray.950"
-      borderRadius="lg"
-      p={6}
+      borderRadius="md"
+      p={4}
       border="1px solid"
       borderColor="gray.900"
       _hover={{ borderColor: 'gray.800' }}
     >
       <VestingHeader />
 
-      <VStack spacing={6} align="stretch">
+      <VStack spacing={4} align="stretch">
         <VestingStats
           vestingData={
             vestingData && {

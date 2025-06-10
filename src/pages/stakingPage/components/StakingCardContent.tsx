@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, HStack, SimpleGrid, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, SimpleGrid, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 import { GrixLogo } from '@/components/commons/Logo';
@@ -70,62 +70,62 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
   return (
     <Box
       bg="gray.950"
-      borderRadius="lg"
-      p={5}
+      borderRadius="md"
+      p={4}
       height="fit-content"
       border="1px solid"
       borderColor="gray.900"
       _hover={{ borderColor: 'gray.800' }}
     >
-      <Flex align="center" mb={4}>
-        <GrixLogo boxSize={7} mr={3} />
+      <Flex align="center" mb={3}>
+        <GrixLogo boxSize={6} mr={2} />
         <div>
-          <Heading size="sm" color="white" mb={1} fontWeight="600">
-            <BoldGrix text={title} />
-          </Heading>
+          <Text color="white" fontSize="sm" fontWeight="600" letterSpacing="-0.01em">
+            {title}
+          </Text>
           <Text color="gray.400" fontSize="xs">
             <BoldGrix text={description} />
           </Text>
         </div>
       </Flex>
 
-      <SimpleGrid columns={2} spacing={4} mb={5}>
-        <VStack align="stretch">
-          <Text fontSize="xs" color="gray.500" mb={1}>
+      <SimpleGrid columns={2} spacing={3} mb={4}>
+        <VStack align="stretch" spacing={1}>
+          <Text fontSize="xs" color="gray.500">
             Staked
           </Text>
-          <Text fontSize="lg" fontWeight="600" color="white">
+          <Text fontSize="sm" fontWeight="600" color="white">
             {formatBalance(stakedAmount)}
           </Text>
         </VStack>
 
-        <VStack align="stretch">
-          <Text fontSize="xs" color="gray.500" mb={1}>
+        <VStack align="stretch" spacing={1}>
+          <Text fontSize="xs" color="gray.500">
             Available to stake
           </Text>
-          <Text fontSize="lg" fontWeight="600" color="white">
+          <Text fontSize="sm" fontWeight="600" color="white">
             {formatBalance(availableBalance)}
           </Text>
         </VStack>
 
-        <VStack align="stretch">
-          <Text fontSize="xs" color="gray.500" mb={1}>
+        <VStack align="stretch" spacing={1}>
+          <Text fontSize="xs" color="gray.500">
             APR
           </Text>
-          <Text fontSize="lg" fontWeight="600" color="green.200" display="flex" alignItems="center" gap={1}>
-            <Text as="span" color="green.300" fontSize="sm">
+          <Text fontSize="sm" fontWeight="600" color="green.200" display="flex" alignItems="center" gap={1}>
+            <Text as="span" color="green.300" fontSize="xs">
               ↗
             </Text>
             {apr.toFixed(2)}%
           </Text>
         </VStack>
 
-        <VStack align="stretch">
-          <Text fontSize="xs" color="gray.500" mb={1}>
+        <VStack align="stretch" spacing={1}>
+          <Text fontSize="xs" color="gray.500">
             Total Staked
           </Text>
           <VStack align="flex-start" spacing={0}>
-            <Text fontSize="lg" fontWeight="600" color="white">
+            <Text fontSize="sm" fontWeight="600" color="white">
               {Number(totalStakedInProtocol).toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
