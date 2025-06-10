@@ -147,7 +147,7 @@ export const StakingCardContent: React.FC<StakingCardContentProps> = ({
 
       <HStack spacing={3}>
         <Button onClick={onStakeModalOpen} variant="primary" size="md" height="40px" fontSize="sm">
-          Stake 
+          Stake
         </Button>
         <Button
           onClick={onUnstakeModalOpen}
