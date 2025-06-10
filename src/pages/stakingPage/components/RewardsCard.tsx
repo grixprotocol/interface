@@ -7,7 +7,6 @@ import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { AssetPriceResponse } from '@/types/api';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
-
 type RewardsCardProps = {
   data: {
     claimable: string;
@@ -144,7 +143,8 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
               </Text>
               {grixPrice && data?.claimable && Number(data.claimable) > 0 && (
                 <Text color="green.300" fontSize="xs" fontWeight="500">
-                  ${(Number(data.claimable) * grixPrice).toLocaleString(undefined, {
+                  $
+                  {(Number(data.claimable) * grixPrice).toLocaleString(undefined, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}

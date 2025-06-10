@@ -162,11 +162,11 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                     borderColor: hasBalance ? 'gray.500' : 'gray.600',
                     color: hasBalance ? 'white' : 'gray.300',
                     transform: hasBalance ? 'translateY(-1px)' : 'none',
-                    boxShadow: hasBalance ? 'sm' : 'none'
+                    boxShadow: hasBalance ? 'sm' : 'none',
                   }}
                   _active={{
                     bg: hasBalance ? 'gray.600' : 'gray.800',
-                    transform: hasBalance ? 'translateY(0)' : 'none'
+                    transform: hasBalance ? 'translateY(0)' : 'none',
                   }}
                   _disabled={{
                     opacity: 0.5,
@@ -176,8 +176,8 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                       borderColor: 'gray.600',
                       color: 'gray.300',
                       transform: 'none',
-                      boxShadow: 'none'
-                    }
+                      boxShadow: 'none',
+                    },
                   }}
                   transition="all 0.2s"
                 >
@@ -215,14 +215,14 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   fontSize="sm"
                   fontWeight="500"
                   isDisabled={!isAmountValid()}
-                  _hover={{ 
+                  _hover={{
                     bg: 'teal.600',
                     transform: 'translateY(-1px)',
-                    boxShadow: 'md'
+                    boxShadow: 'md',
                   }}
-                  _active={{ 
+                  _active={{
                     bg: 'teal.700',
-                    transform: 'translateY(0)'
+                    transform: 'translateY(0)',
                   }}
                   _disabled={{
                     bg: 'gray.700',
@@ -231,8 +231,8 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                     _hover: {
                       bg: 'gray.700',
                       transform: 'none',
-                      boxShadow: 'none'
-                    }
+                      boxShadow: 'none',
+                    },
                   }}
                   transition="all 0.2s"
                 >
@@ -252,14 +252,14 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   fontSize="sm"
                   fontWeight="500"
                   isDisabled={!isAmountValid() || !amount}
-                  _hover={{ 
+                  _hover={{
                     bg: 'teal.600',
                     transform: 'translateY(-1px)',
-                    boxShadow: 'md'
+                    boxShadow: 'md',
                   }}
-                  _active={{ 
+                  _active={{
                     bg: 'teal.700',
-                    transform: 'translateY(0)'
+                    transform: 'translateY(0)',
                   }}
                   _disabled={{
                     bg: 'gray.700',
@@ -268,8 +268,8 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                     _hover: {
                       bg: 'gray.700',
                       transform: 'none',
-                      boxShadow: 'none'
-                    }
+                      boxShadow: 'none',
+                    },
                   }}
                   transition="all 0.2s"
                 >
