@@ -99,14 +99,14 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
       <ModalContent bg="#0D0F12" maxW="400px">
         <Box px={6} py={4}>
           <Flex justify="space-between" align="center" mb={4}>
-            <Text color="white" fontSize="xl" fontWeight="600">
+            <Text color="white" fontSize="sm" fontWeight="600">
               {title}
             </Text>
             <ModalCloseButton position="static" color="gray.400" />
           </Flex>
 
           <VStack spacing={4} align="stretch">
-            <Text color="gray.500" fontSize="md" mb={1}>
+            <Text color="gray.500" fontSize="xs" mb={1}>
               {isStakeMode ? 'Stake Amount' : 'Unstake Amount'}
             </Text>
 
@@ -116,7 +116,7 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   <Box bg="#1E2328" p={2} borderRadius="lg">
                     <GrixLogo boxSize="24px" />
                   </Box>
-                  <Text color="white" fontSize="lg" fontWeight="600">
+                  <Text color="white" fontSize="sm" fontWeight="600">
                     {isEsGrix ? 'esGRIX' : 'GRIX'}
                   </Text>
                 </HStack>
@@ -127,17 +127,17 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   variant="unstyled"
                   textAlign="right"
                   color="white"
-                  fontSize="lg"
+                  fontSize="sm"
                   width="auto"
                 />
               </Flex>
             </Box>
 
             <Flex justify="space-between" align="center">
-              <Text color="gray.500" fontSize="md">
+              <Text color="gray.500" fontSize="xs">
                 {isStakeMode ? 'Available balance' : 'Staked balance'}
               </Text>
-              <Text color="white" fontSize="md">
+              <Text color="white" fontSize="sm">
                 {formatBalance(availableAmount)} {isEsGrix ? 'esGRIX' : 'GRIX'}
               </Text>
             </Flex>
@@ -167,7 +167,7 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   <Box as="span" color="#3B82F6" fontSize="lg">
                     ⓘ
                   </Box>
-                  <Text color="#3B82F6" fontSize="sm">
+                  <Text color="#3B82F6" fontSize="xs">
                     You might not be able to unstake your desired {isEsGrix ? 'esGRIX' : 'GRIX'} if there is an active
                     vesting position.
                   </Text>
