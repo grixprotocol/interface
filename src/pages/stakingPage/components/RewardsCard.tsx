@@ -7,7 +7,6 @@ import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { AssetPriceResponse } from '@/types/api';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
-import { useVesting } from '../hooks/useVesting';
 
 type RewardsCardProps = {
   data: {
