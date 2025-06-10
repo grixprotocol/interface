@@ -4,7 +4,6 @@ import { useAccount } from 'wagmi';
 
 import { getUserRewardTrackerData } from '@/web3Config/staking/hooks';
 
-import { BoldGrix } from './components/BoldGrix';
 import { RewardsCard } from './components/RewardsCard';
 import { StakingCard } from './components/StakingCard';
 import { VestingCard } from './components/VestingCard';
@@ -61,12 +60,12 @@ export const StakingPage: React.FC = () => {
     <Container maxW="1200px" px={{ base: 3, md: 4 }} py={6}>
       <Grid templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }} gap={4} mb={6}>
         <GridItem colSpan={{ base: 1, lg: 3 }}>
-          <VStack align="flex-start" spacing={3} bg="gray.950" p={4} borderRadius="xl">
-            <Heading size="lg" color="white" fontWeight="700" letterSpacing="-0.02em">
+          <VStack align="flex-start" spacing={2} bg="gray.950" p={4} borderRadius="md">
+            <Heading size="md" color="white" fontWeight="600" letterSpacing="-0.01em">
               Staking
             </Heading>
-            <Text color="gray.400" fontSize="md" fontWeight="500">
-              <BoldGrix text="Stake GRIX and esGRIX to start earning rewards" />
+            <Text color="gray.400" fontSize="sm">
+              Stake GRIX and esGRIX to start earning rewards
             </Text>
           </VStack>
         </GridItem>
@@ -112,10 +111,10 @@ export const StakingPage: React.FC = () => {
               transition="all 0.2s"
               _active={{ transform: 'scale(0.98)' }}
             >
-              <Heading size="sm" color="white" fontWeight="700" letterSpacing="-0.01em">
+              <Text color="white" fontSize="sm" fontWeight="600" letterSpacing="-0.01em">
                 Learn about Staking
-              </Heading>
-              <Text color="gray.400" fontSize="sm" fontWeight="500">
+              </Text>
+              <Text color="gray.400" fontSize="xs">
                 Check out our staking walkthrough and guides
               </Text>
             </VStack>
@@ -124,13 +123,8 @@ export const StakingPage: React.FC = () => {
       </Grid>
 
       <Grid templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }} gap={4} mb={6}>
-        <GridItem colSpan={{ base: 1, lg: 3 }} bg="gray.950" p={4} borderRadius="xl">
-          <VStack align="stretch" spacing={3}>
-            <Heading size="md" color="white" fontWeight="700" letterSpacing="-0.02em" mb={1}>
-              Vesting
-            </Heading>
-            <VestingCard onActionComplete={triggerRefresh} userRewardData={userRewardData} />
-          </VStack>
+        <GridItem colSpan={{ base: 1, lg: 3 }}>
+          <VestingCard onActionComplete={triggerRefresh} userRewardData={userRewardData} />
         </GridItem>
       </Grid>
     </Container>

@@ -7,8 +7,6 @@ import { EthLogo } from '@/components/commons/Logo/EthLogo';
 import { AssetPriceResponse } from '@/types/api';
 import { claim, compound } from '@/web3Config/staking/hooks';
 
-import { useVesting } from '../hooks/useVesting';
-
 type RewardsCardProps = {
   data: {
     claimable: string;
@@ -24,7 +22,6 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
   const [isClaiming, setIsClaiming] = useState(false);
   const [isCompounding, setIsCompounding] = useState(false);
   const [grixPrice, setGrixPrice] = useState<number | null>(null);
-  const { totalStaked } = useVesting();
   const toast = useToast();
 
   // Fetch GRIX price from CoinGecko
@@ -113,65 +110,50 @@ export const RewardsCard = ({ data, refetchData }: RewardsCardProps): JSX.Elemen
       _hover={{ borderColor: 'gray.800' }}
     >
       <VStack spacing={3} align="stretch">
-        <HStack justify="space-between">
-          <HStack spacing={2}>
-            <EthLogo boxSize="14px" />
-            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-              WETH
-            </Text>
-          </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0}>
-            ≤{(0.0001).toFixed(4)} WETH (≤${(0.01).toFixed(2)})
-          </Text>
-        </HStack>
-
-        <HStack justify="space-between">
-          <HStack spacing={2}>
-            <GrixLogo boxSize="14px" />
-            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-              Claimable Rewards
-            </Text>
-          </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0} textAlign="right">
-            {data?.claimable ? Number(data.claimable).toFixed(4) : '0.0000'} esGRIX
-            {grixPrice && data?.claimable && (
-              <Text as="span" color="green.300" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-                &nbsp;($
-                {(Number(data.claimable) * grixPrice).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                )
+        <VStack align="stretch" spacing={1}>
+          <HStack justify="space-between" align="flex-start">
+            <HStack spacing={1} align="center">
+              <EthLogo boxSize="12px" />
+              <Text color="gray.500" fontSize="xs">
+                WETH Rewards
               </Text>
-            )}
-          </Text>
-        </HStack>
-
-        <HStack justify="space-between" pt={2} borderTop="1px solid" borderColor="gray.800">
-          <HStack spacing={2}>
-            <GrixLogo boxSize="14px" />
-            <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-              Total Staked
-            </Text>
-          </HStack>
-          <Text color="gray.400" fontSize="sm" fontWeight="500" flexShrink={0} textAlign="right">
-            {Number(totalStaked).toLocaleString(undefined, {
-              minimumFractionDigits: 1,
-              maximumFractionDigits: 1,
-            })}{' '}
-            GRIX
-            {grixPrice && Number(totalStaked) > 0 && (
-              <Text as="span" color="green.300" fontWeight="600" fontSize="sm" letterSpacing="-0.01em">
-                &nbsp;($
-                {(Number(totalStaked) * grixPrice).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                )
+            </HStack>
+            <VStack align="flex-end" spacing={0}>
+              <Text color="white" fontSize="sm" fontWeight="600">
+                ≤{(0.0001).toFixed(4)} WETH
               </Text>
-            )}
-          </Text>
-        </HStack>
+              <Text color="gray.400" fontSize="xs">
+                ≤${(0.01).toFixed(2)}
+              </Text>
+            </VStack>
+          </HStack>
+        </VStack>
+
+        <VStack align="stretch" spacing={1}>
+          <HStack justify="space-between" align="flex-start">
+            <HStack spacing={1} align="center">
+              <GrixLogo boxSize="12px" />
+              <Text color="gray.500" fontSize="xs">
+                Claimable Rewards
+              </Text>
+            </HStack>
+            <VStack align="flex-end" spacing={0}>
+              <Text color="white" fontSize="sm" fontWeight="600">
+                {data?.claimable ? Number(data.claimable).toFixed(4) : '0.00'} esGRIX
+              </Text>
+              {grixPrice && data?.claimable && Number(data.claimable) > 0 && (
+                <Text color="green.300" fontSize="xs" fontWeight="500">
+                  $
+                  {(Number(data.claimable) * grixPrice).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </Text>
+              )}
+            </VStack>
+          </HStack>
+        </VStack>
+
         <Button
           onClick={() => void handleClaim()}
           isLoading={isClaiming}

@@ -99,14 +99,14 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
       <ModalContent bg="#0D0F12" maxW="400px">
         <Box px={6} py={4}>
           <Flex justify="space-between" align="center" mb={4}>
-            <Text color="white" fontSize="xl" fontWeight="600">
+            <Text color="white" fontSize="sm" fontWeight="600">
               {title}
             </Text>
             <ModalCloseButton position="static" color="gray.400" />
           </Flex>
 
           <VStack spacing={4} align="stretch">
-            <Text color="gray.500" fontSize="md" mb={1}>
+            <Text color="gray.500" fontSize="xs" mb={1}>
               {isStakeMode ? 'Stake Amount' : 'Unstake Amount'}
             </Text>
 
@@ -116,7 +116,7 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   <Box bg="#1E2328" p={2} borderRadius="lg">
                     <GrixLogo boxSize="24px" />
                   </Box>
-                  <Text color="white" fontSize="lg" fontWeight="600">
+                  <Text color="white" fontSize="sm" fontWeight="600">
                     {isEsGrix ? 'esGRIX' : 'GRIX'}
                   </Text>
                 </HStack>
@@ -127,17 +127,17 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   variant="unstyled"
                   textAlign="right"
                   color="white"
-                  fontSize="lg"
+                  fontSize="sm"
                   width="auto"
                 />
               </Flex>
             </Box>
 
             <Flex justify="space-between" align="center">
-              <Text color="gray.500" fontSize="md">
+              <Text color="gray.500" fontSize="xs">
                 {isStakeMode ? 'Available balance' : 'Staked balance'}
               </Text>
-              <Text color="white" fontSize="md">
+              <Text color="white" fontSize="sm">
                 {formatBalance(availableAmount)} {isEsGrix ? 'esGRIX' : 'GRIX'}
               </Text>
             </Flex>
@@ -147,14 +147,39 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                 <Button
                   key={percentage}
                   onClick={() => handlePercentageClick(percentage)}
-                  bg="#1E2328"
-                  color="white"
-                  size="md"
+                  variant="outline"
+                  bg="gray.800"
+                  color="gray.300"
+                  borderColor="gray.600"
+                  size="sm"
                   flex={1}
+                  height="32px"
+                  fontSize="xs"
+                  fontWeight="500"
                   isDisabled={!hasBalance}
-                  opacity={hasBalance ? 1 : 0.5}
-                  _hover={{ bg: hasBalance ? '#2A3038' : '#1E2328' }}
-                  _active={{ bg: hasBalance ? '#2A3038' : '#1E2328' }}
+                  _hover={{
+                    bg: hasBalance ? 'gray.700' : 'gray.800',
+                    borderColor: hasBalance ? 'gray.500' : 'gray.600',
+                    color: hasBalance ? 'white' : 'gray.300',
+                    transform: hasBalance ? 'translateY(-1px)' : 'none',
+                    boxShadow: hasBalance ? 'sm' : 'none',
+                  }}
+                  _active={{
+                    bg: hasBalance ? 'gray.600' : 'gray.800',
+                    transform: hasBalance ? 'translateY(0)' : 'none',
+                  }}
+                  _disabled={{
+                    opacity: 0.5,
+                    cursor: 'not-allowed',
+                    _hover: {
+                      bg: 'gray.800',
+                      borderColor: 'gray.600',
+                      color: 'gray.300',
+                      transform: 'none',
+                      boxShadow: 'none',
+                    },
+                  }}
+                  transition="all 0.2s"
                 >
                   {percentage}%
                 </Button>
@@ -167,7 +192,7 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   <Box as="span" color="#3B82F6" fontSize="lg">
                     ⓘ
                   </Box>
-                  <Text color="#3B82F6" fontSize="sm">
+                  <Text color="#3B82F6" fontSize="xs">
                     You might not be able to unstake your desired {isEsGrix ? 'esGRIX' : 'GRIX'} if there is an active
                     vesting position.
                   </Text>
@@ -181,15 +206,35 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   isLoading={isApproving}
                   loadingText="Approving"
                   onClick={handleApprove}
-                  bg="#2F6C60"
+                  variant="solid"
+                  bg="teal.500"
                   color="white"
-                  size="lg"
+                  size="md"
                   width="full"
-                  height="48px"
+                  height="40px"
                   fontSize="sm"
+                  fontWeight="500"
                   isDisabled={!isAmountValid()}
-                  _hover={{ bg: '#2A5F54' }}
-                  _active={{ bg: '#264F46' }}
+                  _hover={{
+                    bg: 'teal.600',
+                    transform: 'translateY(-1px)',
+                    boxShadow: 'md',
+                  }}
+                  _active={{
+                    bg: 'teal.700',
+                    transform: 'translateY(0)',
+                  }}
+                  _disabled={{
+                    bg: 'gray.700',
+                    color: 'gray.500',
+                    cursor: 'not-allowed',
+                    _hover: {
+                      bg: 'gray.700',
+                      transform: 'none',
+                      boxShadow: 'none',
+                    },
+                  }}
+                  transition="all 0.2s"
                 >
                   Approve
                 </Button>
@@ -198,15 +243,35 @@ export const StakeUnstakeModal: React.FC<StakeUnstakeModalProps> = ({
                   isLoading={isLoading}
                   loadingText={isStakeMode ? 'Staking' : 'Unstaking'}
                   onClick={onSubmit}
-                  bg="#2F6C60"
+                  variant="solid"
+                  bg="teal.500"
                   color="white"
-                  size="lg"
+                  size="md"
                   width="full"
-                  height="48px"
+                  height="40px"
                   fontSize="sm"
+                  fontWeight="500"
                   isDisabled={!isAmountValid() || !amount}
-                  _hover={{ bg: '#2A5F54' }}
-                  _active={{ bg: '#264F46' }}
+                  _hover={{
+                    bg: 'teal.600',
+                    transform: 'translateY(-1px)',
+                    boxShadow: 'md',
+                  }}
+                  _active={{
+                    bg: 'teal.700',
+                    transform: 'translateY(0)',
+                  }}
+                  _disabled={{
+                    bg: 'gray.700',
+                    color: 'gray.500',
+                    cursor: 'not-allowed',
+                    _hover: {
+                      bg: 'gray.700',
+                      transform: 'none',
+                      boxShadow: 'none',
+                    },
+                  }}
+                  transition="all 0.2s"
                 >
                   {isStakeMode ? 'Stake' : 'Unstake'}
                 </Button>
